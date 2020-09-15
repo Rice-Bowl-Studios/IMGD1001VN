@@ -1,33 +1,36 @@
 ﻿# The script of the game goes in this file.
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+init python:
+    _game_menu_screen = "preferences"
 
 define e = Character("Eileen")
-
+default no_flashing = False
 
 # The game starts here.
 
+label splashscreen:
+    $ renpy.pause (0)
+    scene whitedrop with None
+    if config.developer:
+        "DEBUG MODE ENABLED"
+    menu:
+        "This game has flashing and strobing, which can cause seizures. Would you like to disable them?"
+        "Yes":
+            $ no_flashing = True
+        "No":
+            pass
+    
+    return
+
+label main_menu:
+    return
+
 label start:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    scene whitedrop with None
 
-    scene bg room
+    "GAME START"
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
+    "GAME DIE"
 
-    show eileen happy
-
-    # These display lines of dialogue.
-
-    e "You've created a new Ren'Py game."
-
-    e "Once you add a story, pictures, and music, you can release it to the world!"
-
-    # This ends the game.
-
-    return
+    $ renpy.quit()
