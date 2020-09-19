@@ -75,7 +75,7 @@ label start:
                 playerCharacterDepPossesivePronoun = "their"
                 playerCharacterIndepPossesivePronoun = "theirs"
         "Other":
-            call playerCharacterPronounHelper from _call_playerCharacterPronounHelper
+            call playerCharacterPronounHelper
     jump startBossFight
         
 label startBossFight:
@@ -195,7 +195,7 @@ label startRealWorld:
                 playerDepPossesivePronoun = "their"
                 playerIndepPossesivePronoun = "theirs"
         "Other":
-            call playerPronounHelper from _call_playerPronounHelper
+            call playerPronounHelper
     "<game title> seems to have crashed"
     "My headset is burning hot"
     "What {i}was{/i} that weird bracelet item"
