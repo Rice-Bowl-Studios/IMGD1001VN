@@ -21,6 +21,37 @@ define startBoss = Character("Start Boss")
 define gameLog = Character("GameLog")
 define hacker = Character("Hacker")
 
+# BG
+image Game Tavern = "bg_GW_GameTavern.png"
+image Game World Arena 01 = "bg_GW_GameWorldArena01.png"
+image Game World Arena 02 = "bg_GW_GameWorldArena02.png"
+image Generic Game Env = "bg_GW_GenericGameEnvironment.png"
+image Hacker Space = "bg_GW_HackerSpace.png"
+image Bedroom = "bg_RW_Bedroom.png"
+image City = "bg_RW_City.png"
+image Prison = "bg_RW_Prison.png"
+
+# IMG
+image Boss01 angry = "ch_GW_Boss01_angry.png"
+image Boss01 attacking = "ch_GW_Boss01_attacking.png"
+image Boss01 neutral = "ch_GW_Boss01_neutral.png"
+image Boss01 possessed = "ch_GW_Boss01_POSSESSED.png"
+image Boss02 angry = "ch_GW_Boss02_angry.png"
+image Boss02 attacking = "ch_GW_Boss02_attacking.png"
+image Boss02 neutral = "ch_GW_Boss02_neutral.png"
+image Boss02 possessed = "ch_GW_Boss02_POSSESSED.png"
+image Friend01 angry = "ch_GW_Friend01_angry.png"
+image Friend01 happy = "ch_GW_Friend01_happy.png"
+image Friend01 neutral = "ch_GW_Friend01_neutral.png"
+image Friend01 possessed = "ch_GW_Friend01_POSSESSED.png"
+image Friend01 sad = "ch_GW_Friend01_sad.png"
+image Friend02 angry = "ch_GW_Friend02_angry.png"
+image Friend02 happy = "ch_GW_Friend02_happy.png"
+image Friend02 neutral = "ch_GW_Friend02_neutral.png"
+image Friend02 possessed = "ch_GW_Friend02_POSSESSED.png"
+image Friend02 sad = "ch_GW_Friend02_sad.png"
+image GWHacker = "ch_GW_Hacker.png"
+image RWHacker neutral = "ch_RW_Hacker_neutral.png"
 
 # Other vars
 define noFlashing = True
@@ -93,16 +124,17 @@ label start:
                     playerCharacterIndepPossesivePronoun = "theirs"
         
 label startBossFight:
-    scene bossLevel with None
-    show start boss at right with easeinright
-    show friend a at left with easeinleft
+    scene Game World Arena 01 with None
+    show Boss01 angry at right with easeinright
+    show Friend01 angry at left with easeinleft
     $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
     friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
-    scene bossLevel with vpunch
+    show Boss01 angry with vpunch
     "TODO: PLAY EXPLOSION/LOUD CRASH"
     friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
+    show Friend01 happy
     friendA "There you are, it's about time! Wasn't the plan to ambush the [startBoss] like 30 minutes ago?"
     menu:
         "Sorry I'm late, I fell asleep.":
@@ -112,6 +144,7 @@ label startBossFight:
     friendA "Well come on! You know, if we don't beat this <insulting nickname for boss> tonight [friendB]'s never gonna let us forget it."
     "{i}You draw your <weapon>, [friendA] draws his <weapon>{/i}"
     startBoss "YOU PATHETIC CREATURES REALLY THINK YOU CAN DEFEAT ME?"
+    show Friend01 angry
     friendA "I'm going in. Cover me!"
     menu:
         "<Attack 1>":
@@ -155,7 +188,8 @@ label startBossAttackChoice3:
             startBoss "[startBoss] blocks your path"
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
-    hide start boss with easeoutright
+    hide Boss01 with easeoutright
+    show Friend01 happy
     friendA "That was awesome!"
     menu:
         "I know":
@@ -164,23 +198,23 @@ label startBossAttackChoice3:
             pass
     friendA "Let's see what kind of loot we got!"
     friendA "Woah is that a-"
+    show Friend01 neutral
     friendA "Oh wait... nevermind"
     friendA "Ooo maybe this is-"
     friendA "Nah, I got nothin. How about you? Anything good?"
     "{i}Only one item appears on your screen{/i}"
     show item hacker item at right with zoomin
-    gameLog "<Unknown> was added to your inventory" # replace <Unknown> with glitch text
+    $ tmpGlitchText = glitchText(16)
+    gameLog "[tmpGlitchText] was added to your inventory" # TODO: replace <Unknown> with glitch text
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No"
     friendA "Huh, weird. Well maybe [friendB] knows something about it-"
-    show item hacker item with vpunch
-    hide friendA
+    scene crash with vpunch
     "TODO: crash effect"
-    hide hacker item
 
 label startRealWorld:
-    scene playerBedroom with None
+    scene Bedroom with None
     python:
         playerName = renpy.input("What is your name?")
         playerName = playerName.strip()
@@ -229,6 +263,7 @@ label startRealWorld:
     "What {i}was{/i} that weird bracelet item"
     "TODO: play phone ring sound"
     "It's [friendB]"
+    show Friend02 neutral with None
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down that [startBoss]"
     menu:
         "About that…":
@@ -254,9 +289,9 @@ label startRealWorld:
     $ renpy.pause(2.0)
 
 label startHackerSpace:
-    scene hackerSpace with fade
+    scene Hacker Space with fade
     "{i}Where am I?{/i}"
-    show hacker at center with easeinbottom
+    show GWHacker at center with easeinbottom
     hacker "God question. From what I can see, I'm pretty sure you're in a bedroom."
     $ tmpChosen = -1
     menu:
