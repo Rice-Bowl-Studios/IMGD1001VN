@@ -160,7 +160,7 @@ label startBossFight:
         "Maybe you're just bad.":
             friendA "Very funny coming from the one who almost missed the whole fight."
     friendA "I don't know if we can win this [playerCharacter]"
-	$ tmpFlag = False
+    $ tmpFlag = False
 
 label startBossAttackChoice:
     menu:
@@ -168,10 +168,10 @@ label startBossAttackChoice:
             gameLog "Critical Hit!"
             friendA "Nice!"
         "<Run Away>" if not tmpFlag:
-			$ tmpFlag = True
+            $ tmpFlag = True
             startBoss "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
             jump startBossAttackChoice
-	$ tmpFlag = False
+    $ tmpFlag = False
 
 label startBossAttackChoice2:
     menu:
@@ -179,10 +179,10 @@ label startBossAttackChoice2:
             gameLog "Critical Hit!"
             friendA "Wow!"
         "<Run Away>" if not tmpFlag:
-			$ tmpFlag = True
+            $ tmpFlag = True
             startBoss "[startBoss] blocks your path"
             jump startBossAttackChoice2
-	$ tmpFlag = False
+    $ tmpFlag = False
 
 label startBossAttackChoice3:
     menu:
@@ -190,7 +190,7 @@ label startBossAttackChoice3:
             gameLog "Critical Hit!"
             friendA "What the-"
         "<Run Away>" if not tmpFlag:
-			$ tmpFlag = True
+            $ tmpFlag = True
             startBoss "[startBoss] blocks your path"
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
