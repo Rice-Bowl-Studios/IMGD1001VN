@@ -7,7 +7,7 @@ default playerObjectPronoun = "them"
 default playerDepPossesivePronoun = "their"
 default playerIndepPossesivePronoun = "theirs"
 
-# Player Character vars
+# Player character vars
 define playerCharacter = Character("[playerUsername]")
 default playerCharacterSubjectPronoun = "they"
 default playerCharacterObjectPronoun = "them"
@@ -53,6 +53,11 @@ image Friend02 sad = "ch_GW_Friend02_sad.png"
 image GWHacker = "ch_GW_Hacker.png"
 image RWHacker neutral = "ch_RW_Hacker_neutral.png"
 
+# Non game vars
+image credit = Text(creditText, font="Montserrat-Medium.ttf", text_align=0.5)
+image theEnd = Text("{size=76}The end", text_align=0.5)
+image thanks = Text("{size=76}Thanks for Playing!", text_align=0.5)
+
 # Other vars
 define noFlashing = True
 
@@ -72,7 +77,7 @@ label main_menu:
 label start:
 
     "GAME START"
-
+    
     menu:
         "This game has flashing and strobing, which can cause seizures. Would you like to disable them?"
         "Yes":
@@ -373,5 +378,5 @@ label afterHackerSpaceNameChoice:
 
 label kill:
     "GAME DIE"
-
+    call credits
     $ renpy.quit()
