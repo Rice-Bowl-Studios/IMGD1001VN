@@ -205,7 +205,7 @@ label startBossAttackChoice3:
     "{i}Only one item appears on your screen{/i}"
     show item hacker item at right with zoomin
     $ tmpGlitchText = glitchText(16)
-    gameLog "[tmpGlitchText] was added to your inventory" # TODO: replace <Unknown> with glitch text
+    gameLog "[tmpGlitchText] was added to your inventory"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No"
