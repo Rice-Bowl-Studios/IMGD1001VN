@@ -15,13 +15,13 @@ default playerCharacterDepPossesivePronoun = "their"
 default playerCharacterIndepPossesivePronoun = "theirs"
 
 # Characters
-define friendA = Character("Friend A")
-define friendB = Character("Friend B")
-define startBoss = Character("Start Boss")
+define friendA = Character("Ognian")
+define friendB = Character("Hilda")
+define startBoss = Character("Ignis the Conqueror")
 define gameLog = Character("GameLog")
-define hacker = Character("Hacker")
+define hacker = Character("[hackerName]")
 
-# BG
+# BG IMG
 image Game Tavern = "bg_GW_GameTavern.png"
 image Game World Arena 01 = "bg_GW_GameWorldArena01.png"
 image Game World Arena 02 = "bg_GW_GameWorldArena02.png"
@@ -30,8 +30,10 @@ image Hacker Space = "bg_GW_HackerSpace.png"
 image Bedroom = "bg_RW_Bedroom.png"
 image City = "bg_RW_City.png"
 image Prison = "bg_RW_Prison.png"
+image crash = "bg_GW_crash.png"
+image logInScreen = "bg_GW_login.png"
 
-# IMG
+# Char IMG
 image Boss01 angry = "ch_GW_Boss01_angry.png"
 image Boss01 attacking = "ch_GW_Boss01_attacking.png"
 image Boss01 neutral = "ch_GW_Boss01_neutral.png"
@@ -53,10 +55,11 @@ image Friend02 sad = "ch_GW_Friend02_sad.png"
 image GWHacker = "ch_GW_Hacker.png"
 image RWHacker neutral = "ch_RW_Hacker_neutral.png"
 
+# Item IMG
+image hacker item = "item_hackerItem.png"
+
 # Non game vars
 image credit = Text(creditText, font="Montserrat-Medium.ttf", text_align=0.5)
-image theEnd = Text("{size=76}The end", text_align=0.5)
-image thanks = Text("{size=76}Thanks for Playing!", text_align=0.5)
 
 # Other vars
 define noFlashing = True
@@ -72,7 +75,8 @@ label splashscreen:
     return
 
 label main_menu:
-    return
+    play music "audio/Space Cadet.ogg"
+    call screen volume
 
 label start:
 
@@ -119,7 +123,7 @@ label start:
                 playerCharacterObjectPronoun = playerCharacterObjectPronoun.strip()
                 if not playerCharacterObjectPronoun:
                     playerCharacterObjectPronoun = "them"
-                playerCharacterDepPossesivePronoun = renpy.input("Dpeendent Possessive Pronoun (ex. his, her, their):")
+                playerCharacterDepPossesivePronoun = renpy.input("Dependent Possessive Pronoun (ex. his, her, their):")
                 playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.strip()
                 if not playerCharacterDepPossesivePronoun:
                     playerCharacterDepPossesivePronoun = "their"
@@ -135,8 +139,8 @@ label startBossFight:
     $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
     friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
+    play sound "audio/metalPot3.ogg"
     show Boss01 angry with vpunch
-    "TODO: PLAY EXPLOSION/LOUD CRASH"
     friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
     show Friend01 happy
@@ -153,9 +157,9 @@ label startBossFight:
     friendA "I'm going in. Cover me!"
     menu:
         "<Attack 1>":
-            pass
+            play sound "audio/swordMetal6.ogg"
         "<Attack 2>":
-            pass
+            play sound "audio/swordMetal6.ogg"
     "{i}[friendA]'s <weapon> shatters into a million pieces{/i}"
     friendA "Shit!"
     friendA "I don't get it, our level is way higher than his. Shouldn't this fight be easy?"
@@ -170,6 +174,7 @@ label startBossFight:
 label startBossAttackChoice:
     menu:
         "<Attack>":
+            play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             friendA "Nice!"
         "<Run Away>" if not tmpFlag:
@@ -181,6 +186,7 @@ label startBossAttackChoice:
 label startBossAttackChoice2:
     menu:
         "<Attack>":
+            play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             friendA "Wow!"
         "<Run Away>" if not tmpFlag:
@@ -192,6 +198,7 @@ label startBossAttackChoice2:
 label startBossAttackChoice3:
     menu:
         "<Attack>":
+            play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             friendA "What the-"
         "<Run Away>" if not tmpFlag:
@@ -214,15 +221,15 @@ label startBossAttackChoice3:
     friendA "Ooo maybe this is-"
     friendA "Nah, I got nothin. How about you? Anything good?"
     "{i}Only one item appears on your screen{/i}"
-    show item hacker item at right with zoomin
+    show hacker item at right with zoomin
     $ tmpGlitchText = glitchText(16)
     gameLog "[tmpGlitchText] was added to your inventory"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No"
     friendA "Huh, weird. Well maybe [friendB] knows something about it-"
+    play sound "audio/error2.ogg"
     scene crash with vpunch
-    "TODO: crash effect"
 
 label startRealWorld:
     scene Bedroom with None
@@ -261,7 +268,7 @@ label startRealWorld:
                 playerObjectPronoun = playerObjectPronoun.strip().capitalize()
                 if not playerObjectPronoun:
                     playerObjectPronoun = "them"
-                playerDepPossesivePronoun = renpy.input("Dpeendent Possessive Pronoun (ex. his, her, their):")
+                playerDepPossesivePronoun = renpy.input("Dependent Possessive Pronoun (ex. his, her, their):")
                 playerDepPossesivePronoun = playerDepPossesivePronoun.strip().capitalize()
                 if not playerDepPossesivePronoun:
                     playerDepPossesivePronoun = "their"
@@ -290,10 +297,12 @@ label startRealWorld:
     "..."
     "My headset is getting hot again."
     "{i}Tries to remove headset{/i}"
-    scene red with None
+    scene reddrop with None
+    stop music
+    play music "audio/Mission Plausible.ogg"
     "I can't life my arm."
     "My head feels like it's on fire."
-    "It feels like somehting's grabbing my wrist."
+    "It feels like something's grabbing my wrist."
     "I can't get the headset off with my arm stuck like this."
     "The heat is getting unbearable..."
     scene black with None
@@ -303,6 +312,7 @@ label startHackerSpace:
     scene Hacker Space with fade
     "{i}Where am I?{/i}"
     show GWHacker at center with easeinbottom
+    $ hackerName = "{b}redacted{/b}"
     hacker "God question. From what I can see, I'm pretty sure you're in a bedroom."
     $ tmpChosen = -1
     menu:
@@ -317,18 +327,18 @@ label startHackerSpace:
             $ tmpChosen = 2
             hacker "Um... I'm actually a psychic."
             hacker "No, a genie!"
-            hacker "Or maybe I'm your consience! Hehe, spooky, right?"
+            hacker "Or maybe I'm your conscience! Hehe, spooky, right?"
     menu:
         "Who are you?" if tmpChosen != 0:
-                pass
+            pass
         "Did you just read my mind?" if tmpChosen != 1:
-                pass
+            pass
         "How did you know that?" if tmpChosen != 2:
-                pass
+            pass
     hacker "Okay, I think that's enough questioning for today."
     "{i}You try to speak, but nothing comes out. It feels as though you are underwater.{/i}"
-    hacker "Right, now hwere was I? Let's see,{w=1.0}{nw}"
-    show item hacker item at right with zoomin
+    hacker "Right, now where was I? Let's see,"
+    show hacker item at right with zoomin
     hacker "Ah of course"
     hacker "{i}ahem{/i}"
     if playerName != playerUsername:
@@ -362,6 +372,7 @@ label hackerSpaceNameChoice:
                 preferredDepPossesivePronoun = playerDepPossesivePronoun
                 preferredIndepPossesivePronoun = playerIndepPossesivePronoun
         "How do you know my name?":
+            play sound "audio/error2.ogg"
             hacker "Hey, what did I say about asking questions?"
             jump hackerSpaceNameChoice
     
@@ -373,10 +384,37 @@ label afterHackerSpaceNameChoice:
     hacker "But then, right when I was about to call it off, you came along and found my invitation!"
     "{i}The mysterious figure gestures toward the <HackerItem>, which is now fastened to your wrist{/i}"
     "{i}How did that get there?{/i}"
-    hacker "And guess what. The best part is,{w=3.0} It's yours to keep! Consider it a party favor from your new best friend."
-    hacker "Oh, that reminds me,{w=1.0} I haven't introduced myself yet! Sorry, it's been a while since I've actually talked to someone for real like this."
+    hacker "And guess what. The best part is...{w=3.0} it's yours to keep! Consider it a party favor from your new best friend."
+    hacker "Oh, that reminds me,{w=1.0} I haven't introduced myself yet! {i}gosh, what kind of friend doesn't even know their friend's name?{/i} Sorry, it's been a while since I've actually talked to someone for real like this."
+    hacker "Hmmm...{w=0.5} where do I begin?{w=1.0} I've gone by a LOT of names in the past, <name1>{w=0.5}, <name2>{w=0.5}, <name3>,{w=1.0}, {i}<embarrassing name>... I don't know what I was thinking with that one{/i}..."
+    hacker "Anything ring a bell? You've probably heard of me before, right? I mean - I'm {i}kind of{/i} a big deal."
+    "..."
+    hacker "..."
+    hacker "?"
+    hacker "Nothing?{w=1.0} Seriously?"
+    $ hackerName = "hacker"
+    hacker "Well, whatever, since we're friends you can call me [hacker]"
+    hacker "So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game."
+    hacker "What was it called again?{w=2.0} You know, the one you've been playing {i}literally{/i} non-stop. {i}like seriously don't you have a job or something?{/i}"
+    hacker "Anyways, I've got a game of my own going on{w=0.5} - so to speak. But you see the thing is I kind of need some help getting to the end of it."
+    hacker "And you know..."
+    hacker "I just thought..."
+    hacker "{i}Since we are friends{/i}"
+    hacker "You could lend me a hand!"
+    menu:
+        "ok...?":
+            pass
+        "Hell no!":
+            pass
+    hacker "Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?"
+    hacker "And don't worry! I promise that when we beat my little game, there's gonna be a special reward just for you.{w=1.0} Oh! And I can even help you with your game too!"
+    hacker "Alright, [preferredName], it's been a pleasure chatting with you tonight, however, I now have a very important train to catch.{w=1.0} I'll be contacting you with more info on our deal pretty soon, so be on the lookout!"
+    hacker "Anyways, [hacker] out!"
+    scene black with pixellate
+    "{i}What was that?{/i}"
 
 label kill:
     "GAME DIE"
-    call credits
+    stop music
+    call credits from _call_credits
     $ renpy.quit()
