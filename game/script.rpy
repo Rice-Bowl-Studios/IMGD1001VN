@@ -217,7 +217,7 @@ label startBossAttackChoice3:
     friendA "Let's see what kind of loot we got!"
     friendA "Woah is that a-"
     show Friend01 neutral
-    friendA "Oh wait... nevermind"
+    friendA "Oh wait... never mind"
     friendA "Ooo maybe this is-"
     friendA "Nah, I got nothin. How about you? Anything good?"
     "{i}Only one item appears on your screen{/i}"
@@ -414,6 +414,9 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label startFriendTwoTavern:
+	scene Game Tavern
+	show friend01 neutral at left
+	show friend02 angry at right
     friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the <weapon> I gave him?{/i}"
     friendA "Right..."
     friendA "About that..."
@@ -422,6 +425,8 @@ label startFriendTwoTavern:
             pass
         "Did anyone else see that?":
             pass
+	show friend01 happy
+	show friend02 happy
     friendA "Oh yeah, did your game crash too?"
     friendB "You had a crash? I didn't even think that was possible anymore."
     menu:
@@ -432,9 +437,11 @@ label startFriendTwoTavern:
     "{i}You explain to [friendA] and [friendB] about what just happened{/i}"
     friendA "..."
     friendB "..."
+	show friend01 neutral
+	show friend02 neutral
     friendA "{i}Seriously?{/i}" (multiple=2)
     friendB "{i}Seriously?{/i}" (multiple=2)
-    friendB "Hold on, so you're telling me somebody just showed up adn starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
+    friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
     friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's freaky."
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
     friendB "Hmm, maybe it was some kind of glitch in <game name>? That would explain the crash, and I've heard there might still be some bugs left behind from before the <digital world>."
