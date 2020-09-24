@@ -144,7 +144,7 @@ label startBossFight:
     friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
     show Friend01 happy
-    friendA "There you are, it's about time! Wasn't the plan to ambush the [startBoss] like 30 minutes ago?"
+    friendA "There you are, it's about time! Wasn't the plan to ambush this boss like 30 minutes ago?"
     menu:
         "Sorry I'm late, I fell asleep.":
             pass
@@ -412,6 +412,33 @@ label afterHackerSpaceNameChoice:
     hacker "Anyways, [hacker] out!"
     scene black with pixellate
     "{i}What was that?{/i}"
+
+label startFriendTwoTavern:
+    friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the <weapon> I gave him?{/i}"
+    friendA "Right..."
+    friendA "About that..."
+    menu:
+        "Something really weird just happened":
+            pass
+        "Did anyone else see that?":
+            pass
+    friendA "Oh yeah, did your game crash too?"
+    friendB "You had a crash? I didn't even think that was possible anymore."
+    menu:
+        "Well yeah, but there was...":
+            pass
+        "No, it was something else...":
+            pass
+    "{i}You explain to [friendA] and [friendB] about what just happened{/i}"
+    friendA "..."
+    friendB "..."
+    friendA "{i}Seriously?{/i}" (multiple=2)
+    friendB "{i}Seriously?{/i}" (multiple=2)
+    friendB "Hold on, so you're telling me somebody just showed up adn starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
+    friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's freaky."
+    friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
+    friendB "Hmm, maybe it was some kind of glitch in <game name>? That would explain the crash, and I've heard there might still be some bugs left behind from before the <digital world>."
+    friendA "Or {i}maybe{/i} you got hacked!"
 
 label kill:
     "GAME DIE"
