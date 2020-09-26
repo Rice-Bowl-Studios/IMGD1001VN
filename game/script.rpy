@@ -414,9 +414,9 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label startFriendTwoTavern:
-	scene Game Tavern
-	show friend01 neutral at left
-	show friend02 angry at right
+    scene Game Tavern
+    show friend01 neutral at left
+    show friend02 angry at right
     friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the <weapon> I gave him?{/i}"
     friendA "Right..."
     friendA "About that..."
@@ -425,8 +425,8 @@ label startFriendTwoTavern:
             pass
         "Did anyone else see that?":
             pass
-	show friend01 happy
-	show friend02 happy
+    show friend01 happy
+    show friend02 happy
     friendA "Oh yeah, did your game crash too?"
     friendB "You had a crash? I didn't even think that was possible anymore."
     menu:
@@ -437,15 +437,71 @@ label startFriendTwoTavern:
     "{i}You explain to [friendA] and [friendB] about what just happened{/i}"
     friendA "..."
     friendB "..."
-	show friend01 neutral
-	show friend02 neutral
+    show friend01 neutral
+    show friend02 neutral
     friendA "{i}Seriously?{/i}" (multiple=2)
     friendB "{i}Seriously?{/i}" (multiple=2)
     friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
     friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's freaky."
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
     friendB "Hmm, maybe it was some kind of glitch in <game name>? That would explain the crash, and I've heard there might still be some bugs left behind from before the <digital world>."
-    friendA "Or {i}maybe{/i} you got hacked!"
+    friendA "Or {i}maybe{/i} you you got hacked!"
+    friendB "Wow, you really have been watching too much TV. You know the <digital world> runs on the most powerful supercomputer in the world. It can't be hacked."
+    friendB "You said your headset overheated right? Maybe you passed out and it was all some weird dream."
+    menu:
+        "I think it has something to do with this bracelet.":
+            pass
+        "The person put this thing on my wrist":
+            pass
+    friendA "Oh yeah, I forgot about that; after [playerCharacter] killed [startBoss], [playerCharacterSubjectPronoun] picked up that weird item. [friendB], have you ever seen anything like it?"
+    show hacker item at center with zoomin
+    friendB "No. It looks just like any normal accessory, but it has no name and {w=0.5} wait, that's strange."
+    friendB "It's identified as a quest item?"
+    friendA "If it's a quest item, then it must be important! You really haven't seen it before [friendB]? I thought you knew everything there is to know about <game>."
+    friendB "Well... not everything. I do have a life you know."
+    hide hacker item
+    friendA "I didn't mean it that way. I just figured... well you know, if there really is some crazy quest that involves whatever the heck just happened to [playerCharacter], you would have heard about it."
+    friendB "Yeah, I'm pretty shocked myself."
+    friendA "Well, I say we go see what this mystery quest is all about! I bet we'll find some rare loot along the way too. {i}maybe even some stuff [friendB] doesn't have{/i}"
+    friendB "Are you serious? You can't just charge headfirst into a quest you know nothing about. You're not even level 50 yet."
+    friendA "You're right..."
+    friendA "That's why you're coming with me!"
+    friendB "I would be lying if I said I wasn't a little interested. But just so we're clear, I am not here to babysit you two."
+    friendA "Yes!"
+    friendA "How about you [playerCharacter]?"
+    "..."
+    "You feel the <hacker item> pulling at your arm."
+    "You try to speak, but nothing comes out."
+    "Your hand raises into a thumbs-up position."
+    friendA "Great! It's the perfect team: Me as our fearless leader, [friendB] as our game expert/bodyguard, and [playerCharacter] and [playerCharacterDepPossesivePronoun] weird bracelet thing as our guide through the unknown."
+    friendA "Together, we'll be unstoppable!"
+    friendB "You know, [friendA], you may be the least qualified 'fearless leader' I know, but I'm actually pretty excited about this."
+    friendA "I'll take that as a compliment"
+    friendB "So, when are we starting our grand adventure?"
+    friendA "How about same time tomorrow? But no falling asleep this time!"
+    friendB "Fine by me."
+    menu:
+        "Ok.":
+            pass
+        "I'm not so sure about this.":
+            friendA "Look, I know you're freaked out about what you saw, but the only way to figure it out is to go on this quest."
+            friendA "{i}also we kinda need you since you've got the quest item and all.{/i}"
+    "You nod your head affirmatively, agreeing to come along."
+    friendA "Great. In that case, I think I'l be signing off for the night. We've got a big day ahead of us after all"
+    friendB "Ok. I'm gonna head out too. See you tomorrow."
+    hide friend01
+    hide friend02
+    scene Bedroom
+    "This is all so strange."
+    "I'd better go to sleep for now"
+    scene black with fade
+    $ renpy.pause(2.0)
+
+label act2Start:
+    scene Hacker Space with fade
+    "Am I... dreaming?"
+    show hacker at right with easeinright
+    hacker "Sort of. Depends on where you draw the line between dream and reality."
 
 label kill:
     "GAME DIE"
