@@ -70,8 +70,8 @@ label splashscreen:
     $ renpy.pause (0)
     scene whitedrop with None
     if config.developer:
-        "DEBUG MODE ENABLED"
-    "Splashscreen here"
+        "{cps=0}DEBUG MODE ENABLED{/cps}"
+    "{cps=0}Splashscreen here{/cps}"
     return
 
 label main_menu:
@@ -80,13 +80,13 @@ label main_menu:
 
 label start:
 
-    "GAME START"
+    "{cps=0}GAME START{/cps}"
     
     menu:
-        "This game has flashing and strobing, which can cause seizures. Would you like to disable them?"
-        "Yes":
+        "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
+        "{cps=0}Yes{/cps}":
             $ noFlashing = True
-        "No":
+        "{cps=0}No{/cps}":
             pass
     python:
         playerUsername = renpy.input("What is your username?")
@@ -94,7 +94,7 @@ label start:
         if not playerUsername:
             playerUsername = "Pat Rick"
     menu:
-        "What are your pronouns?"
+        "{cps=0}What are your pronouns?{/cps}"
         "He/Him/His":
             python:
                 playerCharacterSubjectPronoun = "he"
@@ -134,13 +134,13 @@ label start:
         
 label startBossFight:
     scene Game World Arena 01 with None
-    show Boss01 angry at right with easeinright
+    show Boss01 neutral at right with easeinright
     show Friend01 angry at left with easeinleft
     $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
     friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
     play sound "audio/metalPot3.ogg"
-    show Boss01 angry with vpunch
+    show Boss01 neutral with vpunch
     friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
     show Friend01 happy
@@ -179,7 +179,7 @@ label startBossAttackChoice:
             friendA "Nice!"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            startBoss "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
+            startBoss @ Boss01 angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
             jump startBossAttackChoice
     $ tmpFlag = False
 
@@ -191,7 +191,7 @@ label startBossAttackChoice2:
             friendA "Wow!"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            startBoss "[startBoss] blocks your path"
+            "[startBoss] blocks your path"
             jump startBossAttackChoice2
     $ tmpFlag = False
 
@@ -203,10 +203,10 @@ label startBossAttackChoice3:
             friendA "What the-"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            startBoss "[startBoss] blocks your path"
+            "[startBoss] blocks your path"
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
-    hide Boss01 with easeoutright
+    hide Boss01 with zoomout
     show Friend01 happy
     friendA "That was awesome!"
     menu:
@@ -281,7 +281,7 @@ label startRealWorld:
     "What {i}was{/i} that weird bracelet item"
     "TODO: play phone ring sound"
     "It's [friendB]"
-    show Friend02 neutral with None
+    show Friend02 neutral with easeinbottom
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down that [startBoss]"
     menu:
         "About that…":
@@ -386,7 +386,7 @@ label afterHackerSpaceNameChoice:
     "{i}How did that get there?{/i}"
     hacker "And guess what. The best part is...{w=3.0} it's yours to keep! Consider it a party favor from your new best friend."
     hacker "Oh, that reminds me,{w=1.0} I haven't introduced myself yet! {i}gosh, what kind of friend doesn't even know their friend's name?{/i} Sorry, it's been a while since I've actually talked to someone for real like this."
-    hacker "Hmmm...{w=0.5} where do I begin?{w=1.0} I've gone by a LOT of names in the past, <name1>{w=0.5}, <name2>{w=0.5}, <name3>,{w=1.0}, {i}<embarrassing name>... I don't know what I was thinking with that one{/i}..."
+    hacker "Hmmm...{w=0.5} where do I begin?{w=1.0} I've gone by a LOT of names in the past, <name1>{w=0.5}, <name2>{w=0.5}, <name3>{w=1.0}, {i}<embarrassing name>... I don't know what I was thinking with that one{/i}..."
     hacker "Anything ring a bell? You've probably heard of me before, right? I mean - I'm {i}kind of{/i} a big deal."
     "..."
     hacker "..."
@@ -414,9 +414,9 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label startFriendTwoTavern:
-    scene Game Tavern
-    show friend01 neutral at left
-    show friend02 angry at right
+    scene Game Tavern with fade
+    show Friend01 neutral at left with easeinleft
+    show Friend02 angry at right with easeinright
     friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the <weapon> I gave him?{/i}"
     friendA "Right..."
     friendA "About that..."
@@ -425,8 +425,8 @@ label startFriendTwoTavern:
             pass
         "Did anyone else see that?":
             pass
-    show friend01 happy
-    show friend02 happy
+    show Friend01 happy
+    show Friend02 happy
     friendA "Oh yeah, did your game crash too?"
     friendB "You had a crash? I didn't even think that was possible anymore."
     menu:
@@ -434,11 +434,15 @@ label startFriendTwoTavern:
             pass
         "No, it was something else...":
             pass
-    "{i}You explain to [friendA] and [friendB] about what just happened{/i}"
+    #"{i}You explain to [friendA] and [friendB] about what just happened{/i}"
+    scene black with fade
+    scene Game Tavern with fade
+    show Friend01 neutral at left
+    show Friend02 angry at right
     friendA "..."
     friendB "..."
-    show friend01 neutral
-    show friend02 neutral
+    show Friend01 neutral
+    show Friend02 neutral
     friendA "{i}Seriously?{/i}" (multiple=2)
     friendB "{i}Seriously?{/i}" (multiple=2)
     friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
@@ -469,10 +473,12 @@ label startFriendTwoTavern:
     friendB "I would be lying if I said I wasn't a little interested. But just so we're clear, I am not here to babysit you two."
     friendA "Yes!"
     friendA "How about you [playerCharacter]?"
+    stop music
     "..."
     "You feel the <hacker item> pulling at your arm."
     "You try to speak, but nothing comes out."
     "Your hand raises into a thumbs-up position."
+    play music "audio/Mission Plausible.ogg"
     friendA "Great! It's the perfect team: Me as our fearless leader, [friendB] as our game expert/bodyguard, and [playerCharacter] and [playerCharacterDepPossesivePronoun] weird bracelet thing as our guide through the unknown."
     friendA "Together, we'll be unstoppable!"
     friendB "You know, [friendA], you may be the least qualified 'fearless leader' I know, but I'm actually pretty excited about this."
@@ -489,8 +495,8 @@ label startFriendTwoTavern:
     "You nod your head affirmatively, agreeing to come along."
     friendA "Great. In that case, I think I'l be signing off for the night. We've got a big day ahead of us after all"
     friendB "Ok. I'm gonna head out too. See you tomorrow."
-    hide friend01
-    hide friend02
+    hide Friend01
+    hide Friend02
     scene Bedroom
     "This is all so strange."
     "I'd better go to sleep for now"
@@ -500,11 +506,11 @@ label startFriendTwoTavern:
 label act2Start:
     scene Hacker Space with fade
     "Am I... dreaming?"
-    show hacker at right with easeinright
+    show GWHacker at right with easeinright
     hacker "Sort of. Depends on where you draw the line between dream and reality."
 
 label kill:
-    "GAME DIE"
+    "{cps=0}GAME DIE{/cps}"
     stop music
     call credits from _call_credits
     $ renpy.quit()
