@@ -27,8 +27,6 @@ screen volume:
         bar value Preference("sound volume")
         text "Music Volume"
         bar value Preference("music volume")
-        text "Voice Volume"
-        bar value Preference("voice volume")
         textbutton "Confirm" action Jump("start")
 
 label credits:

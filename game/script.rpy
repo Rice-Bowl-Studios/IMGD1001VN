@@ -15,9 +15,9 @@ default playerCharacterDepPossesivePronoun = "their"
 default playerCharacterIndepPossesivePronoun = "theirs"
 
 # Characters
-define friendA = Character("Ognian")
-define friendB = Character("Hilda")
-define startBoss = Character("Ignis the Conqueror")
+define friendA = Character("Ognian", image="Friend01")
+define friendB = Character("Hilda", image="Friend02")
+define startBoss = Character("Ignis the Conqueror", image="Boss01")
 define gameLog = Character("GameLog")
 define hacker = Character("[hackerName]")
 
@@ -57,6 +57,13 @@ image RWHacker neutral = "ch_RW_Hacker_neutral.png"
 
 # Item IMG
 image hacker item = "item_hackerItem.png"
+
+# Other IMG
+image HP 0 = im.Scale("boss_hp_0.png", 360, 90)
+image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
+image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
+image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
+image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
 
 # Non game vars
 image credit = Text(creditText, font="Montserrat-Medium.ttf", text_align=0.5)
@@ -135,6 +142,7 @@ label start:
 label startBossFight:
     scene Game World Arena 01 with None
     show Boss01 neutral at right with easeinright
+    show HP 100 at top with easeintop
     show Friend01 angry at left with easeinleft
     $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
     friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
@@ -157,9 +165,11 @@ label startBossFight:
     friendA "I'm going in. Cover me!"
     menu:
         "<Attack 1>":
-            play sound "audio/swordMetal6.ogg"
+            pass
         "<Attack 2>":
-            play sound "audio/swordMetal6.ogg"
+            pass
+    play sound "audio/swordMetal6.ogg"
+    show HP 75
     "{i}[friendA]'s <weapon> shatters into a million pieces{/i}"
     friendA "Shit!"
     friendA "I don't get it, our level is way higher than his. Shouldn't this fight be easy?"
@@ -176,10 +186,11 @@ label startBossAttackChoice:
         "<Attack>":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
+            show HP 50
             friendA "Nice!"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            startBoss @ Boss01 angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
+            startBoss @ angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
             jump startBossAttackChoice
     $ tmpFlag = False
 
@@ -188,10 +199,11 @@ label startBossAttackChoice2:
         "<Attack>":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
+            show HP 25
             friendA "Wow!"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            "[startBoss] blocks your path"
+            startBoss @ angry "YOU WON'T GET AWAY THAT EASY"
             jump startBossAttackChoice2
     $ tmpFlag = False
 
@@ -200,10 +212,11 @@ label startBossAttackChoice3:
         "<Attack>":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
+            show HP 0
             friendA "What the-"
         "<Run Away>" if not tmpFlag:
             $ tmpFlag = True
-            "[startBoss] blocks your path"
+            startBoss @ angry "WHO SAYS YOU CAN RUN?"
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
     hide Boss01 with zoomout
@@ -230,6 +243,7 @@ label startBossAttackChoice3:
     friendA "Huh, weird. Well maybe [friendB] knows something about it-"
     play sound "audio/error2.ogg"
     scene crash with vpunch
+    $ renpy.pause(1.5)
 
 label startRealWorld:
     scene Bedroom with None
