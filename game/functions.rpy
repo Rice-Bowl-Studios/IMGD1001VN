@@ -17,7 +17,7 @@ init python:
         creditText += "{size=64}" + c[1] + "\n"
     creditText += "\n{size=48}Engine\n{size=64}" + renpy.version()
 
-screen volume:
+screen volume():
     frame:
         xalign 0.5
         yalign 0.5
