@@ -78,7 +78,7 @@ label splashscreen:
     scene whitedrop with None
     if config.developer:
         "{cps=0}DEBUG MODE ENABLED{/cps}"
-    "{cps=0}Splashscreen here{/cps}"
+        "{cps=0}Splashscreen here{/cps}"
     return
 
 label main_menu:
@@ -87,14 +87,18 @@ label main_menu:
 
 label start:
 
-    "{cps=0}GAME START{/cps}"
+    if config.developer:
+        "{cps=0}GAME START{/cps}"
     
     menu:
+        "Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."
+        '''
         "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
         "{cps=0}Yes{/cps}":
             $ noFlashing = True
         "{cps=0}No{/cps}":
             pass
+        '''
     python:
         playerUsername = renpy.input("What is your username?")
         playerUsername = playerUsername.strip()
@@ -518,14 +522,219 @@ label startFriendTwoTavern:
     scene black with fade
     $ renpy.pause(2.0)
 
-label act2Start:
+label scene4Start:
     scene Hacker Space with fade
     "Am I... dreaming?"
     show GWHacker at right with easeinright
     hacker "Sort of. Depends on where you draw the line between dream and reality."
+    """
+    In this scene, [hacker] explains to the player the nature of the digital world and how it operates: The digital world is in fact another reality that exists within the mind similar to a dream. [hacker] has the unique ability to manipulate this world, and uses her power to uncover information and conspiracies. 
+    
+    [hacker] then begins to tell MainC the story of what she’s been up to recently: using other people’s eyes as “cameras”, she is tracking a person of interest in the real world. [hacker] is confused by the unusual data coming from their headset, and leaves MainC in the middle of her story.
+    
+    By the end of this scene, trust is beginning to form between [hacker] and MainC.
+    """
+
+label scene5Start:
+    scene black with None
+    """
+    In this scene, MainC and friends begin their unusual quest.  The scene begins in a dense forest with an encounter with a very high level monster that they have no chance of defeating.
+
+    [friendB] decides that stealth is their best option, but as they are sneaking around, [friendA] makes a mistake alerting the monster of their presence, and the group is separated.
+
+    As MainC wanders the forest looking for [friendA] and [friendB], something strange begins to happen: The trees appear to be changing positions, but not only that, you can also hear [hacker]’s voice inside your head.
+
+    Thoroughly confused and hopelessly lost, MainC walks almost unconsciously through the forest, unaware of where you're going or where you've been, listening only to the voice of [hacker].
+
+    It sounds as if she’s trying to find her way around some kind of building, and suddenly -almost as if right on queue- MainC begins to see the faint outline of a hallway. As MainC walks in this dreamlike state, your vision shifts back and forth between the forest and the building.
+
+    You can hear [hacker]’s frantic thoughts as she traverses the seemingly endless hallways, all while trying to stay undetected.
+
+    Eventually, the forest fades away and they reach a door.  MainC can feel [hacker]’s excitement as she approaches it, however right when they are about to go inside, the door begins to open from the other end!
+
+    Before MainC can see what lies behind the door, the surroundings are abruptly replaced by the forest again, and standing where the door once stood is the monster. Cornered and caught off guard, MainC has no choice but to fight.
+
+    MainC attacks the monster with all your might, but it’s no use.  Each attack does barely any damage to the monster, and MainC is brought to critically low HP.  However, right when it looks like there is no hope for MainC,  there is a strange interaction between the beast and MainC’s quest item.
+
+    Shockingly, the beast turns the other way, wandering off into the forest in a dazed state.  MainC quickly puts some distance between yourself and the monster, and reunites with [friendA] and [friendB].
+
+    Once the group makes their way out of the forest, they stop for a moment to figure out where to go next.  To their surprise, MainC’s bracelet is now directing them toward a new quest marker that appears to be outside the boundaries of the game world.
+
+    Confused but curious, they decide to head toward the edge of the map where the marker would theoretically be located.  To no one’s surprise, when they reach their destination they find a dead end.  Not knowing where to go next, the group decides to take a break here and set up camp.
+
+    They sit around and discuss their options, however as they are speaking, MainC suddenly is unable to hear them, your vision becomes blurry and dark…
+    """
+
+label scene6Start:
+    scene Hacker Space with fade
+    hacker "Now {i}that{/i} was a close call."
+    hacker "You're welcome by the way."
+    """
+    In this scene [hacker] triumphantly explains to MainC that she’s found exactly what she’s been looking for.
+
+    What that is?
+
+    She won’t say, but what she does tell MainC is that the building MainC saw is actually a secret research facility of the same company that created the <digital world>.
+
+    It’s now time for MainC to uphold your end of their deal.  She warns MainC that from here on out this quest is not going to be just a game.  What [hacker] has found could put the digital world in danger, and she needs MainC’s help to stop it.
+
+    At this point, [hacker] has proven to MainC that she’s not lying, and you agree to help.  [hacker] tells MainC to return to <game-world> and finish the quest.
+
+    Once MainC reaches the end, they will have everything they need, and [hacker] will then contact <pronoun> to explain what comes next.
+    """
+
+label scene7Start:
+    "scene 7 skip"
+
+label scene8Start:
+    "scene 8 skip"
+
+label scene9Start:
+    "\"Where am I?\""
+    "\"I can't feel my body\""
+    hacker """
+    This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you."
+
+    I'm sure you know by now, but the truth is the <serpent temple> was never supposed to be part of the game. In face, now that you've found it, I fear we're both in terrible danger.
+
+    The core of the <temple> you just entered is barely part of the <digital world> at all in fact.
+
+    It's part of {i}me{/i}.
+    """
+    "\"?\""
+    hacker "Thanks to you finishing my quest, I'm finally able to complete our connection."
+    "\"???\""
+    hacker """
+    Look, I don't have much time, but I promise everything will make sense soon.
+    
+    Right now I {i}need{/i} your help. [player], I have to know...
+
+    {i}Do you trust me?{/i}
+    """
+    menu:
+        "Yes":
+            "[hacker] let's out a sigh of relief"
+            hacker """
+            Alright. This next part is gonna feel weird.
+
+            Just promise to stay calm, alright?
+            """
+        "No":
+            "[hacker] let's out a disappointed sigh.."
+            hacker """
+            I'm sorry [player], but there's no other way...
+
+            I {i}have{/i} to do this.
+            """
+    scene black with fade
+    $ renpy.pause(2.0)
+
+label scene10Start:
+    scene Bedroom with None
+    "\"I'm... home?\""
+    "Without thinking, you stand up"
+    "\"Something's not right.\""
+    "You walk toward the door"
+    "As you reach for the door handle, you notice the <quest item> on your wrist"
+    "\"Is this real?\""
+    scene black with fade
+    "You leave your room and step outside"
+    scene City with None
+    "You begin walking down the street"
+
+label scene11Start:
+    """
+    You appear to be in some kind of server room
+
+    Without hesitation, you walk purposefully through the maze of consoles
+
+    You've never stepped foot in this place, yet if feels as if you've walked this route countless times
+
+    You reach a large console in the center of the room. All of the room's wires lead to this machine
+    
+    \"This is it\"
+    
+    Before you lies a massive control panel. You begin adjusting various devices...
+
+    As you continue to work on the panel, you notice a faint sound...
+
+    \"The machine is... breathing.\"
+
+    \"Almost there...\"
+
+    \"Just this...\"
+
+    \"And this...\"
+
+    \"And - There!\"
+
+    You press one more button and step away from the center console
+
+    The front of the machine begins to open. Through he cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
+    """
+    "Unknown Male Voice" "Hey! Stop right there!"
+    play sound "audio/0_mm_gunshot.wav"
+    """
+    You wake up on the floor in front of the center console
+
+    \"My head hurts...\"
+
+    Lying on the floor next to you is your headset. There is a large hole in it
+
+    \"Was I just... shot?\"
+    
+    Standing across the room is a man. He looks familiar
+
+    He's aiming a gun right at you
+    """
+    "Unknown Man" "Your game ends here."
+    "Unknown Female Voice" "No!"
+    "Explosion sound"
+    """
+    Before the man is able to shoot again, the console nearest him explodes, knocking him to the ground. His gun skitters out of reach into the darkness
+
+    \"That voice...\"
+    """
+    "Unknown Man" "Ughhh..."
+    """
+    The man appears to be unconscious
+
+    The center console opens completely, revealing [hacker]'s true self. She is connected to the machine, suspended by cables
+
+    \"Is that...?\"
+    """
+    "Strange Girl" "Hey [player]"
+    menu:
+        "What's going on here?":
+            pass
+        "WHo are you?":
+            hacker "It's me, [hackerName]"
+    hacker "This here is the truth behind the <digital world>"
+    "Her voice is strange, but it's undeniably [hacker]'s"
+    hacker """
+    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the <digital world>"
+
+    As it turns out, we've actually had the world's strongest supercomputer with us all along.
+
+    Only in the mind can there exist truly endless possibilities.
+
+    For years, scientists tried to replicate that power, creating countless supercomputers, AI after AI, and even quantum processing.
+
+    But in the end, no machine could compare to the brain, so humans did what they do best:{w=0.5} Adapt.
+
+    While the power of the human brain can't be replicated, it can be harnessed, rewired, {i}abused{/i}
+
+    Do you get it now [player]? All these fancy computers around us? They're not running the <digital world>.{w=0.5} {i}I am.{/i}
+    """
+    menu:
+        "Set [hacker] free":
+            pass
+        "Leave [hacker] here":
+            pass
 
 label kill:
-    "{cps=0}GAME DIE{/cps}"
+    if config.developer:
+        "{cps=0}GAME DIE{/cps}"
     stop music
     call credits from _call_credits
     $ renpy.quit()
