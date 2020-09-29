@@ -671,7 +671,7 @@ label scene11Start:
     The front of the machine begins to open. Through he cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
     """
     "Unknown Male Voice" "Hey! Stop right there!"
-    play sound "audio/0_mm_gunshot.wav"
+    play sound "audio/9_mm_gunshot.wav"
     """
     You wake up on the floor in front of the center console
 
