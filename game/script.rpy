@@ -89,16 +89,15 @@ label start:
 
     if config.developer:
         "{cps=0}GAME START{/cps}"
-    
-    menu:
-        "Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."
-        '''
+    "Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."
+    '''
+    menu: 
         "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
         "{cps=0}Yes{/cps}":
             $ noFlashing = True
         "{cps=0}No{/cps}":
             pass
-        '''
+    '''
     python:
         playerUsername = renpy.input("What is your username?")
         playerUsername = playerUsername.strip()
@@ -593,7 +592,7 @@ label scene9Start:
     "\"Where am I?\""
     "\"I can't feel my body\""
     hacker """
-    This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you."
+    This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.
 
     I'm sure you know by now, but the truth is the <serpent temple> was never supposed to be part of the game. In face, now that you've found it, I fear we're both in terrible danger.
 
@@ -712,7 +711,7 @@ label scene11Start:
     hacker "This here is the truth behind the <digital world>"
     "Her voice is strange, but it's undeniably [hacker]'s"
     hacker """
-    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the <digital world>"
+    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the <digital world>
 
     As it turns out, we've actually had the world's strongest supercomputer with us all along.
 
