@@ -329,7 +329,7 @@ label startHackerSpace:
     "{i}Where am I?{/i}"
     show GWHacker at center with easeinbottom
     $ hackerName = "{b}redacted{/b}"
-    hacker "God question. From what I can see, I'm pretty sure you're in a bedroom."
+    hacker "Good question. From what I can see, I'm pretty sure you're in a bedroom."
     $ tmpChosen = -1
     menu:
         "Who are you?":
@@ -524,9 +524,13 @@ label scene4Start:
     show GWHacker at right with easeinright
     hacker "Sort of. Depends on where you draw the line between dream and reality."
     """
-    In this scene, [hacker] explains to the player the nature of the digital world and how it operates: The digital world is in fact another reality that exists within the mind similar to a dream. [hacker] has the unique ability to manipulate this world, and uses her power to uncover information and conspiracies. 
+    In this scene, [hacker] explains to the player the nature of the digital world and how it operates: The digital world is in fact another reality that exists within the mind similar to a dream.
     
-    [hacker] then begins to tell MainC the story of what she’s been up to recently: using other people’s eyes as “cameras”, she is tracking a person of interest in the real world. [hacker] is confused by the unusual data coming from their headset, and leaves MainC in the middle of her story.
+    [hacker] has the unique ability to manipulate this world, and uses her power to uncover information and conspiracies. 
+    
+    [hacker] then begins to tell MainC the story of what she’s been up to recently: using other people’s eyes as “cameras”, she is tracking a person of interest in the real world.
+    
+    [hacker] is confused by the unusual data coming from their headset, and leaves MainC in the middle of her story.
     
     By the end of this scene, trust is beginning to form between [hacker] and MainC.
     """
@@ -542,7 +546,9 @@ label scene5Start:
 
     Thoroughly confused and hopelessly lost, MainC walks almost unconsciously through the forest, unaware of where you're going or where you've been, listening only to the voice of [hacker].
 
-    It sounds as if she’s trying to find her way around some kind of building, and suddenly -almost as if right on queue- MainC begins to see the faint outline of a hallway. As MainC walks in this dreamlike state, your vision shifts back and forth between the forest and the building.
+    It sounds as if she’s trying to find her way around some kind of building, and suddenly -almost as if right on queue- MainC begins to see the faint outline of a hallway.
+    
+    As MainC walks in this dreamlike state, your vision shifts back and forth between the forest and the building.
 
     You can hear [hacker]’s frantic thoughts as she traverses the seemingly endless hallways, all while trying to stay undetected.
 
@@ -550,13 +556,17 @@ label scene5Start:
 
     Before MainC can see what lies behind the door, the surroundings are abruptly replaced by the forest again, and standing where the door once stood is the monster. Cornered and caught off guard, MainC has no choice but to fight.
 
-    MainC attacks the monster with all your might, but it’s no use.  Each attack does barely any damage to the monster, and MainC is brought to critically low HP.  However, right when it looks like there is no hope for MainC,  there is a strange interaction between the beast and MainC’s quest item.
+    MainC attacks the monster with all your might, but it’s no use.  Each attack does barely any damage to the monster, and MainC is brought to critically low HP.
+    
+    However, right when it looks like there is no hope for MainC, there is a strange interaction between the beast and MainC’s quest item.
 
     Shockingly, the beast turns the other way, wandering off into the forest in a dazed state.  MainC quickly puts some distance between yourself and the monster, and reunites with [friendA] and [friendB].
 
     Once the group makes their way out of the forest, they stop for a moment to figure out where to go next.  To their surprise, MainC’s bracelet is now directing them toward a new quest marker that appears to be outside the boundaries of the game world.
 
-    Confused but curious, they decide to head toward the edge of the map where the marker would theoretically be located.  To no one’s surprise, when they reach their destination they find a dead end.  Not knowing where to go next, the group decides to take a break here and set up camp.
+    Confused but curious, they decide to head toward the edge of the map where the marker would theoretically be located.  To no one’s surprise, when they reach their destination they find a dead end.
+    
+    Not knowing where to go next, the group decides to take a break here and set up camp.
 
     They sit around and discuss their options, however as they are speaking, MainC suddenly is unable to hear them, your vision becomes blurry and dark…
     """
