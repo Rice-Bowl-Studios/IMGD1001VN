@@ -149,7 +149,7 @@ label startBossFight:
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
     play sound "audio/mirror_shattering.wav"
     show Boss01 neutral with vpunch
-    friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
+    friendA "Damn my weapon's almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
     show Friend01 happy
     friendA "There you are, it's about time! Wasn't the plan to ambush this boss like 30 minutes ago?"
@@ -159,18 +159,18 @@ label startBossFight:
         "I'm here now, let's do this.":
             pass
     friendA "Well come on! You know, if we don't beat this <insulting nickname for boss> tonight [friendB]'s never gonna let us forget it."
-    "{i}You draw your <weapon>, [friendA] draws his <weapon>{/i}"
+    "{i}You draw your weapon, [friendA] draws his weapon{/i}"
     startBoss "YOU PATHETIC CREATURES REALLY THINK YOU CAN DEFEAT ME?"
     show Friend01 angry
     friendA "I'm going in. Cover me!"
     menu:
-        "<Attack 1>":
+        "Attack 1":
             pass
-        "<Attack 2>":
+        "Attack 2":
             pass
     play sound "audio/swordMetal6.ogg"
     show HP 75
-    "{i}[friendA]'s <weapon> shatters into a million pieces{/i}"
+    "{i}[friendA]'s weapon shatters into a million pieces{/i}"
     friendA "Shit!"
     friendA "I don't get it, our level is way higher than his. Shouldn't this fight be easy?"
     menu:
@@ -183,12 +183,12 @@ label startBossFight:
 
 label startBossAttackChoice:
     menu:
-        "<Attack>":
+        "Attack":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             show HP 50
             friendA "Nice!"
-        "<Run Away>" if not tmpFlag:
+        "Run Away" if not tmpFlag:
             $ tmpFlag = True
             startBoss @ angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
             jump startBossAttackChoice
@@ -196,12 +196,12 @@ label startBossAttackChoice:
 
 label startBossAttackChoice2:
     menu:
-        "<Attack>":
+        "Attack":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             show HP 25
             friendA "Wow!"
-        "<Run Away>" if not tmpFlag:
+        "Run Away" if not tmpFlag:
             $ tmpFlag = True
             startBoss @ angry "YOU WON'T GET AWAY THAT EASY"
             jump startBossAttackChoice2
@@ -209,12 +209,12 @@ label startBossAttackChoice2:
 
 label startBossAttackChoice3:
     menu:
-        "<Attack>":
+        "Attack":
             play sound "audio/swordMetal6.ogg"
             gameLog "Critical Hit!"
             show HP 0
             friendA "What the-"
-        "<Run Away>" if not tmpFlag:
+        "Run Away" if not tmpFlag:
             $ tmpFlag = True
             startBoss @ angry "WHO SAYS YOU CAN RUN?"
             jump startBossAttackChoice3
@@ -433,7 +433,7 @@ label startFriendTwoTavern:
     scene Game Tavern with fade
     show Friend01 neutral at left with easeinleft
     show Friend02 angry at right with easeinright
-    friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the <weapon> I gave him?{/i}"
+    friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the weapon I gave him?{/i}"
     friendA "Right..."
     friendA "About that..."
     menu:
@@ -576,7 +576,7 @@ label scene6Start:
 
     At this point, [hacker] has proven to MainC that she’s not lying, and you agree to help.  [hacker] tells MainC to return to <game-world> and finish the quest.
 
-    Once MainC reaches the end, they will have everything they need, and [hacker] will then contact <pronoun> to explain what comes next.
+    Once MainC reaches the end, they will have everything they need, and [hacker] will then contact you to explain what comes next.
     """
 
 label scene7Start:
