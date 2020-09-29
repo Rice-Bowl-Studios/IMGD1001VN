@@ -89,14 +89,12 @@ label start:
     if config.developer:
         "{cps=0}GAME START{/cps}"
     "Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."
-    '''
-    menu: 
-        "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
-        "{cps=0}Yes{/cps}":
-            $ noFlashing = True
-        "{cps=0}No{/cps}":
-            pass
-    '''
+    #menu: 
+    #    "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
+    #    "{cps=0}Yes{/cps}":
+    #        $ noFlashing = True
+    #    "{cps=0}No{/cps}":
+    #        pass
     python:
         playerUsername = renpy.input("What is your username?")
         playerUsername = playerUsername.strip()
