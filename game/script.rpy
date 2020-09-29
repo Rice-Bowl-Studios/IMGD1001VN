@@ -86,7 +86,6 @@ label main_menu:
     call screen volume
 
 label start:
-
     if config.developer:
         "{cps=0}GAME START{/cps}"
     "Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."

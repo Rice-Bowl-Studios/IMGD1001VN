@@ -9,7 +9,7 @@ init python:
             out += random.choice(nonunicode)
         return out
 
-    credits = ("Writing", "Samuel France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("error2.ogg, Kenney Game Assets 2, Kenney, https://kenney.itch.io/kenney-game-assets-2", "")
+    credits = ("Writing", "Samuel France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
     creditText = "{size=76}Credits\n"
     for c in credits:
         if not c==c[0]:
@@ -30,8 +30,8 @@ screen volume:
         textbutton "Confirm" action Jump("start")
 
 label credits:
-    $ credits_speed = 25
+    $ credits_speed = 30
     scene black with dissolve
-    show credit at Move((0.5, 5.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
-    with Pause(credits_speed)
+    show credit at Move((0.5, 7.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
+    with Pause(credits_speed + 2)
     return
