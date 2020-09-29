@@ -56,7 +56,7 @@ image GWHacker = "ch_GW_Hacker.png"
 image RWHacker neutral = "ch_RW_Hacker_neutral.png"
 
 # Item IMG
-image hacker item = "item_hackerItem.png"
+image hacker item = im.Scale("item_hackerItem.png", 360, 360)
 
 # Other IMG
 image HP 0 = im.Scale("boss_hp_0.png", 360, 90)
@@ -140,14 +140,14 @@ label start:
                     playerCharacterIndepPossesivePronoun = "theirs"
         
 label startBossFight:
-    scene Game World Arena 01 with None
-    show Boss01 neutral at right with easeinright
+    scene Game World Arena 01
+    show Boss01 neutral at right
+    show Friend01 angry at left
     show HP 100 at top with easeintop
-    show Friend01 angry at left with easeinleft
     $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
     friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
-    play sound "audio/metalPot3.ogg"
+    play sound "audio/mirror_shattering.wav"
     show Boss01 neutral with vpunch
     friendA "Damn my <weapon>'s almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
@@ -241,7 +241,7 @@ label startBossAttackChoice3:
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No"
     friendA "Huh, weird. Well maybe [friendB] knows something about it-"
-    play sound "audio/error2.ogg"
+    play sound "audio/computer_error_alert.wav"
     scene crash with vpunch
     $ renpy.pause(1.5)
 
@@ -293,7 +293,8 @@ label startRealWorld:
     "<game title> seems to have crashed"
     "My headset is burning hot"
     "What {i}was{/i} that weird bracelet item"
-    "TODO: play phone ring sound"
+    play sound "<to 5>audio/phone_ringing.wav"
+    $ renpy.pause(3.0)
     "It's [friendB]"
     show Friend02 neutral with easeinbottom
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down that [startBoss]"
@@ -303,6 +304,7 @@ label startRealWorld:
         "I'll be there in a few minutes.":
             friendB "Alright. Are you still with [friendA]?"
     friendB "Oh, here he is now. I’ll see you in a bit. Bye."
+    hide Friend02
     "I'd better try logging back in"
     "{i}You put your headset back on{/i}"
     scene logInScreen with None
@@ -457,8 +459,7 @@ label startFriendTwoTavern:
     friendB "..."
     show Friend01 neutral
     show Friend02 neutral
-    friendA "{i}Seriously?{/i}" (multiple=2)
-    friendB "{i}Seriously?{/i}" (multiple=2)
+    friendA "{i}Seriously?{/i}"
     friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
     friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's freaky."
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
