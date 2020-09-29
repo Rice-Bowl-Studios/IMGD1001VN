@@ -410,7 +410,7 @@ label afterHackerSpaceNameChoice:
     hacker "..."
     hacker "?"
     hacker "Nothing?{w=1.0} Seriously?"
-    $ hackerName = "hacker"
+    $ hackerName = "Medusa"
     hacker "Well, whatever, since we're friends you can call me [hacker]"
     hacker "So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game."
     hacker "What was it called again?{w=2.0} You know, the one you've been playing {i}literally{/i} non-stop. {i}like seriously don't you have a job or something?{/i}"
@@ -706,7 +706,7 @@ label scene11Start:
         "What's going on here?":
             pass
         "WHo are you?":
-            hacker "It's me, [hackerName]"
+            hacker "It's me, [hacker]"
     hacker "This here is the truth behind the <digital world>"
     "Her voice is strange, but it's undeniably [hacker]'s"
     hacker """
