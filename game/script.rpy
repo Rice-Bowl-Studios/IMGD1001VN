@@ -178,7 +178,7 @@ label startBossFight:
             pass
         "Maybe you're just bad.":
             friendA "Very funny coming from the one who almost missed the whole fight."
-    friendA "I don't know if we can win this [playerCharacter]"
+    friendA "I don't know if we can win this, [playerCharacter]"
     $ tmpFlag = False
 
 label startBossAttackChoice:
@@ -316,7 +316,7 @@ label startRealWorld:
     scene reddrop with None
     stop music
     play music "audio/Mission Plausible.ogg"
-    "I can't life my arm."
+    "I can't lift my arm."
     "My head feels like it's on fire."
     "It feels like something's grabbing my wrist."
     "I can't get the headset off with my arm stuck like this."
@@ -353,16 +353,15 @@ label startHackerSpace:
             pass
     hacker "Okay, I think that's enough questioning for today."
     "{i}You try to speak, but nothing comes out. It feels as though you are underwater.{/i}"
-    hacker "Right, now where was I? Let's see,"
-    show hacker item at right with zoomin
+    hacker "Right, now where was I? Let's see, plant the <hacker item>, dramatic entrace, obligatory exposition..."
     hacker "Ah of course"
-    hacker "{i}ahem{/i}"
+    hacker "{i}*ahem*{/i}"
     if playerName != playerUsername:
-        hacker "Welcome to my world [playerCharacter]! Or should I say [player]."
+        hacker "Welcome to my world, [playerCharacter]! Or should I say [player]."
         hacker "Which would you prefer?"
         jump hackerSpaceNameChoice
     else:
-        hacker "Welcome to my world [player]."
+        hacker "Welcome to my world, [player]."
         python:
             preferredName = playerName
             preferredSubjectPronoun = playerSubjectPronoun
@@ -398,6 +397,7 @@ label afterHackerSpaceNameChoice:
     else:
         hacker "Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party."
     hacker "But then, right when I was about to call it off, you came along and found my invitation!"
+    show hacker item at right with zoomin
     "{i}The mysterious figure gestures toward the <HackerItem>, which is now fastened to your wrist{/i}"
     "{i}How did that get there?{/i}"
     hacker "And guess what. The best part is...{w=3.0} it's yours to keep! Consider it a party favor from your new best friend."
@@ -412,7 +412,7 @@ label afterHackerSpaceNameChoice:
     hacker "Well, whatever, since we're friends you can call me [hacker]"
     hacker "So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game."
     hacker "What was it called again?{w=2.0} You know, the one you've been playing {i}literally{/i} non-stop. {i}like seriously don't you have a job or something?{/i}"
-    hacker "Anyways, I've got a game of my own going on{w=0.5} - so to speak. But you see the thing is I kind of need some help getting to the end of it."
+    hacker "Anyways, I've got a game of my own going on{w=0.5} -so to speak-, and it's {i}really{/i} important. But you see, the thing is, I kind of need some help getting to the end of it."
     hacker "And you know..."
     hacker "I just thought..."
     hacker "{i}Since we are friends{/i}"
