@@ -523,17 +523,44 @@ label scene4Start:
     "Am I... dreaming?"
     show GWHacker at right with easeinright
     hacker "Sort of. Depends on where you draw the line between dream and reality."
+    "What are you talking about?"
+    hacker """
+    Do you want the short answer, or the technical one?{w=1.0} Ah, screw it, I'll give you both. {i}I do love hearing the sound of my own voice after all{/i}"
+
+    [preferredName], I don't know what they taught you in school about <digital world>, but I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\" and \"a new era of digtal communication\", generously brought to you by <corporation>
+
+    Which honestly isn't far off in some aspects
+
+    {i}But my god, there is so much more to it than that.{/i}
+
+    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simmulation. In fact, nobody does.
+
+    Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}
+
+    You see, what <corporation> doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen.{/i}
+
+    Don't believe me? Look no further than the first thought you had when I brought you here today.
     """
-    In this scene, [hacker] explains to the player the nature of the digital world and how it operates: The digital world is in fact another reality that exists within the mind similar to a dream.
-    
-    [hacker] has the unique ability to manipulate this world, and uses her power to uncover information and conspiracies. 
-    
-    [hacker] then begins to tell MainC the story of what she’s been up to recently: using other people’s eyes as “cameras”, she is tracking a person of interest in the real world.
-    
-    [hacker] is confused by the unusual data coming from their headset, and leaves MainC in the middle of her story.
-    
-    By the end of this scene, trust is beginning to form between [hacker] and MainC.
+    "I thought I was in a dream..."
+    hacker """
+    Exactly! Let me explain...
+
+    Believe it or not, the suits and ties at <corporation> are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep. A dream, essentially.
     """
+    menu:
+        "Are we dreaming right now?":
+            pass
+        "Is everyone on <digital world> dreaming?":
+            pass
+    hacker """
+    Well, not exactly. It's more like one person <the computer> is having some kind of comatose fever-dream, and everyone else, you and your weird friends, gets to show up and whisper in the dreamer's ear.
+
+    With enough whispering, you can make an imprint on their subconscious, and then the dream can be whatever you want.
+
+    In essence, they made an artificial dream machine.
+    """
+    if config.developer:
+        "END SCENE 4"
 
 label scene5Start:
     scene black with None
@@ -570,6 +597,8 @@ label scene5Start:
 
     They sit around and discuss their options, however as they are speaking, MainC suddenly is unable to hear them, your vision becomes blurry and dark…
     """
+    if config.developer:
+        "END SCENE 5"
 
 label scene6Start:
     scene Hacker Space with fade
@@ -588,12 +617,16 @@ label scene6Start:
 
     Once MainC reaches the end, they will have everything they need, and [hacker] will then contact you to explain what comes next.
     """
+    if config.developer:
+        "END SCENE 6"
 
 label scene7Start:
-    "scene 7 skip"
+    if config.developer:
+        "END SCENE 7"
 
 label scene8Start:
-    "scene 8 skip"
+    if config.developer:
+        "END SCENE 8"
 
 label scene9Start:
     "\"Where am I?\""
@@ -634,6 +667,8 @@ label scene9Start:
             """
     scene black with fade
     $ renpy.pause(2.0)
+    if config.developer:
+        "END SCENE 9"
 
 label scene10Start:
     scene Bedroom with None
@@ -647,6 +682,8 @@ label scene10Start:
     "You leave your room and step outside"
     scene City with None
     "You begin walking down the street"
+    if config.developer:
+        "END SCENE 10"
 
 label scene11Start:
     """
