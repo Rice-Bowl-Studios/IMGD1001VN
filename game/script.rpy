@@ -192,7 +192,6 @@ label startBossAttackChoice:
             $ tmpFlag = True
             startBoss @ angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
             jump startBossAttackChoice
-    $ tmpFlag = False
 
 label startBossAttackChoice2:
     menu:
@@ -205,7 +204,6 @@ label startBossAttackChoice2:
             $ tmpFlag = True
             startBoss @ angry "YOU WON'T GET AWAY THAT EASY"
             jump startBossAttackChoice2
-    $ tmpFlag = False
 
 label startBossAttackChoice3:
     menu:
@@ -531,11 +529,11 @@ label scene4Start:
 
     {i}But my god, there is so much more to it than that.{/i}
 
-    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simmulation. In fact, nobody does.
+    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simmulation. In fact, {i}nobody does{/i}.
 
     Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}
 
-    You see, what <corporation> doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen.{/i}
+    You see, what <corporation> doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen{/i}.
 
     Don't believe me? Look no further than the first thought you had when I brought you here today.
     """
@@ -551,11 +549,67 @@ label scene4Start:
         "Is everyone on <digital world> dreaming?":
             pass
     hacker """
-    Well, not exactly. It's more like one person <the computer> is having some kind of comatose fever-dream, and everyone else, you and your weird friends, gets to show up and whisper in the dreamer's ear.
+    Well, not exactly. It's more like one person <the computer> is having some kind of comatose fever-dream, and everyone else, including you and your weird friends, gets to show up and whisper in the dreamer's ear.
 
     With enough whispering, you can make an imprint on their subconscious, and then the dream can be whatever you want.
 
-    In essence, they made an artificial dream machine.
+    In short, they mad e a super advanced dream machine. Super cool!
+
+    And super {i}creepy{/i}.
+
+    I mean, do you have any idea how much raw data is constantly flowing straight from you brain to the <digital world> all the time?
+    """
+    "..."
+    hacker "Neither do I! Nobody does! But I have a theory that it's a lot."
+    menu:
+        "Why are you telling me all of this":
+            hacker "You know if you'd just hold on a minute, I was getting there."
+        "How do you know all of this?":
+            hacker "Oh [preferredName], I'm so glad you asked!"
+    hacker """
+    In case you haven't noticed, I'm kind of a genius when it comes to the <digital world>, {i}and everything else for that matter{/i}. And believe it or not, me and <corporation> actually go way back.
+
+    My relationship with them is...{w=0.5} complicated, to say the lease. I hack them...{w=0.5} they catch me...{w=0.5} I disappear for a while...{w=0.5} and then I come back and do it again!
+
+    And so on.
+
+    But things changed when <corporation> launched the <digital world>. 'The New Digital Frontier', as they like to call it, was supposed to be totally secure. Unhackable! Foolproof!
+
+    Can you believe that? {i}So arrogant, even by my standards{/i}.
+
+    They're not wrong though. There's no other system like <supercomputer>, so even if you were somehow able to intercept its data, the actual hardware you'd need to read it doesn't exist.
+
+    I'm an exception of course. When it comes to the <digital world>, I can see {i}everything{/i}. From the contents of your inventory, to the actual thought data flowing through your headset.
+    """
+    menu:
+        "How are you able to do that?":
+            pass
+        "What makes you so special?":
+            pass
+    hacker """
+    To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at <corporation> are a pretty clever bunch.
+
+    So clever in fact, that when they launched the <digital world>, they actually created a whole new security system just for me! {i}Flattering, I know.{/i}
+
+    For certain {i}personal reasons{/i}, I won't be going into detail on how exactly <corporation> decided to deal with me. {i}Sorry, we are not that close yet{/i}.
+
+    But what's more important is that their plan backfired{w=0.5} - Well, not entirely. It's more like a double edged sword.
+
+    {i}And my side is sharper{/i}.
+
+    While they may be clever, the suits and ties at <corporation> are also {i}extremely{/i} overconfident.
+
+    Seriously, they don't even realize that their 'expert security plan' just so happens to provide an lal-exclusive backdoor into the <digital world>.
+
+    The best part?{w=1.0} It's all mine!
+
+    ANyway, that's what makes me special. Just some dumb luck really. {i}Although, I prefer to think that <corporation> has a soft spot for me{/i}.
+
+    Ling story short, <corporation> messed up big-time and they don't even know it.
+
+    And that's exactly what will lead to their undoing.
+
+    They're hiding something about the <digital world>, and I'm gunna be the one to find it.
     """
     if config.developer:
         "END SCENE 4"
