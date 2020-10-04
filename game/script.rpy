@@ -312,8 +312,7 @@ label startRealWorld:
     scene black with None
     "..."
     "My headset is getting hot again."
-    "{i}Tries to remove headset{/i}"
-    scene reddrop with None
+    "{i}You try to remove your headset{/i}"
     stop music
     play music "audio/Mission Plausible.ogg"
     "I can't lift my arm."
@@ -321,8 +320,7 @@ label startRealWorld:
     "It feels like something's grabbing my wrist."
     "I can't get the headset off with my arm stuck like this."
     "The heat is getting unbearable..."
-    scene black with None
-    $ renpy.pause(2.0)
+    scene black with pulse(8, "#f00", 1, 0.1, 0.1, 0.25, 2.0)
 
 label startHackerSpace:
     scene Hacker Space with fade
