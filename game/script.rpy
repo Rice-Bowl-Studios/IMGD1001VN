@@ -95,10 +95,10 @@ label start:
         "No":
             $ noFlashing = False
     python:
-        playerUsername = renpy.input("What is your username?")
-        playerUsername = playerUsername.strip()
-        if not playerUsername:
-            playerUsername = "Pat Rick"
+        playerUsername = ""
+        while playerUsername == "":
+            playerUsername = renpy.input("What is your username?")
+            playerUsername = playerUsername.strip()
     menu:
         "{cps=0}What are your pronouns?{/cps}"
         "He/Him/His":
@@ -149,16 +149,16 @@ label startBossFight:
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL"
     play sound "audio/mirror_shattering.wav"
     show Boss01 neutral with vpunch
-    friendA "Damn my weapon's almost broken! I can't stay here much longer."
+    friendA "Damn, my weapon's almost broken! I can't stay here much longer."
     gameLog "{i}[playerCharacter] has entered the area{/i}"
     show Friend01 happy
-    friendA "There you are, it's about time! Wasn't the plan to ambush this boss like 30 minutes ago?"
+    friendA "There you are! It's about time! Wasn't the plan to ambush this boss like 30 minutes ago?"
     menu:
         "Sorry I'm late, I fell asleep.":
             pass
         "I'm here now, let's do this.":
             pass
-    friendA "Well come on! You know, if we don't beat this <insulting nickname for boss> tonight [friendB]'s never gonna let us forget it."
+    friendA "Well come on! You know, if we don't beat this <insulting nickname for boss> tonight, [friendB]'s never gonna let us forget it."
     "{i}You draw your weapon, [friendA] draws his weapon{/i}"
     startBoss "YOU PATHETIC CREATURES REALLY THINK YOU CAN DEFEAT ME?"
     show Friend01 angry
@@ -171,10 +171,13 @@ label startBossFight:
     show Friend01 angry:
         ease 0.25 zoom 1.1
         ease 0.25 xalign 0.75
-    $ renpy.pause(0.4)
+    $ renpy.pause(0.5)
+    show Boss01 neutral:
+        ease 0.05 zoom 0.9 xoffset 100
+        ease 0.1 zoom 1.0 xoffset 0
+    $ renpy.pause(0.15)
     play sound "audio/swordMetal6.ogg"
     show HP 75
-    $ renpy.pause(0.1)
     show Friend01 angry:
         ease 0.35 xalign 0.0
         ease 0.25 zoom 1.0
@@ -269,7 +272,7 @@ label startBossAttackChoice3:
     gameLog "[tmpGlitchText] was added to your inventory"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
-    playerCharacter "No"
+    "No"
     friendA "Huh, weird. Well maybe [friendB] knows something about it-"
     play sound "audio/computer_error_alert.wav"
     scene crash with vpunch
@@ -278,10 +281,10 @@ label startBossAttackChoice3:
 label startRealWorld:
     scene Bedroom with None
     python:
-        playerName = renpy.input("What is your name?")
-        playerName = playerName.strip()
-        if not playerName:
-            playerName = "Pat Rick"
+        playerName = ""
+        while playerName == "":
+            playerName = renpy.input("What is your name?")
+            playerName = playerName.strip()
     menu:
         "{cps=0}What are your pronouns?{/cps}"
         "He/Him/His":
@@ -348,7 +351,7 @@ label startRealWorld:
     "It feels like something's grabbing my wrist."
     "I can't get the headset off with my arm stuck like this."
     "The heat is getting unbearable..."
-    scene black with pulse(8, "#f00", 0.7, 1.2, 0.1, 0.1, 0.25, 2.0)
+    scene black with pulse(12, "#f00", 0.7, 1.2, 0.1, 0.1, 0.25, 2.0)
 
 label startHackerSpace:
     scene Hacker Space with fade
@@ -395,6 +398,7 @@ label startHackerSpace:
             preferredDepPossesivePronoun = playerDepPossesivePronoun
             preferredIndepPossesivePronoun = playerIndepPossesivePronoun
         jump afterHackerSpaceNameChoice
+    $ tmpFlag = True
 
 label hackerSpaceNameChoice:
     menu:
@@ -412,7 +416,8 @@ label hackerSpaceNameChoice:
                 preferredObjectPronoun = playerObjectPronoun
                 preferredDepPossesivePronoun = playerDepPossesivePronoun
                 preferredIndepPossesivePronoun = playerIndepPossesivePronoun
-        "How do you know my name?":
+        "How do you know my name?" if tmpFlag:
+            $ tmpFlag = False
             play sound "audio/error2.ogg"
             hacker "Hey, what did I say about asking questions?"
             jump hackerSpaceNameChoice
@@ -587,7 +592,7 @@ label scene4Start:
 
     With enough whispering, you can make an imprint on their subconscious, and then the dream can be whatever you want.
 
-    In short, they mad e a super advanced dream machine. Super cool!
+    In short, they made a super advanced dream machine. Super cool!
 
     And super {i}creepy{/i}.
 
@@ -906,10 +911,10 @@ label scene11Start:
     menu:
         "What's going on here?":
             pass
-        "WHo are you?":
+        "Who are you?":
             hacker "It's me, [hacker]"
     hacker "This here is the truth behind the <digital world>"
-    "Her voice is strange, but it's undeniably [hacker]'s"
+    "{i}Her voice is strange, but it's undeniably [hacker]'s{/i}"
     hacker """
     I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the <digital world>
 
@@ -927,9 +932,9 @@ label scene11Start:
     """
     menu:
         "Set [hacker] free":
-            pass
+            scene black with Pixellate(5, 24)
         "Leave [hacker] here":
-            pass
+            scene black
 
 label kill:
     if config.developer:
