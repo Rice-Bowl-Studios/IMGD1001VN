@@ -42,7 +42,7 @@ screen volume():
         bar value Preference("sound volume")
         text "Music Volume"
         bar value Preference("music volume")
-        textbutton "Confirm" action Jump("start")
+        textbutton "Confirm" action Start()
 
 label credits:
     $ credits_speed = 30

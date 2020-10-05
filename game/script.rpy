@@ -66,7 +66,7 @@ image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
 
 # Non game vars
-image credit = Text(creditText, font="Montserrat-Medium.ttf", text_align=0.5)
+image credit = Text(creditText, text_align=0.5)
 
 # Other vars
 define noFlashing = True
@@ -88,12 +88,11 @@ label main_menu:
 label start:
     if config.developer:
         "{cps=0}GAME START{/cps}"
-    #"Please be careful playing if you are sensitive to flashing lights, this game does not have a filter for it implemented yet."
     menu: 
         "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
-        "{cps=0}Yes{/cps}":
+        "Yes":
             $ noFlashing = True
-        "{cps=0}No{/cps}":
+        "No":
             $ noFlashing = False
     python:
         playerUsername = renpy.input("What is your username?")
@@ -140,6 +139,7 @@ label start:
                     playerCharacterIndepPossesivePronoun = "theirs"
         
 label startBossFight:
+    $ suppress_overlay = False
     scene Game World Arena 01
     show Boss01 neutral at right
     show Friend01 angry at left
@@ -168,8 +168,16 @@ label startBossFight:
             pass
         "Attack 2":
             pass
+    show Friend01 angry:
+        ease 0.25 zoom 1.1
+        ease 0.25 xalign 0.75
+    $ renpy.pause(0.4)
     play sound "audio/swordMetal6.ogg"
     show HP 75
+    $ renpy.pause(0.1)
+    show Friend01 angry:
+        ease 0.35 xalign 0.0
+        ease 0.25 zoom 1.0
     "{i}[friendA]'s weapon shatters into a million pieces{/i}"
     friendA "Shit!"
     friendA "I don't get it, our level is way higher than his. Shouldn't this fight be easy?"
@@ -185,36 +193,60 @@ label startBossAttackChoice:
     menu:
         "Attack":
             play sound "audio/swordMetal6.ogg"
+            show Boss01 neutral:
+                ease 0.1 zoom 0.9 xoffset 100
+            $ renpy.pause(0.1)
+            show Boss01 neutral:
+                ease 0.1 zoom 1.0 xoffset 0
             gameLog "Critical Hit!"
             show HP 50
             friendA "Nice!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
-            startBoss @ angry "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
+            show Boss01 angry:
+                ease 0.25 zoom 1.1
+            startBoss "HAHAHA YOU FOOLS CAN'T ESCAPE ME"
+            show Boss01 neutral:
+                ease 0.25 zoom 1.0
             jump startBossAttackChoice
 
 label startBossAttackChoice2:
     menu:
         "Attack":
             play sound "audio/swordMetal6.ogg"
+            show Boss01 neutral:
+                ease 0.1 zoom 0.9 xoffset 100
+            $ renpy.pause(0.1)
+            show Boss01 neutral:
+                ease 0.1 zoom 1.0 xoffset 0
             gameLog "Critical Hit!"
             show HP 25
             friendA "Wow!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
-            startBoss @ angry "YOU WON'T GET AWAY THAT EASY"
+            show Boss01 angry:
+                ease 0.25 zoom 1.1
+            startBoss "YOU WON'T GET AWAY THAT EASY"
+            show Boss01 neutral:
+                ease 0.25 zoom 1.0
             jump startBossAttackChoice2
 
 label startBossAttackChoice3:
     menu:
         "Attack":
             play sound "audio/swordMetal6.ogg"
+            show Boss01 neutral:
+                ease 0.1 zoom 0.9 xoffset 100
             gameLog "Critical Hit!"
             show HP 0
             friendA "What the-"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
-            startBoss @ angry "WHO SAYS YOU CAN RUN?"
+            show Boss01 angry:
+                ease 0.25 zoom 1.1
+            startBoss "WHO SAYS YOU CAN RUN?"
+            show Boss01 neutral:
+                ease 0.25 zoom 1.0
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
     hide Boss01 with zoomout
@@ -251,7 +283,7 @@ label startRealWorld:
         if not playerName:
             playerName = "Pat Rick"
     menu:
-        "What are your pronouns?"
+        "{cps=0}What are your pronouns?{/cps}"
         "He/Him/His":
             python:
                 playerSubjectPronoun = "he"
@@ -424,7 +456,7 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label startFriendTwoTavern:
-    scene Game Tavern with fade
+    scene Game World Arena 01 with fade
     show Friend01 neutral at left with easeinleft
     show Friend02 angry at right with easeinright
     friendB "There you are. [friendA] was about to tell me about the big fight, {i}specifically the part where he somehow lost the weapon I gave him?{/i}"
@@ -446,7 +478,7 @@ label startFriendTwoTavern:
             pass
     #"{i}You explain to [friendA] and [friendB] about what just happened{/i}"
     scene black with fade
-    scene Game Tavern with fade
+    scene Game World Arena 01 with fade
     show Friend01 neutral at left
     show Friend02 angry at right
     friendA "..."
@@ -599,20 +631,83 @@ label scene4Start:
 
     {i}And my side is sharper{/i}.
 
-    While they may be clever, the suits and ties at <corporation> are also {i}extremely{/i} overconfident.
+    You see, what <corporation> hasn't realized yet about their \"expert security plan\" is that it just so happens to double as an all-exclusive backdoor to the <digital world>.
 
-    Seriously, they don't even realize that their 'expert security plan' just so happens to provide an lal-exclusive backdoor into the <digital world>.
+    And that's what allows me to do all the cool stuff I do!
 
-    The best part?{w=1.0} It's all mine!
-
-    Anyway, that's what makes me special. Just some dumb luck really. {i}Although, I prefer to think that <corporation> has a soft spot for me{/i}.
-
-    Long story short, <corporation> messed up big-time and they don't even know it.
-
-    And that's exactly what will lead to their undoing.
-
-    They're hiding something about the <digital world>, and I'm gunna be the one to find it.
+    {i}And{/i} how I'll get my revenge
     """
+    menu:
+        "Revenge?":
+            pass
+        "What exactly are you planning?":
+            hacker """
+            Hehe peaked your interest have I? Sorry but you'll just have to wait and see.
+            
+            Wouldn't want to ruin the surprise after all.
+        """
+    hacker """
+    Let's just say, <corporation> is hiding something about the <digital world>.{w=1.0} {i}Something big{/i}.
+
+    And I'm gonna be the one to expose it!
+
+    But...{w=0.5} I need some help. {i}Lame, I know{/i}. That's where you come in [preferredName]
+    """
+    menu:
+        "What do you need me for?":
+            pass
+        "Is this going to be illegal?":
+            hacker "Pfft... no! No... haha... why would you thing that?{w=0.25} I mean, I don't know...{w=0.25} maybe...{w=0.25} {i}it could be.{w=0.25} Do you want it to be?{/i}"
+    hacker """
+    You see [preferredName], before I can make my next big move, I need you to hurry up and finish your quest.
+
+    Sorry. I don't mean to sound ungrateful or anything, but there's something really important hiding at the end of that quest I gave you, and I need it ASAP.
+    """
+    menu:
+        "Why don't you just get it yourself?":
+            hacker """
+            In case you haven't noticed, I can't actually enter the <digital world> myself.
+
+            If I were to be detected by <corporation>, everything I've done up until now would be pointless.
+
+            Also, I'm kind of busy with my own adventure right now.
+
+            Here, take a look.
+            """
+        "What is it?":
+            hacker """
+            {i}Hmmm...{w=0.25} how should I explain this{/i}?
+
+            It's a key (sort of?) to the heart of the <digital world>.
+
+            Once I have it, I'll finally be able to expose <corporation>'s secret, and take back what they stole from me.
+
+            Exciting stuff, right? Anyways, I didn't just bring you here today just to monologue about me master plan.
+
+            I actually wanted to take you on a little field trip...
+            """
+    scene City with pixellate
+    hacker "Look familiar?"
+    "It looks like the city I live in. Although I don't thing I've been to this particular area."
+    hacker """
+    This is the energy district. Unless you're into nuclear physics or radiation poisoning, you've probably never been here.
+
+    And this guy definitely doesn't fall into either of those categories.
+    """
+    show corporation guy at left with easeinleft
+    menu:
+        "Who is he?":
+            hacker """
+            I'm wondering the same thing.
+
+            From what I've gathered, he's definitely connected to <corporation>.
+
+            But that alone doesn't explain the data coming from his headset.
+
+            There's something off about it. It's unlike any I've seen before.
+            """
+        "Why are you here?":
+            hacker "Oh, I'm not actually {i}here{/i} [preferredName]. I'm just borrowing the local cameras."
     if config.developer:
         "END SCENE 4"
 
@@ -681,6 +776,13 @@ label scene7Start:
 label scene8Start:
     if config.developer:
         "END SCENE 8"
+    """
+    MainC reaches the final location of <pronoun> quest: The <Serpent Temple>
+
+    The <Temple> itself behaves very strangely. Glitching as if the game is broken.
+
+    MainC connects with <Hacker> at the center of the <Temple>, and suddenly passes out
+    """
 
 label scene9Start:
     "\"Where am I?\""
