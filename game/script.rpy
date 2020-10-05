@@ -294,7 +294,6 @@ label startRealWorld:
     play sound "<to 5>audio/phone_ringing.wav"
     $ renpy.pause(3.0)
     "It's [friendB]"
-    show Friend02 neutral with easeinbottom
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down that [startBoss]"
     menu:
         "About that…":
@@ -302,7 +301,6 @@ label startRealWorld:
         "I'll be there in a few minutes.":
             friendB "Alright. Are you still with [friendA]?"
     friendB "Oh, here he is now. I’ll see you in a bit. Bye."
-    hide Friend02
     "I'd better try logging back in"
     "{i}You put your headset back on{/i}"
     scene logInScreen with None
@@ -318,7 +316,7 @@ label startRealWorld:
     "It feels like something's grabbing my wrist."
     "I can't get the headset off with my arm stuck like this."
     "The heat is getting unbearable..."
-    scene black with pulse(8, "#f00", 1, 0.1, 0.1, 0.25, 2.0)
+    scene black with pulse(8, "#f00", 0.7, 1.2, 0.1, 0.1, 0.25, 2.0)
 
 label startHackerSpace:
     scene Hacker Space with fade
@@ -523,13 +521,15 @@ label scene4Start:
     hacker """
     Do you want the short answer, or the technical one?{w=1.0} Ah, screw it, I'll give you both. {i}I do love hearing the sound of my own voice after all{/i}
 
-    [preferredName], I don't know what they taught you in school about <digital world>, but I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\" and \"a new era of digtal communication\", generously brought to you by <corporation>
+    [preferredName], I don't know what they taught you in school about <digital world>,
+    
+    but I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\" and \"a new era of digital communication\", generously brought to you by <corporation>
 
     Which honestly isn't far off in some aspects
 
     {i}But my god, there is so much more to it than that.{/i}
 
-    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simmulation. In fact, {i}nobody does{/i}.
+    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simulation. In fact, {i}nobody does{/i}.
 
     Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}
 
@@ -541,7 +541,9 @@ label scene4Start:
     hacker """
     Exactly! Let me explain...
 
-    Believe it or not, the suits and ties at <corporation> are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep. A dream, essentially.
+    Believe it or not, the suits and ties at <corporation> are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep.
+    
+    A dream, essentially.
     """
     menu:
         "Are we dreaming right now?":
@@ -603,9 +605,9 @@ label scene4Start:
 
     The best part?{w=1.0} It's all mine!
 
-    ANyway, that's what makes me special. Just some dumb luck really. {i}Although, I prefer to think that <corporation> has a soft spot for me{/i}.
+    Anyway, that's what makes me special. Just some dumb luck really. {i}Although, I prefer to think that <corporation> has a soft spot for me{/i}.
 
-    Ling story short, <corporation> messed up big-time and they don't even know it.
+    Long story short, <corporation> messed up big-time and they don't even know it.
 
     And that's exactly what will lead to their undoing.
 

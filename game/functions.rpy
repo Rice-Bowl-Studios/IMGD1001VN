@@ -9,7 +9,7 @@ init python:
             out += random.choice(nonunicode)
         return out
 
-    def pulse(pulses, color, t0, dt, in_t, out_t, pause_t=0.0):
+    def pulse(pulses, color, t0, xt, dt, in_t, out_t, pause_t=0.0):
         print noFlashing
         if noFlashing:
             return None
@@ -17,7 +17,7 @@ init python:
         t = t0
         for i in range(pulses):
             out += [Fade(in_t, t, out_t, color=color), False]
-            t -= dt
+            t = t/xt-dt
             if t < 0:
                 t = 0
         if pause_t > 0:
