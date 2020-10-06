@@ -803,11 +803,31 @@ label scene4Start:
     hacker """
     But that alone doesn't explain the data coming from his headset. There's something seriously off about it.
 
-    You see, I've been tracking him for a couple of days now, but whenever I try and see what's going on inside his head I get all this weird junk data.
+    You see, I've been tracking him for a couple days now, but whenever I try and see what's going on inside his head, I get all this weird junk data.
 
     It's like there's some kind of noise machine in his headset, drowning out all the real stuff with a bunch of nonsense.
 
-    I can't get any kind of read on what he's thinking or what he's doing in <digital world>. It's unlike anything I've ever seen before, and hostly, it kind of freaks me out.
+    I can't get any kind of read on what he's thinking, or doing in <digital world>. It's unlike anything I've ever seen before, and honestly, it kind of freaks me out.
+
+    Anyways, I've got a sneaking suspicion this guy may know something about what I'm looking for, so I'm gonna follow him until I find it.
+    """
+    "The man heads inside a large office building."
+    hacker """
+    !
+
+    Did you see that [preferredName]? The building he just went in must be one of <corporation>'s secret labs! Oh my god, this could be it!
+
+    Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so that's a no-go.
+
+    Shoot! If I don't figure out something soon, I'm gonna miss my chance! Sorry [preferredName], but I've gotta run. This is just too important to miss.
+
+    [hacker] out!
+    """
+    scene Bedroom with fade
+    """
+    {i}What the heck is she planning?{/i}
+    
+    {i}It's almost time to meet up with [friendA] and [friendB]. We're starting [hacker]'s quest today...{/i}
     """
 
 label scene5Start:
