@@ -111,93 +111,93 @@ label start:
     python:
         playerUsername = ""
         while playerUsername == "":
-            playerUsername = renpy.input("Username:")
+            playerUsername = renpy.input("{font=Kenney Rocket.ttf}Username:{/font}")
             playerUsername = playerUsername.strip()
         playerPassword = ""
         while playerPassword == "":
-            playerPassword = renpy.input("Password:")
+            playerPassword = renpy.input("{font=Kenney Rocket.ttf}Password:{/font}")
             playerPassword = playerPassword.strip()
-    gameLog "{font=Kenney Rocket.ttf}Launching <game world>{w=0.5}.{w=0.5}.{w=0.5}.{/font}"
+    gameLog "{font=Kenney Rocket.ttf}Launching <game world>{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
     gameLog "{font=Kenney Rocket.ttf}We did not find a character with that login info.{/font}"
-    gameLog "{font=Kenney Rocket.ttf}Launching character creation.{/font}"
+    gameLog "{font=Kenney Rocket.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
     menu:
-        "{cps=0}What are your character's pronouns?{/cps}"
-        "He/Him/His":
+        "{cps=0}{font=Kenney Rocket.ttf}What are your character's pronouns?{/font}{/cps}"
+        "{font=Kenney Rocket.ttf}He/Him/His{/font}":
             python:
                 playerCharacterSubjectPronoun = "he"
                 playerCharacterObjectPronoun = "him"
                 playerCharacterDepPossesivePronoun = "his"
                 playerCharacterIndepPossesivePronoun = "his"
-        "She/Her/Hers":
+        "{font=Kenney Rocket.ttf}She/Her/Hers{/font}":
             python:
                 playerCharacterSubjectPronoun = "she"
                 playerCharacterObjectPronoun = "her"
                 playerCharacterDepPossesivePronoun = "her"
                 playerCharacterIndepPossesivePronoun = "hers"
-        "They/Them/Their":
+        "{font=Kenney Rocket.ttf}They/Them/Their{/font}":
             python:
                 playerCharacterSubjectPronoun = "they"
                 playerCharacterObjectPronoun = "them"
                 playerCharacterDepPossesivePronoun = "their"
                 playerCharacterIndepPossesivePronoun = "theirs"
-        "Other":
+        "{font=Kenney Rocket.ttf}Other{/font}":
             python:
-                playerCharacterSubjectPronoun = renpy.input("Subject Pronoun (ex. he, she, they):")
+                playerCharacterSubjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Subject Pronoun (ex. he, she, they):{/font}")
                 playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.strip()
                 if not playerCharacterSubjectPronoun:
                     playerCharacterSubjectPronoun = "they"
-                playerCharacterObjectPronoun = renpy.input("Object Pronoun (ex. him, her, them):")
+                playerCharacterObjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Object Pronoun (ex. him, her, them):{/font}")
                 playerCharacterObjectPronoun = playerCharacterObjectPronoun.strip()
                 if not playerCharacterObjectPronoun:
                     playerCharacterObjectPronoun = "them"
-                playerCharacterDepPossesivePronoun = renpy.input("Dependent Possessive Pronoun (ex. his, her, their):")
+                playerCharacterDepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Dependent Possessive Pronoun (ex. his, her, their):{/font}")
                 playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.strip()
                 if not playerCharacterDepPossesivePronoun:
                     playerCharacterDepPossesivePronoun = "their"
-                playerCharacterIndepPossesivePronoun = renpy.input("Independent Possessive Pronoun (ex. his, hers, theirs):")
+                playerCharacterIndepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Independent Possessive Pronoun (ex. his, hers, theirs):{/font}")
                 playerCharacterIndepPossesivePronoun = playerCharacterIndepPossesivePronoun.strip()
                 if not playerIndepPossesivePronoun:
                     playerCharacterIndepPossesivePronoun = "theirs"
     python:
         playerName = ""
         while playerName == "":
-            playerName = renpy.input("Real Name:")
+            playerName = renpy.input("{font=Kenney Rocket.ttf}Real Name:{/font}")
             playerName = playerName.strip()
     menu:
-        "{cps=0}What are your pronouns?{/cps}"
-        "He/Him/His":
+        "{cps=0}{font=Kenney Rocket.ttf}What are your pronouns?{/font}{/cps}"
+        "{font=Kenney Rocket.ttf}He/Him/His{/font}":
             python:
                 playerSubjectPronoun = "he"
                 playerObjectPronoun = "him"
                 playerDepPossesivePronoun = "his"
                 playerIndepPossesivePronoun = "his"
-        "She/Her/Hers":
+        "{font=Kenney Rocket.ttf}She/Her/Hers{/font}":
             python:
                 playerSubjectPronoun = "she"
                 playerObjectPronoun = "her"
                 playerDepPossesivePronoun = "her"
                 playerIndepPossesivePronoun = "hers"
-        "They/Them/Their":
+        "{font=Kenney Rocket.ttf}They/Them/Their{/font}":
             python:
                 playerSubjectPronoun = "they"
                 playerObjectPronoun = "them"
                 playerDepPossesivePronoun = "their"
                 playerIndepPossesivePronoun = "theirs"
-        "Other":
+        "{font=Kenney Rocket.ttf}Other{/font}":
             python:
-                playerSubjectPronoun = renpy.input("Subject Pronoun (ex. he, she, they):")
+                playerSubjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Subject Pronoun (ex. he, she, they):{/font}")
                 playerSubjectPronoun = playerSubjectPronoun.strip().capitalize()
                 if not playerSubjectPronoun:
                     playerSubjectPronoun = "they"
-                playerObjectPronoun = renpy.input("Object Pronoun (ex. him, her, them):")
+                playerObjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Object Pronoun (ex. him, her, them):{/font}")
                 playerObjectPronoun = playerObjectPronoun.strip().capitalize()
                 if not playerObjectPronoun:
                     playerObjectPronoun = "them"
-                playerDepPossesivePronoun = renpy.input("Dependent Possessive Pronoun (ex. his, her, their):")
+                playerDepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Dependent Possessive Pronoun (ex. his, her, their):{/font}")
                 playerDepPossesivePronoun = playerDepPossesivePronoun.strip().capitalize()
                 if not playerDepPossesivePronoun:
                     playerDepPossesivePronoun = "their"
-                playerIndepPossesivePronoun = renpy.input("Independent Possessive Pronoun (ex. his, hers, theirs):")
+                playerIndepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Independent Possessive Pronoun (ex. his, hers, theirs):{/font}")
                 playerIndepPossesivePronoun = playerIndepPossesivePronoun.strip().capitalize()
                 if not playerIndepPossesivePronoun:
                     playerIndepPossesivePronoun = "theirs"
