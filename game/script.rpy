@@ -35,7 +35,16 @@ image logInScreen = "bg_GW_login.png"
 
 # Char IMG
 image Boss01 angry = "ch_GW_Boss01_angry.png"
-image Boss01 neutral = "ch_GW_Boss01_neutral.png"
+image Boss01 neutral:
+    "ch_GW_Boss01_neutral1.png"
+    0.25
+    "ch_GW_Boss01_neutral2.png"
+    0.25
+    "ch_GW_Boss01_neutral3.png"
+    0.25
+    "ch_GW_Boss01_neutral2.png"
+    0.25
+    repeat
 image Boss02 neutral = "ch_GW_Boss02_neutral.png"
 image Boss02 possessed = "ch_GW_Boss02_POSSESSED.png"
 image Friend01 angry = im.Crop("ch_GW_Friend01_angry.png", (100, 0, 520, 720))
@@ -232,7 +241,7 @@ label startBossAttackChoice3:
     menu:
         "Attack":
             play sound "audio/swordMetal6.ogg"
-            show Boss01 neutral:
+            show Boss01 angry:
                 ease 0.1 zoom 0.9 xoffset 100
             gameLog "Critical Hit!"
             show HP 0
@@ -261,7 +270,7 @@ label startBossAttackChoice3:
     friendA "Ooo maybe this is-"
     friendA "Nah, I got nothin. How about you? Anything good?"
     "{i}Only one item appears on your screen{/i}"
-    show hacker item at right with zoomin
+    show hacker item at truecenter with zoomin
     $ tmpGlitchText = glitchText(16)
     gameLog "[tmpGlitchText] was added to your inventory"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
@@ -422,7 +431,7 @@ label afterHackerSpaceNameChoice:
     else:
         hacker "Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party."
     hacker "But then, right when I was about to call it off, you came along and found my invitation!"
-    show hacker item at right with zoomin
+    show hacker item at truecenter with zoomin
     "{i}The mysterious figure gestures toward the <HackerItem>, which is now fastened to your wrist{/i}"
     "{i}How did that get there?{/i}"
     hacker "And guess what. The best part is...{w=3.0} it's yours to keep! Consider it a party favor from your new best friend."
