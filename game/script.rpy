@@ -35,22 +35,16 @@ image logInScreen = "bg_GW_login.png"
 
 # Char IMG
 image Boss01 angry = "ch_GW_Boss01_angry.png"
-image Boss01 attacking = "ch_GW_Boss01_attacking.png"
 image Boss01 neutral = "ch_GW_Boss01_neutral.png"
-image Boss01 possessed = "ch_GW_Boss01_POSSESSED.png"
-image Boss02 angry = "ch_GW_Boss02_angry.png"
-image Boss02 attacking = "ch_GW_Boss02_attacking.png"
 image Boss02 neutral = "ch_GW_Boss02_neutral.png"
 image Boss02 possessed = "ch_GW_Boss02_POSSESSED.png"
 image Friend01 angry = im.Crop("ch_GW_Friend01_angry.png", (100, 0, 520, 720))
 image Friend01 happy = im.Crop("ch_GW_Friend01_happy.png", (100, 0, 520, 720))
 image Friend01 neutral = im.Crop("ch_GW_Friend01_neutral.png", (100, 0, 520, 720))
-image Friend01 possessed = im.Crop("ch_GW_Friend01_POSSESSED.png", (100, 0, 520, 720))
 image Friend01 sad = im.Crop("ch_GW_Friend01_sad.png", (100, 0, 520, 720))
 image Friend02 angry = im.Crop("ch_GW_Friend02_angry.png", (100, 0, 520, 720))
 image Friend02 happy = im.Crop("ch_GW_Friend02_happy.png", (100, 0, 520, 720))
 image Friend02 neutral = im.Crop("ch_GW_Friend02_neutral.png", (100, 0, 520, 720))
-image Friend02 possessed = im.Crop("ch_GW_Friend02_POSSESSED.png", (100, 0, 520, 720))
 image Friend02 sad = im.Crop("ch_GW_Friend02_sad.png", (100, 0, 520, 720))
 image GWHacker = "ch_GW_Hacker.png"
 image RWHacker neutral = "ch_RW_Hacker_neutral.png"
