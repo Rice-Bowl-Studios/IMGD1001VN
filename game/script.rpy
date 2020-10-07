@@ -18,6 +18,7 @@ default playerCharacterIndepPossesivePronoun = "theirs"
 define friendA = Character("Brogan", image="Friend01")
 define friendB = Character("Cynthia", image="Friend02")
 define startBoss = Character("Ignis the Conqueror", image="Boss01")
+define iceBoss = Character("Ice Crab", image="Boss02")
 define gameLog = Character("GameLog")
 define hacker = Character("[hackerName]")
 
@@ -96,10 +97,10 @@ label splashscreen:
     return
 
 label main_menu:
-    play music "audio/Space Cadet.ogg"
-    call screen volume
+    return
 
 label start:
+    play music "audio/Space Cadet.ogg"
     if config.developer:
         "{cps=0}GAME START{/cps}"
     menu: 
@@ -830,40 +831,136 @@ label scene4Start:
     {i}It's almost time to meet up with [friendA] and [friendB]. We're starting [hacker]'s quest today...{/i}
     """
 
+# TODO: visuals
 label scene5Start:
     scene black with None
+    friendB "Hey [playerCharacter], today's the day."
+    friendA "Oh man, I'm so pumped! Aren't you excited."
+    menu:
+        "Yeah.":
+            friendA "Awesome. So what do we have to do first?"
+        "Not really.":
+            friendB "I don't really blame you. I mean, what {i}are{/i} we doing anyways?"
+    "{i}The <hacker item> is pointing toward the forest region{/i}."
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Pass through <forest>.{/font}"
+    friendB """
+    Huh? How is that supposed to be a challenge?
+    
+    I didn't think there was much to see over there.
     """
-    In this scene, MainC and friends begin their unusual quest.  The scene begins in a dense forest with an encounter with a very high level monster that they have no chance of defeating.
+    friendA "Well then, what are we waiting for? Let's go!"
+    # TODO change to winter scene
+    friendA "Alright. We're in the forest. Now what?"
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Pass through <forest>.{/font}"
+    friendA "Ok... let's just walk to the other side, I guess."
+    friendB "Wait, hold on. Do you see that?"
+    friendA """
+    ...
 
-    [friendB] decides that stealth is their best option, but as they are sneaking around, [friendA] makes a mistake alerting the monster of their presence, and the group is separated.
-
-    As MainC wanders the forest looking for [friendA] and [friendB], something strange begins to happen: The trees appear to be changing positions, but not only that, you can also hear [hacker]’s voice inside your head.
-
-    Thoroughly confused and hopelessly lost, MainC walks almost unconsciously through the forest, unaware of where you're going or where you've been, listening only to the voice of [hacker].
-
-    It sounds as if she’s trying to find her way around some kind of building, and suddenly -almost as if right on queue- MainC begins to see the faint outline of a hallway.
+    No?
+    """
+    friendB "Over there."
+    "{i}There appears to be a large monster standing deeper in the woods{/i}."
+    friendA "What is that thing? It's huge."
+    friendB "If it's what I think it is, then this is really bad news."
+    friendA "Why? Can't we just kill it and move on?"
+    friendB """
+    That right there is a [iceBoss], one of the most powerful enemies in the game.
     
-    As MainC walks in this dreamlike state, your vision shifts back and forth between the forest and the building.
+    Fighting it head on would be suicide.
+    """
+    friendA "We have to get past it somehow, don't we? What should we do?"
+    friendB "The only thing I can think of is trying to sneak past it, but even that's pretty risky."
+    friendA "Well, if that's our only option, I say we go for it."
+    friendB "If you say so.{w=1.0} Ok{w=0.5}, follow my lead."
+    "You slowly follow [friendB] deeper into the forest. No one makes a sound."
+    friendB "{size=-5}Ok, were close to the [iceBoss] now.{/size}"
+    friendA "{size=-5}Hey, [friendB].{/size}"
+    friendB "{size=-5}Shhh.{/size}"
+    friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2.5}woah{/size} {size=2}-Ahh!{/size}"
+    "[friendA] slips and falls."
+    iceBoss "?"
+    friendB "{size=-5}You've got to be kidding me.{/size}"
+    "{i}The [iceBoss] is heading right towards us. This is not good.{/i}"
+    # I hate myself for doing this, but it's kind of funny
+    iceBoss "rawr uwu" # TODO: make this a sound instead
+    friendB "New plan. Everybody run!"
+    # TODO animation / scene change
+    """
+    {i}I think I'm safe here, but now I'm totally lost.{/i}
 
-    You can hear [hacker]’s frantic thoughts as she traverses the seemingly endless hallways, all while trying to stay undetected.
-
-    Eventually, the forest fades away and they reach a door.  MainC can feel [hacker]’s excitement as she approaches it, however right when they are about to go inside, the door begins to open from the other end!
-
-    Before MainC can see what lies behind the door, the surroundings are abruptly replaced by the forest again, and standing where the door once stood is the monster. Cornered and caught off guard, MainC has no choice but to fight.
-
-    MainC attacks the monster with all your might, but it’s no use.  Each attack does barely any damage to the monster, and MainC is brought to critically low HP.
+    {i}I need to find [friendA] and [friendB]{/i}
+    """
+    # TODO: tree change position
+    """
+    {i}...{/i}
     
-    However, right when it looks like there is no hope for MainC, there is a strange interaction between the beast and MainC’s quest item.
+    {i}Am I going the right way?{/i}
+    """
+    # TODO: tree change position
+    "{i}This forest feels endless{/i}."
+    # TODO: tree change position
+    "{i}Have I been this way before?{/i}"
+    # TODO: tree change position
+    "{i}I think I'm going in circles{/i}."
+    hacker "I think I'm going in circles."
+    # fade hallway
+    "{i}?{/i}"
+    hacker """
+    You know, when I imagined finding this place in my head, it was a lot cooler.
 
-    Shockingly, the beast turns the other way, wandering off into the forest in a dazed state.  MainC quickly puts some distance between yourself and the monster, and reunites with [friendA] and [friendB].
+    I mean, who would hae thought I'd be infiltrating the world;s most top secret facility using a sanitation bot?
 
-    Once the group makes their way out of the forest, they stop for a moment to figure out where to go next.  To their surprise, MainC’s bracelet is now directing them toward a new quest marker that appears to be outside the boundaries of the game world.
-
-    Confused but curious, they decide to head toward the edge of the map where the marker would theoretically be located.  To no one’s surprise, when they reach their destination they find a dead end.
+    Whatever. Desperate times call for desperate measures, I guess.
+    """
+    # TODO: tree change position
+    "{i}Where am I?{/i}"
+    hacker "Come on...{w=0.5} Where is it?"
+    # TODO: hallway 60% opacity
+    # TODO: tree change position
+    hacker "I've got to hurry before somebody sees me."
+    "[preferredName]" "I'm so freaking lost."
+    hacker "I'm so freaking lost."
+    # TODO: hallway 100% opacity
+    hacker "How big can this place be? I must be close. I have to be."
+    # TODO: hacker move s to end of hallway
+    hacker "Yes! This is it! After so many years. Finally..."
+    "Before [hacker] reaches the door, it begins to open from the other side."
+    # TODO: maybe play the solid snake alert sound?
+    hacker """
+    {b}!{/b}
     
-    Not knowing where to go next, the group decides to take a break here and set up camp.
+    Not good.
+    """
+    # TODO: hard cut to forest. replace hacker with boss2
+    "{i}!{/i}"
+    iceBoss "rawr xD" # TODO: replace with sound
+    "{i}Not good!{/i}"
+    menu:
+        "Fight":
+            pass
+        "Run Away":
+            "{i}I'm completely cornered. It looks like I have no choice but to fight{/i}."
+    menu:
+        "Attack 1":
+            pass
+        "Attack 2":
+            pass
+    "[iceBoss] attacks."
+    """
+    {i}This is really bad. I won't survive another attack like that{/i}.
 
-    They sit around and discuss their options, however as they are speaking, MainC suddenly is unable to hear them, your vision becomes blurry and dark…
+    {i}I guess this is it{/i}...
+    """
+    # TODO: show hacker item
+    iceBoss "..."
+    playerCharacter "?"
+    "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest."
+    # TODO: hide boss2 and hacker item
+    """
+    {i}What just happened?{/i}
+    
+    {i}I'd better get out of here and go find the others{/i}.
     """
     if config.developer:
         "END SCENE 5"
