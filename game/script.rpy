@@ -79,7 +79,7 @@ image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
 image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
-image Rice Bowl = "rice_bowl_studios_PLACEHOLDER.png"
+image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
@@ -96,9 +96,9 @@ label splashscreen:
         "{cps=0}DEBUG MODE ENABLED{/cps}"
     show Rice Bowl:
         xalign 0.5
-        yalign -5.0
-        easeout 3.0 yalign 5.0 rotate 480
-    $ renpy.pause(5)
+        ypos -0.7
+        easeout 3.0 ypos 1.3 rotate 480
+    $ renpy.pause(4)
     scene black with fade
     return
 
