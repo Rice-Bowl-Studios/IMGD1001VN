@@ -79,13 +79,16 @@ image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
 image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
-image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
+image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
+
 
 # Other vars
 define noFlashing = True
+define playerUsername = ""
+define playerPassword = ""
 
 # The game starts here.
 
@@ -97,7 +100,10 @@ label splashscreen:
     show Rice Bowl:
         xalign 0.5
         ypos -0.7
-        easeout 3.0 ypos 1.3 rotate 480
+        parallel:
+            easeout 3.0 ypos 1.3
+        parallel:
+            linear 3.0 rotate 480
     $ renpy.pause(4)
     scene black with fade
     return
@@ -116,14 +122,14 @@ label start:
         "No":
             $ noFlashing = False
     python:
-        playerUsername = ""
         while playerUsername == "":
             playerUsername = renpy.input("{font=Kenney Rocket.ttf}Username:{/font}")
             playerUsername = playerUsername.strip()
-        playerPassword = ""
         while playerPassword == "":
             playerPassword = renpy.input("{font=Kenney Rocket.ttf}Password:{/font}")
             playerPassword = playerPassword.strip()
+        if len(playerPassword) > 16:
+            playerPassword = playerPassword[0:16]
     gameLog "{font=Kenney Rocket.ttf}Launching <game world>{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
     gameLog "{font=Kenney Rocket.ttf}We did not find a character with that login info.{/font}"
     gameLog "{font=Kenney Rocket.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
@@ -208,6 +214,7 @@ label start:
                 playerIndepPossesivePronoun = playerIndepPossesivePronoun.strip().capitalize()
                 if not playerIndepPossesivePronoun:
                     playerIndepPossesivePronoun = "theirs"
+    jump startRealWorld
         
 label startBossFight:
     $ suppress_overlay = False
@@ -372,9 +379,10 @@ label startRealWorld:
     friendB "Oh, here he is now. I’ll see you in a bit. Bye."
     player "I'd better try logging back in."
     "You put your headset back on."
-    scene black with None
+    #scene black with None
     if config.developer:
         "The password is [playerPassword]"
+    show text "Password\n" + playerPassword at truecenter
     python:
         tmpPassword = renpy.input("Username: [playerUsername]\nPassword:")
         tmpPassword = tmpPassword.strip()

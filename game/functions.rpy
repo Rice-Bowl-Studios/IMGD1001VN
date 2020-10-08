@@ -32,18 +32,6 @@ init python:
         creditText += "{size=64}" + c[1] + "\n"
     creditText += "\n{size=48}Engine\n{size=64}" + renpy.version()
 
-screen volume():
-    frame:
-        xalign 0.5
-        yalign 0.5
-        has vbox
-
-        text "Sound Volume"
-        bar value Preference("sound volume")
-        text "Music Volume"
-        bar value Preference("music volume")
-        textbutton "Confirm" action Start()
-
 label credits:
     $ credits_speed = 30
     scene black with dissolve
