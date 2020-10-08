@@ -79,6 +79,7 @@ image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
 image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
+image Rice Bowl = "rice_bowl_studios_PLACEHOLDER.png"
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
@@ -93,7 +94,12 @@ label splashscreen:
     scene whitedrop with None
     if config.developer:
         "{cps=0}DEBUG MODE ENABLED{/cps}"
-        "{cps=0}Splashscreen here{/cps}"
+    show Rice Bowl:
+        xalign 0.5
+        yalign -5.0
+        easeout 3.0 yalign 5.0 rotate 480
+    $ renpy.pause(5)
+    scene black with fade
     return
 
 label main_menu:
@@ -729,7 +735,7 @@ label scene4Start:
             pass
         "What exactly are you planning?":
             hacker """
-            Hehe peaked your interest have I? Sorry but you'll just have to wait and see.
+            Hehe piqued your interest have I? Sorry but you'll just have to wait and see.
             
             Wouldn't want to ruin the surprise after all.
         """
@@ -1085,7 +1091,7 @@ label scene11Start:
 
     You press one more button and step away from the center console.
 
-    The front of the machine begins to open. Through he cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
+    The front of the machine begins to open. Through the cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
     """
     "Unknown Male Voice" "Hey! Stop right there!"
     play sound "audio/9_mm_gunshot.wav"
