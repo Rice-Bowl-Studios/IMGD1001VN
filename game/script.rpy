@@ -856,7 +856,7 @@ label scene5Start:
         "Not really.":
             friendB "I don't really blame you. I mean, what {i}are{/i} we doing anyways?"
     "{i}The <hacker item> is pointing toward the forest region{/i}."
-    gameLog "{font=Kenney Rocket.ttf}Current Objective: Pass through <forest>.{/font}"
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Inside <forest>.{/font}"
     friendB """
     Huh? How is that supposed to be a challenge?
     
@@ -865,8 +865,8 @@ label scene5Start:
     friendA "Well then, what are we waiting for? Let's go!"
     # TODO change to winter scene
     friendA "Alright. We're in the forest. Now what?"
-    gameLog "{font=Kenney Rocket.ttf}Current Objective: Pass through <forest>.{/font}"
-    friendA "Ok... let's just walk to the other side, I guess."
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Inside <forest>.{/font}"
+    friendA "Ok... let's just start looking around I guess."
     friendB "Wait, hold on. Do you see that?"
     friendA """
     ...
@@ -961,6 +961,12 @@ label scene5Start:
         "Attack 2":
             pass
     "[iceBoss] attacks."
+    menu:
+        "Attack 1":
+            pass
+        "Attack 2":
+            pass
+    "[iceBoss] attacks."
     """
     {i}This is really bad. I won't survive another attack like that{/i}.
 
@@ -979,27 +985,188 @@ label scene5Start:
     if config.developer:
         "END SCENE 5"
 
+label scene5HalfStart:
+    pass
+
+# TODO: visuals
 label scene6Start:
     scene Hacker Space with fade
     hacker "Now {i}that{/i} was a close call."
     hacker "You're welcome by the way."
+    menu:
+        "For what?":
+            hacker """
+            For saving you just new, dug. {size=-5}You should probably be used to it by now, if we're being honest.{/size}
+
+            Whatever. You can thank me later. Right now, I have a question.
+            """
+        "What was that door?":
+            hacker """
+            Door? You{w=0.5} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}
+
+            That was part of <corporation>'s lab.
+
+            You know, the one I showed you earlier.
+
+            Sorry for leaving you on a cliffhanger there. I just got a little overexcited.
+
+            For good reason, though!
+
+            I found something, but before I tell you, I have a question.
+            """
+    hacker """
+    [preferredName], be honest
+    
+    What do {i}you{/i} think about hte whole <digital world>?
     """
-    In this scene [hacker] triumphantly explains to MainC that she’s found exactly what she’s been looking for.
+    $ tmpFlag = False
+    menu:
+        "I like it.":
+            hacker """
+            You know, if I wasn't in my current position, I think I might really love this place.
 
-    What that is?
+            I mean, a whole world where you can see your friends all the time, and have the same freedom as a dream?
 
-    She won’t say, but what she does tell MainC is that the building MainC saw is actually a secret research facility of the same company that created the <digital world>.
+            Sounds pretty nice to me.
+            """
+        "I hate it.":
+            hacker """
+            I get that, there's so much about the <digital world> that even I don't know.
 
-    It’s now time for MainC to uphold your end of their deal.  She warns MainC that from here on out this quest is not going to be just a game.  What [hacker] has found could put the digital world in danger, and she needs MainC’s help to stop it.
+            I mean, imagine if somebody else could do what I can. They'd be able to get away with whatever they want.
+            """
+        "Why do you ask?":
+            $ tmpFlag = True
+            hacker """
+            Just curious.
 
-    At this point, [hacker] has proven to MainC that she’s not lying, and you agree to help.  [hacker] tells MainC to return to <game-world> and finish the quest.
+            I don't really get out of the house much, so I wonder how normal people like you must feel about it.
 
-    Once MainC reaches the end, they will have everything they need, and [hacker] will then contact you to explain what comes next.
+            You know, if I wasn't in my current position, I think I'd really love this place.
+
+            A whole world where you can see your friends all the time, adn have the same amount of freedom as a dream?
+
+            Doesn't sound so bad to me.
+
+            But at the same time, it's kind of scary, isn't it?
+
+            I mean, there's so much about the <digital world> that even I still don't know.
+
+            Imagine if somebody else was able to do what I can.
+
+            They could get away with whatever they want.
+
+            Sorry [preferredName], you don't have to answer the question if you don't want to.
+            """
+    if tmpFlag:
+        menu:
+            "I love the <digital world>.":
+                pass
+            "I hate the <digital world>.":
+                pass
+            "I'd prefer not to say.":
+                pass
+        hacker "I can understand that. One way or another, I hope we find some answers at the end of this."
+    hacker """
+    Anyways [preferredName], I've {i}finally{/i} found what I'm looking for. Which means we're almost at the end of our little quest.
+
+    I have to warn you, from here on out, what we're doing is {i}not{/i} a game.
+    """
+    "[preferredName]" "..."
+    hacker """
+    I'm serious, what <corporation>'s been doing in that lab is...
+
+    It's just really not cool! Alright?
+
+    Look, all I need now is for you to finish your quest in <game world>. OK?
+
+    {size=-0.5}Then maybe, just maybe, I'll be able to fix this.{/size}
+    """
+    menu:
+        "What is <corporation> doing exactly?":
+            hacker """
+            I-
+
+            They-
+
+            ...
+
+            *Sigh*
+
+            Listen [preferredName]. I know I have some explaining to do. I just...
+
+            I need you to trust me right now, OK?
+
+            It'll all make sense once you finish the quest. I promise.
+            """
+            menu:
+                "OK, what do I have to do?":
+                    jump scene6PurpleCont
+                "No. Tell me what's going on {i}{b}now{/b}{/i}":
+                    hacker """
+                    I-{w=0.5} I...{w=0.5} Listen, I don't have time for this!
+                    
+                    Are you gonna help me or not?
+                    """
+            menu:
+                "I guess.":
+                    jump scene6PurpleCont
+                "No way!":
+                    hacker """
+                    Ugh, {i}fine{/i}. Sorry [preferredName], I tried playing nice, but this might be my only change.
+
+                    And I am {i}not{/i} going to miss it!
+                    """
+                    if config.developer:
+                        "END SCENE 6"
+                    jump scene7Orange
+        "OK.":
+            jump scene6PurpleCont
+
+label scene6PurpleCont:
+    hacker """
+    Great! All you have to do is go back into the forest, and you should find what you're looking for pretty fast.
+    
+    Oh, and this time, don't bring any of your pesky friends with you! {size=-0.5}Sorry, but this last part is single-player only.{/size}
+
+    ALright? You'd better hurry. Good Lick [preferredName]!
+
+    I'll be waiting for you on the other side.
     """
     if config.developer:
         "END SCENE 6"
+    
+label scene7Purple:
 
-label scene7Start:
+    if config.developer:
+        "END SCENE 7"
+
+# TODO: visuals
+label scene7Orange:
+    friendA "Hey [playerCharacter], are you even listening?"
+    friendB "Looks like [playerCharacterSubjectPronoun] zoned out pretty hard there."
+    friendA """
+    We've got to figure out what to do next.
+    
+    All we found in that dumb forest was a freaking [iceBoss].
+    """
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Inside <forest>.{/font}"
+    "{i}Right. I've got to go back{/i}."
+    playerCharacter "I'm gonna go get some more firewood."
+    friendA "OK."
+    friendB "Don't go too far. The [iceBoss] could still be around."
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: Inside <forest>.{/font}"
+    "{i}This place makes no sense{/i}."
+    "{i}What am I even looking for?{/i}"
+    show hacker item at truecenter
+    "{i}I guess I should follow it{/i}."
+    """
+    {i}I've been walking for a long time now{/i}.
+    
+    {i}This forest feels never-ending{/i}.
+    """
+    "{i}Is that...?{/i}"
+    gameLog "{font=Kenney Rocket.ttf}Current Objective: <redacted>.{/font}"
     if config.developer:
         "END SCENE 7"
 
