@@ -37,7 +37,62 @@ init python:
         if pause_t > 0:
             out += [Pause(pause_t), False]
         return MultipleTransition(out)
+    
+    # Lines 41-94 and 104-108 are taken and modified from a decompiled version of Doki Doki Literature Club
+    def screenshot_srf():
+        srf = renpy.display.draw.screenshot(None, False)
+        return srf
 
+    def hide_windows_enabled(enabled=True):
+        global _windows_hidden
+        _windows_hidden = not enabled
+
+    class TearPiece:
+        def __init__(self, startY, endY, offtimeMult, ontimeMult, offsetMin, offsetMax):
+            self.startY = startY
+            self.endY = endY
+            self.offTime = (random.random() * 0.2 + 0.2) * offtimeMult
+            self.onTime = (random.random() * 0.2 + 0.2) * ontimeMult
+            self.offset = 0
+            self.offsetMin = offsetMin
+            self.offsetMax = offsetMax
+        
+        def update(self, st):
+            st = st % (self.offTime + self.onTime)
+            if st > self.offTime and self.offset == 0:
+                self.offset = random.randint(self.offsetMin, self.offsetMax)
+            elif st <= self.offTime and self.offset != 0:
+                self.offset = 0
+
+    class Tear(renpy.Displayable):
+        def __init__(self, number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf=None):
+            super(Tear, self).__init__()
+            self.width, self.height = renpy.get_physical_size()
+            if float(self.width) / float(self.height) > 16.0/9.0:
+                self.width = self.height * 16 / 9
+            else:
+                self.height = self.width * 9 / 16
+            self.number = number
+            if not srf: self.srf = screenshot_srf()
+            else: self.srf = srf
+            self.pieces = []
+            tearpoints = [0, self.height]
+            for i in range(number):
+                tearpoints.append(random.randint(10, self.height - 10))
+            tearpoints.sort()
+            for i in range(number+1):
+                self.pieces.append(TearPiece(tearpoints[i], tearpoints[i+1], offtimeMult, ontimeMult, offsetMin, offsetMax))
+        
+        def render(self, width, height, st, at):
+            render = renpy.Render(self.width, self.height)
+            render.blit(self.srf, (0,0))
+            for piece in self.pieces:
+                piece.update(st)
+                subsrf = self.srf.subsurface((0, max(0, piece.startY - 1), self.width, max(0, piece.endY - piece.startY)))
+                render.blit(subsrf, (piece.offset, piece.startY))
+            renpy.redraw(self, 0)
+            return render
+        
     credits = ("Writing", "Samuel France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
     creditText = "{size=76}Credits\n"
     for c in credits:
@@ -45,6 +100,12 @@ init python:
             creditText += "\n{size=48}" + c[0] + "\n"
         creditText += "{size=64}" + c[1] + "\n"
     creditText += "\n{size=48}Engine\n{size=64}" + renpy.version()
+
+screen tear(number=10, offtimeMult=1, ontimeMult=1, offsetMin=0, offsetMax=50, srf=None):
+    zorder 150
+    add Tear(number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf) size (1280,720)
+    on "show" action Function(hide_windows_enabled, enabled=False)
+    on "hide" action Function(hide_windows_enabled, enabled=True)
 
 label credits:
     $ credits_speed = 30

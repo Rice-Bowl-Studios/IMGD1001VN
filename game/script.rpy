@@ -1,15 +1,16 @@
-﻿# The script of the game goes in this file.
-
-# Player vars
+﻿# Player vars
 define player = Character("[playerName]")
-define playerUsername = ""
-define playerPassword = ""
+define playerSubjectPronoun = "they"
+define playerObjectPronoun = "them"
+define playerDepPossesivePronoun = "their"
 
 # Player character vars
 define playerCharacter = Character("[playerUsername]")
 default playerCharacterSubjectPronoun = "they"
 default playerCharacterObjectPronoun = "them"
 default playerCharacterDepPossesivePronoun = "their"
+define playerUsername = ""
+define playerPassword = ""
 
 # Characters
 define friendA = Character("Brogan", image="Friend01")
@@ -77,6 +78,15 @@ image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
 image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
+image campfire:
+    "bg_GW_campfire1.png"
+    0.15
+    "bg_GW_campfire2.png"
+    0.15
+    "bg_GW_campfire3.png"
+    0.15
+    "bg_GW_campfire4.png"
+    0.15
 
 # Other game vars
 define digitalWorld = "NeuralScape"
@@ -86,7 +96,6 @@ define corporation = "Noodle Bowl Industries Inc. Corp."
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
 image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
-
 
 # Other vars
 define noFlashing = True
@@ -103,7 +112,7 @@ label splashscreen:
             easeout 3.0 ypos 1.3
         parallel:
             linear 3.0 rotate 480
-    $ renpy.pause(4)
+    $ renpy.pause(4.0)
     scene black with fade
     return
 
@@ -111,7 +120,6 @@ label main_menu:
     return
 
 label start:
-    play music "audio/Space Cadet.ogg"
     if config.developer:
         "{cps=0}GAME START{/cps}"
     menu: 
@@ -173,10 +181,10 @@ label start:
         while playerName == "":
             playerName = renpy.input("{font=Kenney Rocket.ttf}Real Name:{/font}")
             playerName = playerName.strip()
-    jump startRealWorld
         
 label startBossFight:
     $ suppress_overlay = False
+    # TODO: music 1.1.1 boss fight music
     scene Game World Arena 01
     show Boss01 neutral at right
     show Friend01 angry at left:
@@ -297,6 +305,7 @@ label startBossAttackChoice3:
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
     hide Boss01 with zoomout
     hide HP 0 with easeouttop
+    # TODO: music 1.1.2 post boss fight music
     show Friend01 happy
     friendA "That was awesome!"
     menu:
@@ -316,23 +325,32 @@ label startBossAttackChoice3:
     gameLog "{font=Kenney Rocket.ttf}[tmpGlitchText] was added to your inventory{/font}"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
-    playerCharacter "No"
+    playerCharacter "No."
     friendA "Huh, weird. Well, maybe [friendB] knows something about it-"
+    stop music fadeout 0.5
+    show screen tear()
+    # TODO: play sfx 01 glitching
+    $ renpy.pause(1.0)
+    hide screen tear
     play sound "audio/computer_error_alert.wav"
     scene crash with vpunch
     $ renpy.pause(1.5)
+    scene black with None
 
 label startRealWorld:
-    scene Bedroom with None
+    # TODO: music 1.1.3 hanging out in room
+    scene Bedroom with fade
     player """
-    [gameWorld] seems to have crashed
+    [gameWorld] seems to have crashed.
     
-    My headset is burning hot
+    My headset is burning hot.
     
-    What {i}was{/i} that weird bracelet item
+    What {i}was{/i} that weird bracelet item.
     """
+    $ renpy.music.set_pause(True)
     play sound "<to 2.5>audio/phone_ringing.wav"
     $ renpy.pause(2)
+    $ renpy.music.set_pause(False)
     player "It's [friendB]"
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down [startBoss]"
     menu:
@@ -343,41 +361,43 @@ label startRealWorld:
     friendB "Oh, here he is now. I’ll see you in a bit. Bye."
     player "I'd better try logging back in."
     "You put your headset back on."
-    #scene black with None
-    if config.developer:
-        "The password is [playerPassword]"
-    show text "Password\n" + playerPassword at truecenter
+    stop music fadeout 1.0
+    scene logInScreen
+    image passwordText = ParameterizedText(xalign=0.5, yalign=0.0)
+    show text "[playerUsername]" at truecenter
+    show passwordText playerPassword at topleft
     python:
-        tmpPassword = renpy.input("Username: [playerUsername]\nPassword:")
+        tmpPassword = renpy.input("Password:")
         tmpPassword = tmpPassword.strip()
     while tmpPassword != playerPassword:
         play sound "audio/error2.ogg"
         gameLog "Incorrect Login."
         python:
-            tmpPassword = renpy.input("Username: [playerUsername]\nPassword:")
+            tmpPassword = renpy.input("Password:")
             tmpPassword = tmpPassword.strip()
-    player """
-    ...
-
-    My headset is getting hot again.
+    "..."
+    # TODO: music 1.1.4 trying to log back on
     """
-    "You try to remove your headset."
-    stop music
-    play music "audio/Mission Plausible.ogg"
-    player """
-    I can't lift my arm.
+    {i}???{/i}
     
-    My head feels like it's on fire.
-    
-    It feels like something's grabbing my wrist.
-    
-    I can't get the headset off with my arm stuck like this.
-    
-    The heat is getting unbearable...
+    {i}My headset is getting hot again{/i}.
+
+    You try to remove your headset
     """
     scene black with pulse(12, "#f00", 0.7, 1.2, 0.1, 0.1, 0.25, 2.0)
+    """
+    {i}I can't lift my arm{/i}.
+
+    {i}It feels like something's grabbing my wrist{/i}.
+
+    {i}I can't get the headset off with my arm stuck like this{/i}.
+
+    {i}The heat is getting unbearable{/i}...
+    """
+    stop music fadeout 1.0
 
 label startHackerSpace:
+    # TODO: music 1.2.1 hacker space
     scene Hacker Space with fade
     "Where am I?"
     show GWHacker at center with easeinbottom
@@ -442,17 +462,18 @@ label hackerSpaceNameChoice:
                 preferredSubjectPronoun = playerCharacterSubjectPronoun
                 preferredObjectPronoun = playerCharacterObjectPronoun
                 preferredDepPossesivePronoun = playerCharacterDepPossesivePronoun
-                preferredIndepPossesivePronoun = playerCharacterIndepPossesivePronoun
         "Call me [player]":
             python:
                 preferredName = playerName
                 preferredSubjectPronoun = playerSubjectPronoun
                 preferredObjectPronoun = playerObjectPronoun
                 preferredDepPossesivePronoun = playerDepPossesivePronoun
-                preferredIndepPossesivePronoun = playerIndepPossesivePronoun
         "How do you know my name?" if tmpFlag:
             $ tmpFlag = False
+            show screen tear()
             play sound "audio/error2.ogg"
+            $ renpy.pause(0.5)
+            hide screen tear
             hacker "Hey, what did I say about asking questions?"
             jump hackerSpaceNameChoice
     
@@ -517,10 +538,12 @@ label afterHackerSpaceNameChoice:
 
     Anyways, [hacker] out!
     """
+    stop music fadeout 1.0
     scene black with pixellate
     "{i}What was that?{/i}"
 
-label scene3:
+label scene3Start:
+    # TODO: music 1.1.2
     scene Game World Arena 01 with fade
     show Friend01 neutral at right with easeinright
     show Friend02 angry at left with easeinleft
@@ -548,6 +571,7 @@ label scene3:
     show Friend02 angry at left with fade
     friendA "..."
     friendB "..."
+    # TODO: music 1.3.1
     show Friend01 neutral
     show Friend02 neutral
     friendA "{i}Seriously?{/i}"
@@ -574,6 +598,7 @@ label scene3:
     hide hacker item with zoomout
     friendA "I didn't mean it that way. I just figured... well you know, if there really is some crazy quest that involves whatever the heck just happened to [playerCharacter], you would have heard about it."
     friendB "Yeah, I'm pretty shocked myself."
+    # TODO: music 1.1.2
     friendA "Well, I say we go see what this mystery quest is all about! I bet we'll find some rare loot along the way too. {size=-5}maybe even some stuff [friendB] doesn't have{/size}"
     friendB "Are you serious? You can't just charge headfirst into a quest you know nothing about. You're not even level 50 yet."
     friendA "You're right..."
@@ -581,12 +606,13 @@ label scene3:
     friendB "I would be lying if I said I wasn't a little interested. But just so we're clear, I am not here to babysit you two."
     friendA "Yes!"
     friendA "How about you [playerCharacter]?"
-    stop music
+    $ renpy.music.set_pause(True)
     "..."
     "You feel the <hacker item> pulling at your arm."
     "You try to speak, but nothing comes out."
     "Your hand raises into a thumbs-up position."
-    play music "audio/Mission Plausible.ogg"
+    $ renpy.music.set_pause(False)
+    play music "audio/Mission Plausible.ogg" # TODO: remove
     $ playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.lower()
     friendA "Great! It's the perfect team: Me as our fearless leader, [friendB] as our game expert/bodyguard, and [playerCharacter] and [playerCharacterDepPossesivePronoun] weird bracelet thing as our guide through the unknown."
     friendA "Together, we'll be unstoppable!"
@@ -604,15 +630,15 @@ label scene3:
     "You nod your head affirmatively, agreeing to come along."
     friendA "Great. In that case, I think I'll be signing off for the night. We've got a big day ahead of us after all"
     friendB "Ok. I'm gonna head out too. See you tomorrow."
-    hide Friend01
-    hide Friend02
-    scene Bedroom
+    stop music fadeout 1.0
+    scene Bedroom with fade
     "This is all so strange."
     "I'd better go to sleep for now"
     scene black with fade
     $ renpy.pause(2.0)
 
 label scene4Start:
+    # TODO: music 1.2.1
     scene Hacker Space with fade
     "Am I... dreaming?"
     show GWHacker at right with easeinright
@@ -629,7 +655,9 @@ label scene4Start:
 
     {i}But my god, there is so much more to it than that.{/i}
 
-    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of [corporation]'s little simulation. In fact, {i}nobody does{/i}.
+    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of [corporation]'s little simulation.
+    
+    In fact, {i}nobody does{/i}.
 
     Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}
 
@@ -641,7 +669,9 @@ label scene4Start:
     hacker """
     Exactly! Let me explain...
 
-    Believe it or not, the suits and ties at [corporation] are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep.
+    Believe it or not, the suits and ties at [corporation] are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all.
+    
+    It's actually emulating something much more akin to what goes on in our brains when we fall asleep.
     
     A dream, essentially.
     """
@@ -805,7 +835,8 @@ label scene4Start:
 
     [hacker] out!
     """
-    scene Bedroom with fade
+    stop music fadeout 1.0
+    scene Bedroom with pixellate
     """
     {i}What the heck is she planning?{/i}
     
@@ -814,7 +845,8 @@ label scene4Start:
 
 # TODO: visuals
 label scene5Start:
-    scene black with None
+    # TODO:  music 2.5.1
+    scene black with fade
     friendB "Hey [playerCharacter], today's the day."
     friendA "Oh man, I'm so pumped! Aren't you excited."
     menu:
@@ -859,12 +891,14 @@ label scene5Start:
     friendA "{size=-5}Hey, [friendB].{/size}"
     friendB "{size=-5}Shhh.{/size}"
     friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2.5}woah{/size} {size=2}-Ahh!{/size}"
+    # TODO: twig snap SFX
     "[friendA] slips and falls."
     iceBoss "?"
+    stop music fadeout 0.5
     friendB "{size=-5}You've got to be kidding me.{/size}"
     "{i}The [iceBoss] is heading right towards us. This is not good.{/i}"
     # I hate myself for doing this, but it's kind of funny
-    iceBoss "rawr uwu" # TODO: make this a sound instead
+    iceBoss "rawr uwu" # TODO: replace with roar SFX
     friendB "New plan. Everybody run!"
     # TODO animation / scene change
     """
@@ -885,6 +919,7 @@ label scene5Start:
     # TODO: tree change position
     "{i}I think I'm going in circles{/i}."
     hacker "I think I'm going in circles."
+    # TODO: music 1.2.1
     # fade hallway
     "{i}?{/i}"
     hacker """
@@ -913,10 +948,12 @@ label scene5Start:
     
     Not good.
     """
+    stop music
     # TODO: hard cut to forest. replace hacker with boss2
     "{i}!{/i}"
-    iceBoss "rawr xD" # TODO: replace with sound
+    iceBoss "rawr xD" # TODO: replace with roar SFX
     "{i}Not good!{/i}"
+    # TODO: music 1.1.1
     menu:
         "Fight":
             pass
@@ -939,11 +976,12 @@ label scene5Start:
 
     {i}I guess this is it{/i}...
     """
-    # TODO: show hacker item
+    show hacker item # TODO: positioning and anim (glowing loop?)
     iceBoss "..."
     playerCharacter "?"
     "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest."
-    # TODO: hide boss2 and hacker item
+    hide Boss02
+    hide hacker item
     """
     {i}What just happened?{/i}
     
@@ -953,10 +991,12 @@ label scene5Start:
         "END SCENE 5"
 
 label scene5HalfStart:
+    # TODO: music 1.1.2
     pass
 
 # TODO: visuals
 label scene6Start:
+    # TODO: music 1.2.1
     scene Hacker Space with fade
     hacker "Now {i}that{/i} was a close call."
     hacker "You're welcome by the way."
@@ -1176,6 +1216,7 @@ label scene8Start:
 label scene9Start:
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
+    # TODO: music 1.2.1
     hacker """
     This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.
 
@@ -1232,6 +1273,7 @@ label scene9Start:
         "END SCENE 9"
 
 label scene10Start:
+    # TODO: music 1.3.1
     scene Bedroom with None
     """
     {i}I'm...{w=0.5} home?{/i}
@@ -1283,10 +1325,12 @@ label scene10Start:
 
     As you open the door, you feel a growing sense of excitement. You cannot tell if it's your own.
     """
+    stop music fadeout 1.0
     if config.developer:
         "END SCENE 10"
 
 label scene11Start:
+    # TODO: music 3.11.1
     """
     You appear to be in some kind of server room.
 
@@ -1317,6 +1361,7 @@ label scene11Start:
     The front of the machine begins to open. Through the cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
     """
     "Unknown Male Voice" "Hey! Stop right there!"
+    stop music
     play sound "audio/9_mm_gunshot.wav"
     """
     You wake up on the floor in front of the center console.
@@ -1333,7 +1378,8 @@ label scene11Start:
     """
     "Unknown Man" "Your game ends here."
     "Unknown Female Voice" "No!"
-    play sound "audio/mirror_shattering.wav"
+    play sound "audio/mirror_shattering.wav" # TODO: replace with explosion SFX
+    # TODO: music 1.2.1
     """
     Before the man is able to shoot again, the console nearest him explodes, knocking him to the ground. His gun skitters out of reach into the darkness.
 
@@ -1379,6 +1425,7 @@ label scene11Start:
 label kill:
     if config.developer:
         "{cps=0}GAME DIE{/cps}"
-    stop music
+    stop music fadeout 1.0
+    # TODO: music 3.12.1. peaceful ambient ending music
     call credits from _call_credits
     $ renpy.quit()
