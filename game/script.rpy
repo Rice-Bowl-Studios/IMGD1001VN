@@ -1135,14 +1135,9 @@ label scene6PurpleCont:
     """
     if config.developer:
         "END SCENE 6"
-    
-label scene7Purple:
-
-    if config.developer:
-        "END SCENE 7"
 
 # TODO: visuals
-label scene7Orange:
+label scene7Purple:
     friendA "Hey [playerCharacter], are you even listening?"
     friendB "Looks like [playerCharacterSubjectPronoun] zoned out pretty hard there."
     friendA """
@@ -1167,6 +1162,40 @@ label scene7Orange:
     """
     "{i}Is that...?{/i}"
     gameLog "{font=Kenney Rocket.ttf}Current Objective: <redacted>.{/font}"
+    if config.developer:
+        "END SCENE 7"
+
+label scene7Orange:
+    friendA """
+    So what should we do now?
+
+    All we found in the forest was a freaking [iceBoss]
+    """
+    friendA """
+    ?
+
+    What the...
+    """
+    $ tmpGlitchText = glitchText(32)
+    friendA "[tmpGlitchText]"
+    $ tmpGlitchText = glitchText(64, True)
+    friendA "[tmpGlitchText]"
+    $ tmpGlitchText = glitchText(128, True)
+    friendA "{b}{vert}[tmpGlitchText]{/vert}{/b}"
+    friendB "What's going on?"
+    python:
+        if random.randint(0,2) == 0:
+            tmpGlitchText = glitchText(32)
+            tmpGlitchText1 = glitchText(32, True)
+        else:
+            tmpGlitchText = glitchText(32, True)
+            tmpGlitchText1 = glitchText(32)
+    menu:
+        "[tmpGlitchText]":
+            pass
+        "[tmpGlitchText1]":
+            pass
+    scene black with fade
     if config.developer:
         "END SCENE 7"
 

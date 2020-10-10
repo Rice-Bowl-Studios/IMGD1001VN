@@ -2,11 +2,25 @@ init python:
     import random
 
     nonunicode = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"
+    hiragana = "あいうおえかきくけこなにぬねのはひふへほまみむめもたちつてとさしすせそがぎぐげごばびぶべぼぱぴぷぺぽだぢづでどざじずぜぞわん"
+    katakana = "アイウエオカキクケコナニヌネノハヒフヘホマミムメモタチツテトサシスセソガギグゲゴバビブベボパピプペポダヂヅデドザジズゼゾワン"
+    kanji = "死火亡煩"
 
-    def glitchText(length):
+    def glitchText(length, japanese=False):
         out = ""
         for x in range(length):
-            out += random.choice(nonunicode)
+            if japanese:
+                tmp = random.randint(0, 4)
+                if tmp == 0:
+                    out += "{font=bananaslipplus.otf}" + random.choice(hiragana) + "{/font}"
+                elif tmp == 1:
+                    out += "{font=bananaslipplus.otf}" + random.choice(katakana) + "{/font}"
+                elif tmp == 2:
+                    out += "{font=bananaslipplus.otf}" + random.choice(kanji) + "{/font}"
+                else:
+                    out += random.choice(nonunicode)
+            else:
+                out += random.choice(nonunicode)
         return out
 
     def pulse(pulses, color, t0, xt, dt, in_t, out_t, pause_t=0.0):
