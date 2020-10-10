@@ -2,17 +2,14 @@
 
 # Player vars
 define player = Character("[playerName]")
-default playerSubjectPronoun = "they"
-default playerObjectPronoun = "them"
-default playerDepPossesivePronoun = "their"
-default playerIndepPossesivePronoun = "theirs"
+define playerUsername = ""
+define playerPassword = ""
 
 # Player character vars
 define playerCharacter = Character("[playerUsername]")
 default playerCharacterSubjectPronoun = "they"
 default playerCharacterObjectPronoun = "them"
 default playerCharacterDepPossesivePronoun = "their"
-default playerCharacterIndepPossesivePronoun = "theirs"
 
 # Characters
 define friendA = Character("Brogan", image="Friend01")
@@ -88,10 +85,6 @@ image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER
 
 # Other vars
 define noFlashing = True
-define playerUsername = ""
-define playerPassword = ""
-
-# The game starts here.
 
 label splashscreen:
     $ renpy.pause (0)
@@ -141,19 +134,16 @@ label start:
                 playerCharacterSubjectPronoun = "he"
                 playerCharacterObjectPronoun = "him"
                 playerCharacterDepPossesivePronoun = "his"
-                playerCharacterIndepPossesivePronoun = "his"
         "{font=Kenney Rocket.ttf}She/Her/Hers{/font}":
             python:
                 playerCharacterSubjectPronoun = "she"
                 playerCharacterObjectPronoun = "her"
                 playerCharacterDepPossesivePronoun = "her"
-                playerCharacterIndepPossesivePronoun = "hers"
         "{font=Kenney Rocket.ttf}They/Them/Their{/font}":
             python:
                 playerCharacterSubjectPronoun = "they"
                 playerCharacterObjectPronoun = "them"
                 playerCharacterDepPossesivePronoun = "their"
-                playerCharacterIndepPossesivePronoun = "theirs"
         "{font=Kenney Rocket.ttf}Other{/font}":
             python:
                 playerCharacterSubjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Subject Pronoun (ex. he, she, they):{/font}")
@@ -168,53 +158,11 @@ label start:
                 playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.strip()
                 if not playerCharacterDepPossesivePronoun:
                     playerCharacterDepPossesivePronoun = "their"
-                playerCharacterIndepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Independent Possessive Pronoun (ex. his, hers, theirs):{/font}")
-                playerCharacterIndepPossesivePronoun = playerCharacterIndepPossesivePronoun.strip()
-                if not playerIndepPossesivePronoun:
-                    playerCharacterIndepPossesivePronoun = "theirs"
     python:
         playerName = ""
         while playerName == "":
             playerName = renpy.input("{font=Kenney Rocket.ttf}Real Name:{/font}")
             playerName = playerName.strip()
-    menu:
-        "{cps=0}{font=Kenney Rocket.ttf}What are your pronouns?{/font}{/cps}"
-        "{font=Kenney Rocket.ttf}He/Him/His{/font}":
-            python:
-                playerSubjectPronoun = "he"
-                playerObjectPronoun = "him"
-                playerDepPossesivePronoun = "his"
-                playerIndepPossesivePronoun = "his"
-        "{font=Kenney Rocket.ttf}She/Her/Hers{/font}":
-            python:
-                playerSubjectPronoun = "she"
-                playerObjectPronoun = "her"
-                playerDepPossesivePronoun = "her"
-                playerIndepPossesivePronoun = "hers"
-        "{font=Kenney Rocket.ttf}They/Them/Their{/font}":
-            python:
-                playerSubjectPronoun = "they"
-                playerObjectPronoun = "them"
-                playerDepPossesivePronoun = "their"
-                playerIndepPossesivePronoun = "theirs"
-        "{font=Kenney Rocket.ttf}Other{/font}":
-            python:
-                playerSubjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Subject Pronoun (ex. he, she, they):{/font}")
-                playerSubjectPronoun = playerSubjectPronoun.strip().capitalize()
-                if not playerSubjectPronoun:
-                    playerSubjectPronoun = "they"
-                playerObjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Object Pronoun (ex. him, her, them):{/font}")
-                playerObjectPronoun = playerObjectPronoun.strip().capitalize()
-                if not playerObjectPronoun:
-                    playerObjectPronoun = "them"
-                playerDepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Dependent Possessive Pronoun (ex. his, her, their):{/font}")
-                playerDepPossesivePronoun = playerDepPossesivePronoun.strip().capitalize()
-                if not playerDepPossesivePronoun:
-                    playerDepPossesivePronoun = "their"
-                playerIndepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Independent Possessive Pronoun (ex. his, hers, theirs):{/font}")
-                playerIndepPossesivePronoun = playerIndepPossesivePronoun.strip().capitalize()
-                if not playerIndepPossesivePronoun:
-                    playerIndepPossesivePronoun = "theirs"
     jump startRealWorld
         
 label startBossFight:
@@ -224,8 +172,13 @@ label startBossFight:
     show Friend01 angry at left:
         xzoom -1.0
     show HP 100 at top with easeintop
-    $ playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
-    friendA "Ugh! Why's this taking so long? Where the heck is [playerCharacterSubjectPronoun]?"
+    python:
+        playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
+        if playerCharacterSubjectPronoun == "they":
+            tmpChosen = "are"
+        else:
+            tmpChosen = "is"
+    friendA "Ugh! Why's this taking so long? Where the heck [tmpChosen] [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL!"
     play sound "audio/mirror_shattering.wav"
     show Boss01 neutral with vpunch
@@ -590,6 +543,7 @@ label scene3:
     friendA "{i}Seriously?{/i}"
     friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
     friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's {i}freaky{/i}."
+    $ playerCharacterObjectPronoun = playerCharacterObjectPronoun.lower()
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
     friendB "Hmm, maybe it was some kind of glitch in <game name>? That would explain the crash, and I've heard there might still be some bugs left behind from before <game name> was ported to <digital world>."
     friendA "Or {i}maybe{/i} [playerCharacterSubjectPronoun] got hacked!"
@@ -622,6 +576,7 @@ label scene3:
     "You try to speak, but nothing comes out."
     "Your hand raises into a thumbs-up position."
     play music "audio/Mission Plausible.ogg"
+    $ playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.lower()
     friendA "Great! It's the perfect team: Me as our fearless leader, [friendB] as our game expert/bodyguard, and [playerCharacter] and [playerCharacterDepPossesivePronoun] weird bracelet thing as our guide through the unknown."
     friendA "Together, we'll be unstoppable!"
     friendB "You know, [friendA], you may be the least qualified {i}fearless leader{/i} I know, but I'm actually pretty excited about this."
