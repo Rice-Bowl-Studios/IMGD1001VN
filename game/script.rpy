@@ -15,7 +15,7 @@ default playerCharacterDepPossesivePronoun = "their"
 define friendA = Character("Brogan", image="Friend01")
 define friendB = Character("Cynthia", image="Friend02")
 define startBoss = Character("Ignis the Conqueror", image="Boss01")
-define iceBoss = Character("Ice Crab", image="Boss02")
+define iceBoss = Character("Iceclops", image="Boss02")
 define gameLog = Character("GameLog")
 define hacker = Character("[hackerName]")
 
@@ -78,6 +78,11 @@ image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
 
+# Other game vars
+define digitalWorld = "NeuralScape"
+define gameWorld = "Hero's Fantasy Online"
+define corporation = "Noodle Bowl Industries Inc. Corp."
+
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
 image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
@@ -124,9 +129,14 @@ label start:
             playerPassword = playerPassword.strip()
         if len(playerPassword) > 16:
             playerPassword = playerPassword[0:16]
-    gameLog "{font=Kenney Rocket.ttf}Launching <game world>{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
-    gameLog "{font=Kenney Rocket.ttf}We did not find a character with that login info.{/font}"
-    gameLog "{font=Kenney Rocket.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{/font}{w=0.5}{nw}"
+    gameLog """
+    {font=Kenney Rocket.ttf}Launching [gameWorld]{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
+    
+    {font=Kenney Rocket.ttf}We did not find a character with that login info.{/font}
+    
+    {font=Kenney Rocket.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
+    """
+    $ gameWorld = "HFO"
     menu:
         "{cps=0}{font=Kenney Rocket.ttf}What are your character's pronouns?{/font}{/cps}"
         "{font=Kenney Rocket.ttf}He/Him/His{/font}":
@@ -315,7 +325,7 @@ label startBossAttackChoice3:
 label startRealWorld:
     scene Bedroom with None
     player """
-    <game title> seems to have crashed
+    [gameWorld] seems to have crashed
     
     My headset is burning hot
     
@@ -453,7 +463,7 @@ label afterHackerSpaceNameChoice:
         hacker "Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party."
     hacker "But then, right when I was about to call it off, you came along and found my invitation!"
     show hacker item at truecenter with zoomin
-    "The mysterious figure gestures toward the <HackerItem>, which is now fastened to your wrist"
+    "The mysterious figure gestures toward the <hacker item>, which is now fastened to your wrist"
     "How did that get there?"
     hide hacker item with zoomout
     hacker """
@@ -541,13 +551,14 @@ label scene3:
     show Friend01 neutral
     show Friend02 neutral
     friendA "{i}Seriously?{/i}"
-    friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the <digital world>? And you didn't know who it was or where you were?"
-    friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the <digital world>, and then I wake up with no idea how I got there? It's {i}freaky{/i}."
+    friendB "Hold on, so you're telling me somebody just showed up and starting talking to you on the [digitalWorld]? And you didn't know who it was or where you were?"
+    $ digitalWorld = "N-Scape"
+    friendA "That doesn't make any sense. Are you sure you weren't just on some weird night time TV channel? Sometimes I'll fall asleep on the [digitalWorld], and then I wake up with no idea how I got there? It's {i}freaky{/i}."
     $ playerCharacterObjectPronoun = playerCharacterObjectPronoun.lower()
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
-    friendB "Hmm, maybe it was some kind of glitch in <game name>? That would explain the crash, and I've heard there might still be some bugs left behind from before <game name> was ported to <digital world>."
+    friendB "Hmm, maybe it was some kind of glitch in [gameWorld]? That would explain the crash, and I've heard there might still be some bugs left behind from before [gameWorld] was ported to [digitalWorld]."
     friendA "Or {i}maybe{/i} [playerCharacterSubjectPronoun] got hacked!"
-    friendB "Wow, you really have been watching too much TV. You know the <digital world> runs on the most powerful supercomputer in the world. It can't be hacked."
+    friendB "Wow, you really have been watching too much TV. You know the [digitalWorld] runs on the most powerful supercomputer in the world. It can't be hacked."
     friendB "You said your headset overheated right? Maybe you passed out and it was all some weird dream."
     menu:
         "I think it has something to do with this bracelet.":
@@ -558,7 +569,7 @@ label scene3:
     show hacker item at truecenter with zoomin
     friendB "No. It looks just like any normal accessory, but it has no name and {w=0.5} wait, that's strange."
     friendB "It's identified as a quest item?"
-    friendA "If it's a quest item, then it must be important! You really haven't seen it before [friendB]? I thought you knew everything there is to know about <game>."
+    friendA "If it's a quest item, then it must be important! You really haven't seen it before [friendB]? I thought you knew everything there is to know about [gameWorld]."
     friendB "Well... not everything. I do have a life you know."
     hide hacker item with zoomout
     friendA "I didn't mean it that way. I just figured... well you know, if there really is some crazy quest that involves whatever the heck just happened to [playerCharacter], you would have heard about it."
@@ -610,19 +621,19 @@ label scene4Start:
     hacker """
     Do you want the short answer, or the technical one?{w=1.0} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all{/size}
 
-    [preferredName], I don't know what they taught you in school about <digital world>,
+    [preferredName], I don't know what they taught you in school about [digitalWorld],
     
-    but I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\" and \"a new era of digital communication\", generously brought to you by <corporation>
+    but I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\" and \"a new era of digital communication\", generously brought to you by [corporation]
 
     Which honestly isn't far off in some aspects
 
     {i}But my god, there is so much more to it than that.{/i}
 
-    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of <corporation>'s little simulation. In fact, {i}nobody does{/i}.
+    Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret. Your 8th grade history teacher has no idea what's actually going on under the hood of [corporation]'s little simulation. In fact, {i}nobody does{/i}.
 
     Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}
 
-    You see, what <corporation> doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen{/i}.
+    You see, what [corporation] doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen{/i}.
 
     Don't believe me? Look no further than the first thought you had when I brought you here today.
     """
@@ -630,14 +641,14 @@ label scene4Start:
     hacker """
     Exactly! Let me explain...
 
-    Believe it or not, the suits and ties at <corporation> are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep.
+    Believe it or not, the suits and ties at [corporation] are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all. It's actually emulating something much more akin to what goes on in our brains when we fall asleep.
     
     A dream, essentially.
     """
     menu:
         "Are we dreaming right now?":
             pass
-        "Is everyone on <digital world> dreaming?":
+        "Is everyone on [digitalWorld] dreaming?":
             pass
     hacker """
     Well, not exactly. It's more like one person {size=-5}the computer{/size} is having some kind of comatose fever-dream, and everyone else{size=-5}, including you and your weird friends,{/size} gets to show up and whisper in the dreamer's ear.
@@ -648,7 +659,7 @@ label scene4Start:
 
     And super {i}creepy{/i}.
 
-    I mean, do you have any idea how much raw data is constantly flowing straight from you brain to the <digital world> all the time?
+    I mean, do you have any idea how much raw data is constantly flowing straight from you brain to the [digitalWorld] all the time?
     """
     "..."
     hacker "Neither do I! Nobody does! But I have a theory that it's a lot."
@@ -658,19 +669,19 @@ label scene4Start:
         "How do you know all of this?":
             hacker "Oh [preferredName], I'm so glad you asked!"
     hacker """
-    In case you haven't noticed, I'm kind of a genius when it comes to the <digital world>, {size=-5}and everything else for that matter{/size}. And believe it or not, me and <corporation> actually go way back.
+    In case you haven't noticed, I'm kind of a genius when it comes to the [digitalWorld], {size=-5}and everything else for that matter{/size}. And believe it or not, me and [corporation] actually go way back.
 
     My relationship with them is...{w=0.5} complicated, to say the lease. I hack them...{w=0.5} they catch me...{w=0.5} I disappear for a while...{w=0.5} and then I come back and do it again!
 
     And so on.
 
-    But things changed when <corporation> launched the <digital world>. {i}The New Digital Frontier{/i}, as they like to call it, was supposed to be totally secure. Unhackable! Foolproof!
+    But things changed when [corporation] launched the [digitalWorld]. {i}The New Digital Frontier{/i}, as they like to call it, was supposed to be totally secure. Unhackable! Foolproof!
 
     Can you believe that? {size=-5}So arrogant, even by my standards{/size}.
 
     They're not wrong though. There's no other system like <super computer>, so even if you were somehow able to intercept its data, the actual hardware you'd need to read it doesn't exist.
 
-    I'm an exception of course. When it comes to the <digital world>, I can see {i}everything{/i}. From the contents of your inventory, to the actual thought data flowing through your headset.
+    I'm an exception of course. When it comes to the [digitalWorld], I can see {i}everything{/i}. From the contents of your inventory, to the actual thought data flowing through your headset.
     """
     menu:
         "How are you able to do that?":
@@ -678,17 +689,17 @@ label scene4Start:
         "What makes you so special?":
             pass
     hacker """
-    To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at <corporation> are a pretty clever bunch.
+    To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at [corporation] are a pretty clever bunch.
 
-    So clever in fact, that when they launched the <digital world>, they actually created a whole new security system just for me! {size=-5}Flattering, I know.{/size}
+    So clever in fact, that when they launched the [digitalWorld], they actually created a whole new security system just for me! {size=-5}Flattering, I know.{/size}
 
-    For certain {i}personal reasons{/i}, I won't be going into detail on how exactly <corporation> decided to deal with me. {size=-5}Sorry, we are not that close yet{/size}.
+    For certain {i}personal reasons{/i}, I won't be going into detail on how exactly [corporation] decided to deal with me. {size=-5}Sorry, we are not that close yet{/size}.
 
     But what's more important is that their plan backfired{w=0.5} - Well, not entirely. It's more like a double edged sword.
 
     {i}And my side is sharper{/i}.
 
-    You see, what <corporation> hasn't realized yet about their \"expert security plan\" is that it just so happens to double as an all-exclusive backdoor to the <digital world>.
+    You see, what [corporation] hasn't realized yet about their \"expert security plan\" is that it just so happens to double as an all-exclusive backdoor to the [digitalWorld].
 
     And that's what allows me to do all the cool stuff I do!
 
@@ -704,7 +715,7 @@ label scene4Start:
             Wouldn't want to ruin the surprise after all.
         """
     hacker """
-    Let's just say, <corporation> is hiding something about the <digital world>.{w=1.0} {i}Something big{/i}.
+    Let's just say, [corporation] is hiding something about the [digitalWorld].{w=1.0} {i}Something big{/i}.
 
     And I'm gonna be the one to expose it!
 
@@ -723,9 +734,9 @@ label scene4Start:
     menu:
         "Why don't you just get it yourself?":
             hacker """
-            In case you haven't noticed, I can't actually enter the <digital world> myself.
+            In case you haven't noticed, I can't actually enter the [digitalWorld] myself.
 
-            If I were to be detected by <corporation>, everything I've done up until now would be pointless.
+            If I were to be detected by [corporation], everything I've done up until now would be pointless.
 
             Also, I'm kind of busy with my own adventure right now.
 
@@ -735,9 +746,9 @@ label scene4Start:
             hacker """
             {size=-5}Hmmm...{w=0.25} how should I explain this{/size}?
 
-            It's a key (sort of?) to the heart of the <digital world>.
+            It's a key (sort of?) to the heart of the [digitalWorld].
 
-            Once I have it, I'll finally be able to expose <corporation>'s secret, and take back what they stole from me.
+            Once I have it, I'll finally be able to expose [corporation]'s secret, and take back what they stole from me.
 
             Exciting stuff, right? Anyways, I didn't just bring you here today just to monologue about me master plan.
 
@@ -757,7 +768,7 @@ label scene4Start:
             hacker """
             I'm wondering the same thing.
 
-            From what I've gathered, he's definitely connected to <corporation>.
+            From what I've gathered, he's definitely connected to [corporation].
 
             But that alone doesn't explain the data coming from his headset.
 
@@ -769,7 +780,7 @@ label scene4Start:
             
             But to answer your question, I'm here to keep an eye on our sophisticated friend here.
 
-            From what I've gathered, this particular individual is without a doubt part of <corporation>. And from the looks of his fancy getup, I'd say he's a pretty important one at that.
+            From what I've gathered, this particular individual is without a doubt part of [corporation]. And from the looks of his fancy getup, I'd say he's a pretty important one at that.
             """
     hacker """
     But that alone doesn't explain the data coming from his headset. There's something seriously off about it.
@@ -778,7 +789,7 @@ label scene4Start:
 
     It's like there's some kind of noise machine in his headset, drowning out all the real stuff with a bunch of nonsense.
 
-    I can't get any kind of read on what he's thinking, or doing in <digital world>. It's unlike anything I've ever seen before, and honestly, it kind of freaks me out.
+    I can't get any kind of read on what he's thinking, or doing in [digitalWorld]. It's unlike anything I've ever seen before, and honestly, it kind of freaks me out.
 
     Anyways, I've got a sneaking suspicion this guy may know something about what I'm looking for, so I'm gonna follow him until I find it.
     """
@@ -786,7 +797,7 @@ label scene4Start:
     hacker """
     !
 
-    Did you see that [preferredName]? The building he just went in must be one of <corporation>'s secret labs! Oh my god, this could be it!
+    Did you see that [preferredName]? The building he just went in must be one of [corporation]'s secret labs! Oh my god, this could be it!
 
     Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so that's a no-go.
 
@@ -960,7 +971,7 @@ label scene6Start:
             hacker """
             Door? You{w=0.5} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}
 
-            That was part of <corporation>'s lab.
+            That was part of [corporation]'s lab.
 
             You know, the one I showed you earlier.
 
@@ -973,7 +984,7 @@ label scene6Start:
     hacker """
     [preferredName], be honest
     
-    What do {i}you{/i} think about hte whole <digital world>?
+    What do {i}you{/i} think about hte whole [digitalWorld]?
     """
     $ tmpFlag = False
     menu:
@@ -987,7 +998,7 @@ label scene6Start:
             """
         "I hate it.":
             hacker """
-            I get that, there's so much about the <digital world> that even I don't know.
+            I get that, there's so much about the [digitalWorld] that even I don't know.
 
             I mean, imagine if somebody else could do what I can. They'd be able to get away with whatever they want.
             """
@@ -1006,7 +1017,7 @@ label scene6Start:
 
             But at the same time, it's kind of scary, isn't it?
 
-            I mean, there's so much about the <digital world> that even I still don't know.
+            I mean, there's so much about the [digitalWorld] that even I still don't know.
 
             Imagine if somebody else was able to do what I can.
 
@@ -1016,9 +1027,9 @@ label scene6Start:
             """
     if tmpFlag:
         menu:
-            "I love the <digital world>.":
+            "I love the [digitalWorld].":
                 pass
-            "I hate the <digital world>.":
+            "I hate the [digitalWorld].":
                 pass
             "I'd prefer not to say.":
                 pass
@@ -1030,16 +1041,16 @@ label scene6Start:
     """
     "[preferredName]" "..."
     hacker """
-    I'm serious, what <corporation>'s been doing in that lab is...
+    I'm serious, what [corporation]'s been doing in that lab is...
 
     It's just really not cool! Alright?
 
-    Look, all I need now is for you to finish your quest in <game world>. OK?
+    Look, all I need now is for you to finish your quest in [gameWorld]. OK?
 
     {size=-0.5}Then maybe, just maybe, I'll be able to fix this.{/size}
     """
     menu:
-        "What is <corporation> doing exactly?":
+        "What is [corporation] doing exactly?":
             hacker """
             I-
 
@@ -1170,7 +1181,7 @@ label scene9Start:
 
     You may already know by now, but the truth is, <forest> was never supposed to be part of the game.
     
-    In fact, it’s barely part of the <digital world> at all.
+    In fact, it’s barely part of the [digitalWorld] at all.
 
     It's part of {i}me{/i}.
     """
@@ -1183,7 +1194,7 @@ label scene9Start:
             pass
         "What do you mean the <forest> is {i}part of you?{/i}":
             pass
-        "What happened to the <digital world>? To my friends?" if tmpFlag:
+        "What happened to the [digitalWorld]? To my friends?" if tmpFlag:
             hacker """
             Sorry, when you refused to finish the quest, I got desperate.
 
@@ -1235,7 +1246,7 @@ label scene10Start:
 
     You walk toward the door.
 
-    As you reach for the handle, you notice the <quest item> on your wrist.
+    As you reach for the handle, you notice the <hacker item> on your wrist.
 
     {i}Is this real?{/i}
     """
@@ -1342,10 +1353,10 @@ label scene11Start:
             pass
         "Who are you?":
             hacker "It's me, [hacker]."
-    hacker "This here is the truth behind the <digital world>."
+    hacker "This here is the truth behind the [digitalWorld]."
     "{i}Her voice is strange, but it's undeniably [hacker]'s{/i}."
     hacker """
-    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the <digital world>.
+    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the [digitalWorld].
 
     As it turns out, we've actually had the world's strongest supercomputer with us all along.
 
@@ -1357,7 +1368,7 @@ label scene11Start:
 
     While the power of the human brain can't be replicated, it can be harnessed, rewired, {i}abused{/i}.
 
-    Do you get it now [player]? All these fancy computers around us? They're not running the <digital world>.{w=0.5} {i}I am{/i}.
+    Do you get it now [player]? All these fancy computers around us? They're not running the [digitalWorld].{w=0.5} {i}I am{/i}.
     """
     menu:
         "Set [hacker] free":
