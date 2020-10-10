@@ -25,6 +25,7 @@ image Game Tavern = "bg_GW_GameTavern.png"
 image Game World Arena 01 = "bg_GW_GameWorldArena01.png"
 image Game World Arena 02 = "bg_GW_GameWorldArena02.png"
 image Generic Game Env = "bg_GW_GenericGameEnvironment.png"
+image Forest = "bg_GW_forest.png"
 image Hacker Space = "bg_GW_HackerSpace.png"
 image Bedroom = "bg_RW_Bedroom.png"
 image City = "bg_RW_City.png"
@@ -79,14 +80,16 @@ image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
 image campfire:
-    "bg_GW_campfire1.png"
+    im.Scale("bg_GW_campfire1.png", 360, 360)
     0.15
-    "bg_GW_campfire2.png"
+    im.Scale("bg_GW_campfire2.png", 360, 360)
     0.15
-    "bg_GW_campfire3.png"
+    im.Scale("bg_GW_campfire3.png", 360, 360)
     0.15
-    "bg_GW_campfire4.png"
+    im.Scale("bg_GW_campfire4.png", 360, 360)
     0.15
+    repeat
+image darkOverlay = "bg_forest_darkoverlay.png"
 
 # Other game vars
 define digitalWorld = "NeuralScape"
@@ -122,6 +125,7 @@ label main_menu:
 label start:
     if config.developer:
         "{cps=0}GAME START{/cps}"
+    jump scene3Start
     menu: 
         "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
         "Yes":
@@ -544,9 +548,12 @@ label afterHackerSpaceNameChoice:
 
 label scene3Start:
     # TODO: music 1.1.2
-    scene Game World Arena 01 with fade
-    show Friend01 neutral at right with easeinright
-    show Friend02 angry at left with easeinleft
+    scene Forest
+    show campfire:
+        align (0.52, 0.95)
+    show Friend01 neutral at right
+    show Friend02 angry at left
+    show darkOverlay
     friendB "There you are. [friendA] was about to tell me about the big fight, specifically the part where he somehow {i}lost{/i} the weapon I gave him?"
     friendA """
     Right...
