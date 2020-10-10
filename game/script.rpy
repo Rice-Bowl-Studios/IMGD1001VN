@@ -31,6 +31,7 @@ image Hacker Space = "bg_GW_HackerSpace.png"
 image Bedroom = "bg_RW_Bedroom.png"
 image City = "bg_RW_City.png"
 image Prison = "bg_RW_Prison.png"
+image Hallway = "bg_RW_Hallway.png"
 image crash = "bg_GW_crash.png"
 image logInScreen = "bg_GW_login.png"
 
@@ -1162,8 +1163,10 @@ label scene7Purple:
     """
     "{i}Is that...?{/i}"
     gameLog "{font=Kenney Rocket.ttf}Current Objective: <redacted>.{/font}"
+    $ tmpFlag = False
     if config.developer:
         "END SCENE 7"
+    jump scene8Start
 
 label scene7Orange:
     friendA """
@@ -1196,19 +1199,13 @@ label scene7Orange:
         "[tmpGlitchText1]":
             pass
     scene black with fade
+    $ tmpFlag = True
     if config.developer:
         "END SCENE 7"
 
 label scene8Start:
     if config.developer:
         "END SCENE 8"
-    """
-    MainC reaches the final location of <pronoun> quest: The <Serpent Temple>
-
-    The <Temple> itself behaves very strangely. Glitching as if the game is broken.
-
-    MainC connects with <Hacker> at the center of the <Temple>, and suddenly passes out
-    """
 
 label scene9Start:
     "{i}Where am I?{/i}"
@@ -1216,37 +1213,53 @@ label scene9Start:
     hacker """
     This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.
 
-    I'm sure you know by now, but the truth is the <serpent temple> was never supposed to be part of the game. In face, now that you've found it, I fear we're both in terrible danger.
-
-    The core of the <temple> you just entered is barely part of the <digital world> at all in fact.
+    You may already know by now, but the truth is, <forest> was never supposed to be part of the game.
+    
+    In fact, it’s barely part of the <digital world> at all.
 
     It's part of {i}me{/i}.
     """
     playerCharacter "?"
-    hacker "Thanks to you finishing my quest, I'm finally able to complete our connection."
+    hacker "And now that you've found it, I fear we're both in terrible danger."
     playerCharacter "???"
+    $ tmpChosen = "Look"
+    menu:
+        "What kind of danger?":
+            pass
+        "What do you mean the <forest> is {i}part of you?{/i}":
+            pass
+        "What happened to the <digital world>? To my friends?" if tmpFlag:
+            hacker """
+            Sorry, when you refused to finish the quest, I got desperate.
+
+            But don't worry! Your friends will be fine.{w=1.0} {size=-0.5}Probably.{/size}
+            """
+            $ tmpChosen = "Anyways"
     hacker """
-    Look, I don't have much time, but I promise everything will make sense soon.
+    [tmpChosen], I don't have much time, but I promise everything will make sense soon.
     
-    Right now I {i}need{/i} your help. [player], I have to know...
+    Thanks to you finishing my quest, I'm finally able to complete our connection.
+
+    Which means right now, I {i}need{/i} your help. [preferredName], I have to know...
 
     {i}Do you trust me?{/i}
     """
     menu:
         "Yes":
-            "[hacker] lets out a sigh of relief"
+            "[hacker] lets out a sigh of relief."
             hacker """
             Alright. This next part is gonna feel weird.
 
             Just promise to stay calm, alright?
             """
         "No":
-            "[hacker] lets out a disappointed sigh.."
+            "[hacker] lets out a disappointed sigh."
             hacker """
-            I'm sorry [player], but there's no other way...
+            I'm sorry [preferredName], but there's no other way...
 
-            I {i}have{/i} to do this.
+            {i}I have to do this{/i}.
             """
+    # TODO: play a glitched out image with the below pulse transition
     scene black with pulse(12, "#fff", 0.5, 1.2, 0.1, 0.1, 0.25, 2.0)
     $ renpy.pause(2.0)
     if config.developer:
@@ -1254,16 +1267,56 @@ label scene9Start:
 
 label scene10Start:
     scene Bedroom with None
-    "{i}I'm... home?{/i}."
-    "Without thinking, you stand up."
-    "{i}Something's not right{/i}."
-    "You walk toward the door."
-    "As you reach for the door handle, you notice the <quest item> on your wrist."
-    "{i}Is this real?{/i}"
+    """
+    {i}I'm...{w=0.5} home?{/i}
+
+    Without thinking, you stand up.
+
+    {i}Something's not right{/i}.
+
+    {i}{#TODO: hacker font}I have to go now.{/i}
+
+    {i}But why?{/i}
+
+    You walk toward the door.
+
+    As you reach for the handle, you notice the <quest item> on your wrist.
+
+    {i}Is this real?{/i}
+    """
     scene black with fade
     "You leave your room and step outside"
-    scene City with None
-    "You begin walking down the street"
+    scene City with fade
+    """
+    You begin walking down the street.
+
+    {i}I've never been this way before, but it feels oddly familiar{/i}.
+
+    {i}{#TODO: hacker font}It must be this way.{/i}
+
+    {i}What is?{/i}
+
+    You move as if you've walked this route a thousand times.
+
+    {i}{#TODO: hacker font}I have to hurry.{/i}
+    """
+    # TODO: transition to corporation building scene
+    "{i}Here?{/i}"
+    # TODO: zoom into building
+    scene Hallway with fade
+    "{i}Won't somebody see me?{/i}"
+    hacker "They only see what I want them to see."
+    # TODO: zoom
+    "{i}Are you{w=0.5}... in my head?{/i}"
+    hacker "Always have been."
+    # TODO: zoom again
+    """
+    {i}{#TODO: hacker font}Almost there...{/i}
+
+    {i}{#TODO: hacker font}I can't believe it. This actually might work!{/i}
+
+    As you open the door, you feel a growing sense of excitement. You cannot tell if it's your own.
+    """
     if config.developer:
         "END SCENE 10"
 
