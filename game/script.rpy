@@ -125,7 +125,6 @@ label main_menu:
 label start:
     if config.developer:
         "{cps=0}GAME START{/cps}"
-    jump scene3Start
     menu: 
         "{cps=0}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/cps}"
         "Yes":
@@ -194,6 +193,9 @@ label startBossFight:
     show Friend01 angry at left:
         xzoom -1.0
     show HP 100 at top with easeintop
+    show screen tear(10, 1, 1, 0, 50, layer Friend01)
+    $ renpy.pause(5.0)
+    hide screen tear
     python:
         playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
         if playerCharacterSubjectPronoun == "they":
@@ -897,7 +899,7 @@ label scene5Start:
     friendB "{size=-5}Ok, were close to the [iceBoss] now.{/size}"
     friendA "{size=-5}Hey, [friendB].{/size}"
     friendB "{size=-5}Shhh.{/size}"
-    friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2.5}woah{/size} {size=2}-Ahh!{/size}"
+    friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2}woah{/size} {size=2}-Ahh!{/size}"
     # TODO: twig snap SFX
     "[friendA] slips and falls."
     iceBoss "?"
