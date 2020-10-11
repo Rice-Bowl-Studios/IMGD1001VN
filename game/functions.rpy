@@ -1,12 +1,32 @@
 init python:
     import random
 
-    nonunicode = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"
-    hiragana = "あいうおえかきくけこなにぬねのはひふへほまみむめもたちつてとさしすせそがぎぐげごばびぶべぼぱぴぷぺぽだぢづでどざじずぜぞわん"
-    katakana = "アイウエオカキクケコナニヌネノハヒフヘホマミムメモタチツテトサシスセソガギグゲゴバビブベボパピプペポダヂヅデドザジズゼゾワン"
-    kanji = "死火亡煩"
+    def generateTreePos(nTree=3, minScale=0.5, maxScale=0.7):
+        out = []
+        partChoices = range(3)
+        random.shuffle(partChoices)
+        for x in range(nTree):
+            # TODO: maybe make scale dependent on y if I have time
+            scale = random.random() * (maxScale - minScale) + minScale
+            partChoice = partChoices.pop()
+            x = min(880.0/1280.0, random.random() * (1.0 / nTree - 0.2) + (float(partChoice) / nTree))
+            y = random.random() * 0.2 + 0.1
+            out.append([scale, (x, y)])
+        return out
 
-    def glitchText(length, japanese=False):
+    def generateHex(length):
+        hexChars = "0123456789ABCDEF"
+        out = random.choice(hexChars[1:])
+        for x in range(length):
+            out += random.choice(hexChars)
+        return out
+
+    def glitchText(length, japanese=False, full=False):
+        nonunicode_full = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"
+        nonunicode_kenney_rocket = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
+        hiragana = "あいうおえかきくけこなにぬねのはひふへほまみむめもたちつてとさしすせそがぎぐげごばびぶべぼぱぴぷぺぽだぢづでどざじずぜぞわをん"
+        katakana = "アイウエオカキクケコナニヌネノハヒフヘホマミムメモタチツテトサシスセソガギグゲゴバビブベボパピプペポダヂヅデドザジズゼゾワヲン"
+        kanji = "死火亡煩"
         out = ""
         for x in range(length):
             if japanese:
@@ -18,9 +38,15 @@ init python:
                 elif tmp == 2:
                     out += "{font=bananaslipplus.otf}" + random.choice(kanji) + "{/font}"
                 else:
-                    out += random.choice(nonunicode)
+                    if full:
+                        out += random.choice(nonunicode_full)
+                    else:
+                        out += random.choice(nonunicode_kenney_rocket)
             else:
-                out += random.choice(nonunicode)
+                if full:
+                    out += random.choice(nonunicode_full)
+                else:
+                    out += random.choice(nonunicode_kenney_rocket)
         return out
 
     def pulse(pulses, color, t0, xt, dt, in_t, out_t, pause_t=0.0):
