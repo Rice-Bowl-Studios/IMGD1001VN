@@ -346,9 +346,10 @@ label startBossAttackChoice3:
     $ renpy.pause(1.0)
     hide screen tear
     play sound "audio/computer_error_alert.wav"
-    scene crash with vpunch
+    scene black
+    show crash at truecenter with vpunch
     $ renpy.pause(1.5)
-    scene black with None
+    hide crash with zoomout
 
 label startRealWorld:
     # TODO: music 1.1.3 hanging out in room
@@ -654,8 +655,8 @@ label scene3Start:
     friendB "I would be lying if I said I wasn't a little interested. But just so we're clear, I am not here to babysit you two."
     friendA "Yes!"
     friendA "How about you [playerCharacter]?"
+    playerCharacter "..."
     $ renpy.music.set_pause(True)
-    "..."
     $ tmpGlitchText = glitchText(16)
     """
     You feel the [tmpGlitchText] pulling at your arm.
@@ -678,8 +679,12 @@ label scene3Start:
         "Ok.":
             pass
         "I'm not so sure about this.":
-            friendA "Look, I know you're freaked out about what you saw, but the only way to figure it out is to go on this quest."
-            friendA "{size=-5}also we kinda need you since you've got the quest item and all.{/size}"
+            friendA """
+            Look, I know you're freaked out about what you saw, but the only way to figure it out is to go on this quest.
+            
+            friendA "{size=-5}also we kinda need you since you've got the quest item and all.{/size}
+            """
+            "{i}He's right. I need to find out what's going on here{/i}."
     "You nod your head affirmatively, agreeing to come along."
     friendA "Great. In that case, I think I'll be signing off for the night. We've got a big day ahead of us after all"
     friendB "Ok. I'm gonna head out too. See you tomorrow."
@@ -1611,6 +1616,7 @@ label scene8Start:
     if config.developer:
         "{cps=0}END SCENE 8{/cps}"
 
+# TODO: visuals
 label scene9Start:
     # TODO: music 1.3.1
     scene Bedroom with None
@@ -1667,6 +1673,7 @@ label scene9Start:
     if config.developer:
         "{cps=0}END SCENE 9{/cps}"
 
+# TODO: visuals
 label scene10Start:
     # TODO: music 3.11.1
     """
