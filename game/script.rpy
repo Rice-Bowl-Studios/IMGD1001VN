@@ -1520,7 +1520,7 @@ label scene7Orange:
 
     What the...
     """
-    show friend01 angry
+    show Friend01 angry
     $ tmpGlitchText = glitchText(32, False, True)
     friendA "[tmpGlitchText]"
     $ tmpGlitchText = glitchText(64, True, True)
@@ -1621,7 +1621,7 @@ label scene9Start:
 
     {i}Something's not right{/i}.
 
-    {i}{#TODO: hacker font}I have to go now.{/i}
+    {i}{font=Kenney Rocket.ttf}I have to go now.{/font}{/i}
 
     {i}But why?{/i}
 
@@ -1638,13 +1638,13 @@ label scene9Start:
 
     {i}I've never been this way before, but it feels oddly familiar{/i}.
 
-    {i}{#TODO: hacker font}It must be this way.{/i}
+    {i}{font=Kenney Rocket.ttf}It must be this way.{/font}{/i}
 
     {i}What is?{/i}
 
     You move as if you've walked this route a thousand times.
 
-    {i}{#TODO: hacker font}I have to hurry.{/i}
+    {i}{font=Kenney Rocket.ttf}I have to hurry.{/font}{/i}
     """
     # TODO: transition to corporation building scene
     "{i}Here?{/i}"
@@ -1657,9 +1657,9 @@ label scene9Start:
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Always have been.{/font}"
     # TODO: zoom again
     """
-    {i}{#TODO: hacker font}Almost there...{/i}
+    {i}{font=Kenney Rocket.ttf}Almost there...{/font}{/i}
 
-    {i}{#TODO: hacker font}I can't believe it. This actually might work!{/i}
+    {i}{font=Kenney Rocket.ttf}I can't believe it. This actually might work!{/font}{/i}
 
     As you open the door, you feel a growing sense of excitement. You cannot tell if it's your own.
     """
