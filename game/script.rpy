@@ -188,7 +188,6 @@ label start:
             playerName = playerName.strip()
 
 label startBossFight:
-    jump scene5Start
     # TODO: music 1.1.1 boss fight music
     scene Game World Arena 01
     show Boss01 neutral at right
@@ -377,7 +376,7 @@ label startRealWorld:
     "You put your headset back on."
     stop music fadeout 1.0
     scene logInScreen
-    image passwordHintText = ParameterizedText(xalign=0.5)
+    image passwordHintText = ParameterizedText(xalign=0.5, yalign=0.5)
     image passwordText = ParameterizedText()
     image playerIdText = ParameterizedText(xalign=1.0)
     show text "{color=#000}[playerUsername]{/color}":
@@ -400,6 +399,7 @@ label startRealWorld:
         python:
             tmpPassword = renpy.input("Password:")
             tmpPassword = tmpPassword.strip()
+    window hide
     $ tmpChosen = ""
     while len(tmpChosen) < len(tmpPassword):
         $ renpy.pause(0.15)
@@ -593,11 +593,8 @@ label afterHackerSpaceNameChoice:
 label scene3Start:
     # TODO: music 1.1.2
     scene Forest
-    show campfire:
-        align (0.52, 0.95)
     show Friend01 neutral at right
     show Friend02 angry at left
-    show darkOverlay
     friendB "There you are. [friendA] was about to tell me about the big fight, specifically the part where he somehow {i}lost{/i} the weapon I gave him?"
     friendA """
     Right...
@@ -1146,6 +1143,7 @@ label scene5Start:
     show snowTree3:
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ del(treePos)
     show Boss02 possessed
     "{i}!{/i}"
     iceBoss "rawr xD" # TODO: replace with roar SFX
@@ -1204,12 +1202,54 @@ label scene5Start:
 
 label scene5HalfStart:
     # TODO: music 1.1.2
-    pass
+    scene Forest
+    show Friend01 neutral at right
+    show Friend02 angry at left
+    show campfire:
+        alpha 0.0
+    show darkOverlay:
+        alpha 0.0
+    friendA "MainC! You made it!"
+    friendB "We got split up after the [iceBoss] found us. You didn't find anything, did you?"
+    playerCharacter "No."
+    friendA """
+    Ugh, what kind of quest doesn't even give you a real objective?
+    
+    I mean, what the heck are we supposed to be looking for in that empty forest?
 
-# TODO: visuals
+    Whatever, I guess we'd better set up camp for now. We can look some more later.
+    """
+    show darkOverlay with fade:
+        alpha 1.0
+    show campfire:
+        align (0.52, 0.95)
+        alpha 0.0
+        linear 0.1 alpha 1.0
+    friendB "Um, I don't know about you, but I am {i}not{/i} going back in there with that [iceBoss] prowling around. Especially not after what you just pulled."
+    friendA "Look, I said I was sorry alright? How was I supposed to know there was ice there?"
+    friendB """
+    {i}Maybe{/i} if you'd just pay more attention...{w=0.5} Ugh never mind.
+    
+    Anyways, it's super easy to get lost in there too. It wouldn't be smart to go back without a map at least.
+    """
+    friendA "That's true. Actually, is it just me, or does the forest seem way bigger from the inside than it does from here?"
+    menu:
+        "Yeah, it is kind of weird":
+            pass
+        "I don't think so.":
+            pass
+    friendA "Well, if we're not going back in, what should we do next?"
+    friendB "Maybe we could..."
+    show screen tear()
+    $ renpy.pause(0.4)
+    hide screen tear
+
 label scene6Start:
     # TODO: music 1.2.1
-    scene Hacker Space with fade
+    scene Hacker Space with pixellate
+    show GWHacker at center:
+        alpha 0.0
+        linear 0.5 alpha 1.0
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}Now {i}that{/i} was a close call.{/font}
     
@@ -1218,7 +1258,7 @@ label scene6Start:
     menu:
         "For what?":
             "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}For saving you just new, dug. {size=-5}You should probably be used to it by now, if we're being honest.{/size}{/font}
+            {font=Kenney Rocket.ttf}For saving you just new, duh. {size=-5}You should probably be used to it by now, if we're being honest.{/size}{/font}
 
             {font=Kenney Rocket.ttf}Whatever. You can thank me later. Right now, I have a question.{/font}
             """
@@ -1302,7 +1342,7 @@ label scene6Start:
 
     {font=Kenney Rocket.ttf}Look, all I need now is for you to finish your quest in [gameWorld]. OK?{/font}
 
-    {font=Kenney Rocket.ttf}{size=-0.5}Then maybe, just maybe, I'll be able to fix this.{/size}{/font}
+    {font=Kenney Rocket.ttf}{size=-5}Then maybe, just maybe, I'll be able to fix this.{/size}{/font}
     """
     menu:
         "What is [corporation] doing exactly?":
@@ -1349,7 +1389,7 @@ label scene6PurpleCont:
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}Great! All you have to do is go back into the forest, and you should find what you're looking for pretty fast.{/font}
     
-    {font=Kenney Rocket.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-0.5}Sorry, but this last part is single-player only.{/size}{/font}
+    {font=Kenney Rocket.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-5}Sorry, but this last part is single-player only.{/size}{/font}
 
     {font=Kenney Rocket.ttf}Alright? You'd better hurry. Good Lick [preferredName]!{/font}
 
@@ -1358,9 +1398,20 @@ label scene6PurpleCont:
     if config.developer:
         "END SCENE 6"
 
-# TODO: visuals
 label scene7Purple:
-    # MOVE BACK TO SNOW FOREST BG
+    scene Forest
+    show Friend01 neutral at right
+    show Friend02 angry at left
+    show campfire:
+        alpha 0.0
+    show darkOverlay:
+        alpha 0.0
+    show darkOverlay:
+        alpha 1.0
+    show campfire:
+        align (0.52, 0.95)
+        alpha 0.0
+        linear 0.1 alpha 1.0
     friendA "Hey [playerCharacter], are you even listening?"
     friendB "Looks like [playerCharacterSubjectPronoun] zoned out pretty hard there."
     friendA """
@@ -1373,24 +1424,92 @@ label scene7Purple:
     playerCharacter "I'm gonna go get some more firewood."
     friendA "OK."
     friendB "Don't go too far. The [iceBoss] could still be around."
+    $ treePos = generateTreePos()
+    scene Forest Snow with fade
+    show snowTree1:
+        zoom treePos[0][0]
+        pos (treePos[0][1][0], treePos[0][1][1])
+    show snowTree2:
+        zoom treePos[1][0]
+        pos (treePos[1][1][0], treePos[1][1][1])
+    show snowTree3:
+        zoom treePos[2][0]
+        pos (treePos[2][1][0], treePos[2][1][1])
+    $ treePos = generateTreePos()
     "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside <forest>.{/font}"
+    show snowTree1:
+        zoom treePos[0][0]
+        pos (treePos[0][1][0], treePos[0][1][1])
+    show snowTree2:
+        zoom treePos[1][0]
+        pos (treePos[1][1][0], treePos[1][1][1])
+    show snowTree3:
+        zoom treePos[2][0]
+        pos (treePos[2][1][0], treePos[2][1][1])
+    $ treePos = generateTreePos()
     "{i}This place makes no sense{/i}."
+    show snowTree1:
+        zoom treePos[0][0]
+        pos (treePos[0][1][0], treePos[0][1][1])
+    show snowTree2:
+        zoom treePos[1][0]
+        pos (treePos[1][1][0], treePos[1][1][1])
+    show snowTree3:
+        zoom treePos[2][0]
+        pos (treePos[2][1][0], treePos[2][1][1])
+    $ treePos = generateTreePos()
     "{i}What am I even looking for?{/i}"
     show hacker item at truecenter
+    "{i}The <hacker item> is pulling at my arm...{/i}"
+    show snowTree1:
+        zoom treePos[0][0]
+        pos (treePos[0][1][0], treePos[0][1][1])
+    show snowTree2:
+        zoom treePos[1][0]
+        pos (treePos[1][1][0], treePos[1][1][1])
+    show snowTree3:
+        zoom treePos[2][0]
+        pos (treePos[2][1][0], treePos[2][1][1])
+    $ treePos = generateTreePos()
     "{i}I guess I should follow it{/i}."
+    show snowTree1:
+        zoom treePos[0][0]
+        pos (treePos[0][1][0], treePos[0][1][1])
+    show snowTree2:
+        zoom treePos[1][0]
+        pos (treePos[1][1][0], treePos[1][1][1])
+    show snowTree3:
+        zoom treePos[2][0]
+        pos (treePos[2][1][0], treePos[2][1][1])
+    $ treePos = generateTreePos()
     """
     {i}I've been walking for a long time now{/i}.
     
     {i}This forest feels never-ending{/i}.
     """
+    # TODO: add more trees and then manually pos them to make a path
     "{i}Is that...?{/i}"
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: <redacted>.{/font}"
+    $ tmpGlitchText = glitchText(128)
+    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective:{w=1.0} [tmpGlitchText]{/font}"
     $ tmpFlag = False
     if config.developer:
         "END SCENE 7"
     jump scene8Start
 
 label scene7Orange:
+    scene Forest
+    show Friend01 neutral at right
+    show Friend02 angry at left
+    show campfire:
+        alpha 0.0
+    show darkOverlay:
+        alpha 0.0
+    show darkOverlay:
+        alpha 1.0
+    show campfire:
+        align (0.52, 0.95)
+        alpha 0.0
+        linear 0.1 alpha 1.0
     friendA """
     So what should we do now?
 
@@ -1401,6 +1520,7 @@ label scene7Orange:
 
     What the...
     """
+    show friend01 angry
     $ tmpGlitchText = glitchText(32, False, True)
     friendA "[tmpGlitchText]"
     $ tmpGlitchText = glitchText(64, True, True)
@@ -1420,12 +1540,12 @@ label scene7Orange:
             pass
         "[tmpGlitchText1]":
             pass
-    scene black with fade
     $ tmpFlag = True
     if config.developer:
         "END SCENE 7"
 
 label scene8Start:
+    scene black with fade
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
     # TODO: music 1.2.1
@@ -1451,7 +1571,7 @@ label scene8Start:
             "{font=Kenney Rocket.ttf}[hacker]{/font}" """
             {font=Kenney Rocket.ttf}Sorry, when you refused to finish the quest, I got desperate.{/font}
 
-            {font=Kenney Rocket.ttf}But don't worry! Your friends will be fine.{w=1.0} {size=-0.5}Probably.{/size}{/font}
+            {font=Kenney Rocket.ttf}But don't worry! Your friends will be fine.{w=1.0} {size=-5}Probably.{/size}{/font}
             """
             $ tmpChosen = "Anyways"
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
@@ -1478,9 +1598,16 @@ label scene8Start:
 
             {font=Kenney Rocket.ttf}{i}I have to do this{/i}.{/font}
             """
-    # TODO: play a glitched out image with the below pulse transition
-    scene black with pulse(12, "#fff", 0.5, 1.2, 0.1, 0.1, 0.25, 2.0)
+    show screen tear()
+    $ renpy.pause(1.0)
+    show screen tear(30)
     $ renpy.pause(2.0)
+    show screen tear(40, 0.5)
+    $ renpy.pause(2.0)
+    show screen tear(50, 0.25)
+    $ renpy.pause(0.5)
+    scene black with pulse(12, "#777", 0.5, 1, 0.1, 0.1, 0.25, 1.0)
+    hide screen tear
     if config.developer:
         "{cps=0}END SCENE 8{/cps}"
 
@@ -1504,7 +1631,6 @@ label scene9Start:
 
     {i}Is this real?{/i}
     """
-    scene black with fade
     "You leave your room and step outside"
     scene City with fade
     """
