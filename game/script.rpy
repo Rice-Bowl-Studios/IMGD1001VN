@@ -80,6 +80,8 @@ image HP 0 = im.Scale("boss_hp_0.png", 360, 90)
 image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
 image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
 image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
+image HP 90 = im.Scale("boss_hp_90.png", 360, 90)
+image HP 95 = im.Scale("boss_hp_95.png", 360, 90)
 image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
 image campfire:
     im.Scale("bg_GW_campfire1.png", 360, 360)
@@ -333,7 +335,7 @@ label startBossAttackChoice3:
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No."
-    friendA "Huh, weird. Well, maybe [friendB] knows something about it-"
+    friendA "Huh, weird. Well, maybe [friendB] knows something about it-{w=0.4}{nw}"
     stop music fadeout 0.5
     show screen tear()
     # TODO: play sfx 01 glitching
@@ -370,16 +372,20 @@ label startRealWorld:
     "You put your headset back on."
     stop music fadeout 1.0
     scene logInScreen
-    image passwordText = ParameterizedText(xalign=0.5, yalign=0.0)
-    python:
-        tmpChosen = " " * (36 - len(playerUsername))
-    show text "{color=#000}[playerUsername]{/color}[tmpChosen]{color=#7e7e7e}[playerID]{/color}":
+    image passwordHintText = ParameterizedText(xalign=0.5)
+    image passwordText = ParameterizedText()
+    image playerIdText = ParameterizedText(xalign=1.0)
+    show text "{color=#000}[playerUsername]{/color}":
         zoom 1.5
         anchor (0, 0)
         pos (300, 400)
-    show passwordText "{color=#000}[playerPassword]{/color}":
+    show playerIdText "{color=#7e7e7e}[playerID]{/color}":
+        zoom 1.5
+        pos (990, 400)
+    show passwordHintText "{color=#000}[playerPassword]{/color}":
+        transform_anchor True
         rotate -15
-        pos (130, 50)
+        pos (130, 125)
     python:
         tmpPassword = renpy.input("Password:")
         tmpPassword = tmpPassword.strip()
@@ -389,7 +395,15 @@ label startRealWorld:
         python:
             tmpPassword = renpy.input("Password:")
             tmpPassword = tmpPassword.strip()
-    $ renpy.pause(1.0)
+    $ tmpChosen = ""
+    while len(tmpChosen) < len(tmpPassword):
+        $ renpy.pause(0.15)
+        $ tmpChosen += "*"
+        show passwordText "{color=#000}[tmpChosen]{/color}":
+            zoom 1.5
+            anchor (0, 0)
+            pos (300, 525)
+    $ renpy.pause(0.5)
     scene black with fade
     "..."
     # TODO: music 1.1.4 trying to log back on
@@ -470,7 +484,6 @@ label startHackerSpace:
             preferredSubjectPronoun = playerSubjectPronoun
             preferredObjectPronoun = playerObjectPronoun
             preferredDepPossesivePronoun = playerDepPossesivePronoun
-            preferredIndepPossesivePronoun = playerIndepPossesivePronoun
         jump afterHackerSpaceNameChoice
 
 label hackerSpaceNameChoice:
@@ -503,9 +516,12 @@ label afterHackerSpaceNameChoice:
         "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}But then, right when I was about to call it off, you came along and found my invitation!{/font}"
     show hacker item at truecenter with zoomin
-    $ tmpGlitchText = glitchText(16)
-    "The mysterious figure gestures toward the [tmpGlitchText], which is now fastened to your wrist"
-    "How did that get there?"
+    $ tmpGlitchText = glitchText(16, False, True)
+    """
+    The mysterious figure gestures toward the [tmpGlitchText], which is now fastened to your wrist
+    
+    {i}How did that get there?{/i}
+    """
     hide hacker item with zoomout
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}And guess what. The best part is{w=3.0}: it's yours to keep! Consider it a party favor from your new best friend.{/font}
@@ -708,7 +724,9 @@ label scene4Start:
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}Exactly! Let me explain...{/font}
 
-    {font=Kenney Rocket.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever. You see, their so-called \"supercomputer\" isn't much of a computer at all.{/font}
+    {font=Kenney Rocket.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever.{/font}
+    
+    {font=Kenney Rocket.ttf}You see, their so-called \"supercomputer\" isn't much of a computer at all.{/font}
     
     {font=Kenney Rocket.ttf}It's actually emulating something much more akin to what goes on in our brains when we fall asleep.{/font}
     
@@ -732,7 +750,7 @@ label scene4Start:
 
     {font=Kenney Rocket.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from you brain to the [digitalWorld] all the time?{/font}
     """
-    "..."
+    "[preferredName]" "..."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
     menu:
         "Why are you telling me all of this":
@@ -949,9 +967,9 @@ label scene5Start:
     """
     friendB "Over there."
     show Boss02 neutral:
-        zoom 0.8
+        zoom 0.7
         align (0.5, 0.5)
-        ypos 0.3
+        ypos 0.25
         linear 0.25 alpha 1.0
     "{i}There appears to be a large monster standing deeper in the woods{/i}."
     friendA "What is that thing? It's huge."
@@ -973,15 +991,16 @@ label scene5Start:
     friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2}woah{/size} {size=2}-Ahh!{/size}"
     # TODO: twig snap SFX
     "[friendA] slips and falls."
+    show Boss02 possessed
     iceBoss "?"
     stop music fadeout 0.5
     friendB "{size=-5}You've got to be kidding me.{/size}"
     hide Boss02
     show Boss02 possessed:
-        zoom 0.8
+        zoom 0.7
         align (0.5, 0.5)
-        ypos 0.3
-        linear 0.1 zoom 1 ypos 0.5
+        ypos 0.25
+        linear 0.5 zoom 1 ypos 0.5
     "{i}The [iceBoss] is heading right towards us. This is not good.{/i}"
     # I hate myself for doing this, but it's kind of funny
     iceBoss "rawr uwu" # TODO: replace with roar SFX
@@ -1095,6 +1114,7 @@ label scene5Start:
         linear 2.5 alpha 1.0
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}How big can this place be? I must be close. I have to be.{/font}"
     show Hallway:
+        alpha 1.0
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 2.5
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Yes! This is it! After so many years. Finally...{/font}"
@@ -1139,14 +1159,14 @@ label scene5Start:
             pass
         "Attack 2":
             pass
-    # TODO: make keyframe with health bar ever so slightly lower
+    show HP 95
     "[iceBoss] attacks."
     menu:
         "Attack 1":
             pass
         "Attack 2":
             pass
-    # TODO: make keyframe with health bar ever so slightly lower
+    show HP 90
     "[iceBoss] attacks."
     """
     {i}This is really bad. I won't survive another attack like that{/i}.
@@ -1156,7 +1176,7 @@ label scene5Start:
     show hacker item # TODO: positioning and anim (glowing loop?)
     iceBoss "..."
     playerCharacter "?"
-    "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest."
+    "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest." # ATL the boss out
     hide HP with easeouttop
     hide Boss02 with zoomout
     hide hacker item
