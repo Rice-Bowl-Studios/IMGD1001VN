@@ -191,7 +191,6 @@ label start:
 
 label startBossFight:
     $ suppress_overlay = False
-    jump scene5Start
     # TODO: music 1.1.1 boss fight music
     scene Game World Arena 01
     show Boss01 neutral at right
@@ -372,10 +371,15 @@ label startRealWorld:
     stop music fadeout 1.0
     scene logInScreen
     image passwordText = ParameterizedText(xalign=0.5, yalign=0.0)
-    show text "{color=#000}[playerUsername]{/color}    {color=#7e7e7e}[playerID]{/color}":
+    python:
+        tmpChosen = " " * (36 - len(playerUsername))
+    show text "{color=#000}[playerUsername]{/color}[tmpChosen]{color=#7e7e7e}[playerID]{/color}":
+        zoom 1.5
         anchor (0, 0)
-        pos (400, 360)
-    show passwordText "{color=#000}[playerPassword]{/color}" at topleft
+        pos (300, 400)
+    show passwordText "{color=#000}[playerPassword]{/color}":
+        rotate -15
+        pos (130, 50)
     python:
         tmpPassword = renpy.input("Password:")
         tmpPassword = tmpPassword.strip()
