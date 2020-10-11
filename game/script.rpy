@@ -76,13 +76,8 @@ image CorpGuy angry = im.Crop("ch_RW_CorpGuy_angry.png", (200, 0, 420, 720))
 image hacker item = im.Scale("item_hackerItem.png", 360, 360)
 
 # Other IMG
-image HP 0 = im.Scale("boss_hp_0.png", 360, 90)
-image HP 25 = im.Scale("boss_hp_25.png", 360, 90)
-image HP 50 = im.Scale("boss_hp_50.png", 360, 90)
-image HP 75 = im.Scale("boss_hp_75.png", 360, 90)
-image HP 90 = im.Scale("boss_hp_90.png", 360, 90)
-image HP 95 = im.Scale("boss_hp_95.png", 360, 90)
-image HP 100 = im.Scale("boss_hp_100.png", 360, 90)
+image HP = im.Scale("boss_hp.png", 360, 90)
+image redBar = im.Scale("boss_hp_bar.png", 360, 90)
 image campfire:
     im.Scale("bg_GW_campfire1.png", 360, 360)
     0.15
@@ -130,6 +125,7 @@ label main_menu:
     return
 
 label start:
+    $ suppress_overlay = False
     if config.developer:
         "{cps=0}GAME START{/cps}"
     menu: 
@@ -192,13 +188,16 @@ label start:
             playerName = playerName.strip()
 
 label startBossFight:
-    $ suppress_overlay = False
+    jump scene5Start
     # TODO: music 1.1.1 boss fight music
     scene Game World Arena 01
     show Boss01 neutral at right
     show Friend01 angry at left:
         xzoom -1.0
-    show HP 100 at top with easeintop
+    show HP at top with easeintop
+    show redBar at top:
+        size (0, 90)
+        linear 1.5 size (360, 90)
     python:
         playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.lower()
         if playerCharacterSubjectPronoun == "they":
@@ -237,7 +236,8 @@ label startBossFight:
         ease 0.1 zoom 1.0 xoffset 0
     $ renpy.pause(0.15)
     play sound "audio/swordMetal6.ogg"
-    show HP 75
+    show redBar:
+        linear 0.25 size (360 * 3 / 4, 90)
     show Friend01 angry:
         ease 0.35 xalign 0.0
         ease 0.25 zoom 1.0
@@ -259,10 +259,11 @@ label startBossAttackChoice:
             show Boss01 neutral:
                 ease 0.1 zoom 0.9 xoffset 100
             $ renpy.pause(0.1)
+            show redBar:
+                linear 0.25 size (360 * 2 / 4, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
             "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
-            show HP 50
             friendA "Nice!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -280,10 +281,11 @@ label startBossAttackChoice2:
             show Boss01 neutral:
                 ease 0.1 zoom 0.9 xoffset 100
             $ renpy.pause(0.1)
+            show redBar:
+                linear 0.25 size (360 / 4, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
             "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
-            show HP 25
             friendA "Wow!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -300,8 +302,10 @@ label startBossAttackChoice3:
             play sound "audio/swordMetal6.ogg"
             show Boss01 angry:
                 ease 0.1 zoom 0.9 xoffset 100
+            $ renpy.pause (0.1)
+            show redBar:
+                linear 0.25 size (0, 90)
             "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
-            show HP 0
             friendA "What the-"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -313,7 +317,8 @@ label startBossAttackChoice3:
             jump startBossAttackChoice3
     startBoss "AAAARRRGGGGHHHHH HOW COULD THIS HAPPEN???"
     hide Boss01 with zoomout
-    hide HP 0 with easeouttop
+    hide redBar
+    hide HP with easeouttop
     # TODO: music 1.1.2 post boss fight music
     show Friend01 happy
     friendA "That was awesome!"
@@ -1145,8 +1150,11 @@ label scene5Start:
     "{i}!{/i}"
     iceBoss "rawr xD" # TODO: replace with roar SFX
     # pause for roar
-    show HP 100 at top with easeintop:
+    show HP at top with easeintop:
         size (1280, 90)
+    show redBar at top:
+        size (0, 90)
+        linear 1.0 size (1280, 90)
     "{i}Not good!{/i}"
     # TODO: music 1.1.1
     menu:
@@ -1159,14 +1167,16 @@ label scene5Start:
             pass
         "Attack 2":
             pass
-    show HP 95
+    show redBar:
+        linear 0.25 size (1280 * 95 / 100, 90)
     "[iceBoss] attacks."
     menu:
         "Attack 1":
             pass
         "Attack 2":
             pass
-    show HP 90
+    show redBar:
+        linear 0.25 size (1280 * 90 / 100, 90)
     "[iceBoss] attacks."
     """
     {i}This is really bad. I won't survive another attack like that{/i}.
@@ -1177,7 +1187,11 @@ label scene5Start:
     iceBoss "..."
     playerCharacter "?"
     "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest." # ATL the boss out
-    hide HP with easeouttop
+    image hpComb = Composite((1280, 90), (0, 0), im.Scale("boss_hp.png", 1280, 90), ((1280 - (1280 * 90 / 100)) / 2, 0), im.Scale("boss_hp_bar.png", 1280 * 90 / 100, 90))
+    show hpComb at top
+    hide redBar
+    hide HP
+    hide hpComb with easeouttop
     hide Boss02 with zoomout
     hide hacker item
     """
