@@ -218,6 +218,38 @@ label start:
             playerName = playerName.strip()
 
 label startBossFight:
+    if config.developer:
+        menu:
+            "Where to jump to?"
+            "Scene 1":
+                pass
+            "Scene 2":
+                jump startHackerSpace
+            "Scene 3":
+                jump scene3Start
+            "Scene 4":
+                jump scene4Start
+            "Scene 5":
+                jump scene5Start
+            "Scene 6":
+                jump scene6Start
+            "More":
+                menu:
+                    "Where to jump to?"
+                    "Scene 7 Orange":
+                        jump scene7Orange
+                    "Scene 7 Purple":
+                        jump scene7Purple
+                    "Scene 8":
+                        jump scene8Start
+                    "Scene 9":
+                        jump scene9Start
+                    "Scene 10":
+                        jump scene10Start
+                    "End":
+                        jump kill
+                    "Back":
+                        jump startBossFight
     # TODO: music 1.1.1 boss fight music
     scene Game World Arena 01
     show Boss01 neutral at right
@@ -894,7 +926,7 @@ label scene4Start:
             """
     scene City with pixellate
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Look familiar?{/font}"
-    "[preferredName]" "It looks like the city I live in. Although I don't thing I've been to this particular area."
+    "[preferredName]" "It looks like the city I live in. Although I don't think I've been to this particular area."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}This is the energy district. Unless you're into nuclear physics or radiation poisoning, you've probably never been here.{/font}
 
@@ -1244,7 +1276,7 @@ label scene5HalfStart:
         alpha 0.0
     show darkOverlay:
         alpha 0.0
-    friendA "MainC! You made it!"
+    friendA "[playerCharacter]! You made it!"
     friendB "We got split up after the [iceBoss] found us. You didn't find anything, did you?"
     playerCharacter "No."
     friendA """
@@ -1646,7 +1678,6 @@ label scene8Start:
     if config.developer:
         "{cps=0}END SCENE 8{/cps}"
 
-# TODO: visuals
 label scene9Start:
     # TODO: music 1.3.1
     scene Bedroom with None
@@ -1703,7 +1734,6 @@ label scene9Start:
     if config.developer:
         "{cps=0}END SCENE 9{/cps}"
 
-# TODO: visuals
 label scene10Start:
     # TODO: music 3.11.1
     scene Prison
@@ -1960,4 +1990,15 @@ label kill:
     stop music fadeout 1.0
     # TODO: music 3.12.1. peaceful ambient ending music
     call credits from _call_credits
+    scene whitedrop with fade
+    show Rice Bowl:
+        xalign 0.5
+        ypos 1.3
+        rotate 180
+        parallel:
+            easeout 3.0 ypos -0.7
+        parallel:
+            linear 3.0 rotate 660
+    $ renpy.pause(4.0)
+    scene black with fade
     $ renpy.quit()
