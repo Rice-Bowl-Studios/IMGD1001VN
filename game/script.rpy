@@ -817,7 +817,7 @@ label scene4Start:
 
     {font=Kenney Rocket.ttf}And super {i}creepy{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from you brain to the [digitalWorld] all the time?{/font}
+    {font=Kenney Rocket.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from your brain to the [digitalWorld] all the time?{/font}
     """
     "[preferredName]" "..."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
@@ -831,7 +831,7 @@ label scene4Start:
     
     {font=Kenney Rocket.ttf}And believe it or not, me and [corporation] actually go way back.{/font}
 
-    {font=Kenney Rocket.ttf}My relationship with them is...{w=0.5} complicated, to say the lease. I hack them...{w=0.5} they catch me...{/font}
+    {font=Kenney Rocket.ttf}My relationship with them is...{w=0.5} complicated, to say the least. I hack them...{w=0.5} they catch me...{/font}
     
     {font=Kenney Rocket.ttf}I disappear for a while...{w=0.5} and then I come back and do it again!{/font}
 
@@ -1458,7 +1458,7 @@ label scene6PurpleCont:
     
     {font=Kenney Rocket.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-5}Sorry, but this last part is single-player only.{/size}{/font}
 
-    {font=Kenney Rocket.ttf}Alright? You'd better hurry. Good Lick [preferredName]!{/font}
+    {font=Kenney Rocket.ttf}Alright? You'd better hurry. Good luck [preferredName]!{/font}
 
     {font=Kenney Rocket.ttf}I'll be waiting for you on the other side.{/font}
     """
