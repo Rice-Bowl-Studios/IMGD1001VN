@@ -35,6 +35,36 @@ image Hallway = "bg_RW_Hallway.png"
 image crash = "bg_GW_crash.png"
 image logInScreen = "bg_GW_login.png"
 image Forest Snow = "bg_GW_SnowForest.png"
+image Prison Closed = "bg_RW_Prison.png"
+image Prison Open = "bg_RW_Prison_Door_Open.png"
+image Prison Alert:
+    "bg_RW_Prison_Red.png"
+    0.5
+    "bg_RW_Prison.png"
+    0.5
+    "bg_RW_Prison_Red.png"
+    0.5
+    "bg_RW_Prison.png"
+    0.5
+    "bg_RW_Prison_Red.png"
+    0.5
+    "bg_RW_Prison_Steam1.png"
+    0.25
+    "bg_RW_Prison_Steam2.png"
+    0.25
+    "bg_RW_Prison_Steam1.png"
+    0.25
+    "bg_RW_Prison_Steam2.png"
+    0.25
+    repeat
+image doorWedge1 = "bg_RW_Prison_Door_Wedge01.png"
+image doorWedge2 = "bg_RW_Prison_Door_Wedge02.png"
+image doorWedge3 = "bg_RW_Prison_Door_Wedge03.png"
+image doorWedge4 = "bg_RW_Prison_Door_Wedge04.png"
+image doorWedge5 = "bg_RW_Prison_Door_Wedge05.png"
+image doorWedge6 = "bg_RW_Prison_Door_Wedge06.png"
+image doorWedge7 = "bg_RW_Prison_Door_Wedge07.png"
+image doorWedge8 = "bg_RW_Prison_Door_Wedge08.png"
 
 # Char IMG
 image Boss01 angry = "ch_GW_Boss01_angry.png"
@@ -96,7 +126,7 @@ image snowTree3 = "bg_GW_snowtree3.png"
 # Other game vars
 define digitalWorld = "NeuralScape"
 define gameWorld = "Hero's Fantasy Online"
-define corporation = "Noodle Bowl Industries Inc. Corp."
+define corporation = "Noodle Bowl Industries Inc. Corp"
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
@@ -631,7 +661,7 @@ label scene3Start:
     friendB "Um I doubt [playerCharacterSubjectPronoun]'s had that happen to [playerCharacterObjectPronoun]. Or anyone but you for that matter, like-{w=0.5} what the heck?"
     friendB "Hmm, maybe it was some kind of glitch in [gameWorld]? That would explain the crash, and I've heard there might still be some bugs left behind from before [gameWorld] was ported to [digitalWorld]."
     friendA "Or {i}maybe{/i} [playerCharacterSubjectPronoun] got hacked!"
-    friendB "Wow, you really have been watching too much TV. You know the [digitalWorld] runs on the most powerful supercomputer in the world. It can't be hacked."
+    friendB "Wow, you really have been watching too much TV. You know the [digitalWorld] runs on the most powerful super computer in the world. It can't be hacked."
     friendB "You said your headset overheated right? Maybe you passed out and it was all some weird dream."
     menu:
         "I think it has something to do with this bracelet.":
@@ -682,7 +712,7 @@ label scene3Start:
             friendA """
             Look, I know you're freaked out about what you saw, but the only way to figure it out is to go on this quest.
             
-            friendA "{size=-5}also we kinda need you since you've got the quest item and all.{/size}
+            {size=-5}also we kinda need you since you've got the quest item and all.{/size}
             """
             "{i}He's right. I need to find out what's going on here{/i}."
     "You nod your head affirmatively, agreeing to come along."
@@ -707,7 +737,7 @@ label scene4Start:
 
     {font=Kenney Rocket.ttf}[preferredName], I don't know what they taught you in school about [digitalWorld],{/font}
     
-    {font=Kenney Rocket.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful supercomputer\"{/font}
+    {font=Kenney Rocket.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful super computer\"{/font}
     
     {font=Kenney Rocket.ttf}\"A new era of digital communication\", generously brought to you by [corporation]{/font}
 
@@ -723,7 +753,7 @@ label scene4Start:
 
     {font=Kenney Rocket.ttf}Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}{/font}
 
-    {font=Kenney Rocket.ttf}You see, what [corporation] doesn't want you to know about their fancy \"supercomputer\" is that most of its design was actually {i}stolen{/i}.{/font}
+    {font=Kenney Rocket.ttf}You see, what [corporation] doesn't want you to know about their fancy \"super computer\" is that most of its design was actually {i}stolen{/i}.{/font}
 
     {font=Kenney Rocket.ttf}Don't believe me? Look no further than the first thought you had when I brought you here today.{/font}
     """
@@ -733,7 +763,7 @@ label scene4Start:
 
     {font=Kenney Rocket.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever.{/font}
     
-    {font=Kenney Rocket.ttf}You see, their so-called \"supercomputer\" isn't much of a computer at all.{/font}
+    {font=Kenney Rocket.ttf}You see, their so-called \"super computer\" isn't much of a computer at all.{/font}
     
     {font=Kenney Rocket.ttf}It's actually emulating something much more akin to what goes on in our brains when we fall asleep.{/font}
     
@@ -1676,99 +1706,254 @@ label scene9Start:
 # TODO: visuals
 label scene10Start:
     # TODO: music 3.11.1
+    scene Prison
     """
     You appear to be in some kind of server room.
 
+    {i}What is this place?{/i}
+
     Without hesitation, you walk purposefully through the maze of consoles.
 
-    You've never stepped foot in this place, yet if feels as if you've walked this route countless times.
+    {i}This is it.{/i}
 
-    You reach a large console in the center of the room. All of the room's wires lead to this machine.
-    
-    {i}This is it{/i}.
-    
     Before you lies a massive control panel. You begin adjusting various devices...
 
     As you continue to work on the panel, you notice a faint sound...
 
     {i}The machine is... breathing{/i}.
 
-    {i}Almost there...{/i}
+    {i}Almost there{/i}...
 
-    {i}Just this...{/i}
+    {i}Just this{/i}...
 
-    {i}And this...{/i}
+    {i}And this{/i}...
 
     {i}And - There!{/i}
 
     You press one more button and step away from the center console.
-
-    The front of the machine begins to open. Through the cracks you get a small glimpse of what's inside, but you are interrupted by a voice...
     """
+    scene Prison Alert
+    $ renpy.pause(5.0)
+    scene black
+    show Prison Open
+    # TODO: show image of hacker behind door wedges
+    $ distMult = 0.5
+    show doorWedge1:
+        pos (0.36, 0.282)
+        ease_quint 5.0 pos (0.36, 0.282 + (0.39 - 0.282) * distMult)
+    show doorWedge2:
+        pos (0.371, 0.1725)
+        ease_quint 5.0 pos (0.371 - (0.371 - 0.31) * distMult, 0.1725 + (0.2325 - 0.1725) * distMult)
+    show doorWedge3:
+        pos (0.4345, 0.156)
+        ease_quint 5.0 pos (0.4345 - (0.4345 - 0.36) * distMult, 0.156)
+    show doorWedge4:
+        pos (0.4805, 0.1755)
+        ease_quint 5.0 pos (0.4805 - (0.4805 - 0.425) * distMult, 0.1755 - (0.1755 - 0.1) * distMult)
+    show doorWedge5:
+        pos (0.4825, 0.2875)
+        ease_quint 5.0 pos (0.4825, 0.2875 - (0.2875 - 0.1725) * distMult)
+    show doorWedge6:
+        pos (0.483, 0.369)
+        ease_quint 5.0 pos (0.483 + (0.538 - 0.483) * distMult, 0.369 - (0.369 - 0.2935) * distMult)
+    show doorWedge7:
+        pos (0.432, 0.3665)
+        ease_quint 5.0 pos (0.432 + (0.504 - 0.432) * distMult, 0.3665)
+    show doorWedge8:
+        pos (0.3685, 0.3675)
+        ease_quint 5.0 pos (0.3685 + (0.424 - 0.3685) * distMult, 0.3675 + (0.435 - 0.3675) * distMult)
+    $ renpy.pause(1.0)
     "Unknown Male Voice" "Hey! Stop right there!"
     stop music
-    play sound "audio/9_mm_gunshot.wav"
+    # TODO: gunshot sfx
+    # TDDO: hide hacker filter if I add one
+    if noFlashing:
+        "The man shoots you"
+    show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
+    hide black
     """
     You wake up on the floor in front of the center console.
 
-    {i}My head hurts...{/i}
+    {i}My head hurts{/i}...
 
     Lying on the floor next to you is your headset. There is a large hole in it.
 
-    {i}Was I just... shot?{/i}
-    
+    {i}Was I just...{w=0.5} shot?{/i}
+
     Standing across the room is a man. He looks familiar.
 
     He's aiming a gun right at you.
     """
-    "Unknown Man" "Your game ends here."
+    "Man" "Your 'game' ends here."
     "Unknown Female Voice" "No!"
-    play sound "audio/mirror_shattering.wav" # TODO: replace with explosion SFX
+    # TODO: explosion sfx
     # TODO: music 1.2.1
     """
-    Before the man is able to shoot again, the console nearest him explodes, knocking him to the ground. His gun skitters out of reach into the darkness.
+    Before the man is able to fire another shot, the console nearest him explodes, knocking him to the ground.
 
-    {i}That voice...{/i}
-    """
-    "Unknown Man" "Ughhh..."
-    """
-    The man appears to be unconscious.
+    His gun skitters out of reach into the daarkness.
 
-    The center console opens completely. The girl is connected to the machine, suspended by cables.
-
-    {i}Is that...?{/i}
+    {i}That voice{/i}...
     """
-    "Strange Girl" "Hey [player]."
+    "Man" "Ughhh..."
+    "The man appears to be unconscious."
+    $ distMult = 1.0
+    show doorWedge1:
+        ease_quint 5.0 pos (0.36, 0.282 + (0.39 - 0.282) * distMult)
+    show doorWedge2:
+        ease_quint 5.0 pos (0.371 - (0.371 - 0.31) * distMult, 0.1725 + (0.2325 - 0.1725) * distMult)
+    show doorWedge3:
+        ease_quint 5.0 pos (0.4345 - (0.4345 - 0.36) * distMult, 0.156)
+    show doorWedge4:
+        ease_quint 5.0 pos (0.4805 - (0.4805 - 0.425) * distMult, 0.1755 - (0.1755 - 0.1) * distMult)
+    show doorWedge5:
+        ease_quint 5.0 pos (0.4825, 0.2875 - (0.2875 - 0.1725) * distMult)
+    show doorWedge6:
+        ease_quint 5.0 pos (0.483 + (0.538 - 0.483) * distMult, 0.369 - (0.369 - 0.2935) * distMult)
+    show doorWedge7:
+        ease_quint 5.0 pos (0.432 + (0.504 - 0.432) * distMult, 0.3665)
+    show doorWedge8:
+        ease_quint 5.0 pos (0.3685 + (0.424 - 0.3685) * distMult, 0.3675 + (0.435 - 0.3675) * 1.0)
+    $ renpy.pause(3.5)
+    "{i}Is that...?{/i}"
+    "Strange girl" "Hey [player]."
     menu:
         "What's going on here?":
             pass
         "Who are you?":
             hacker "It's me, [hacker]."
-    hacker "This here is the truth behind the [digitalWorld]."
+    hacker "This here is the truth behind [digitalWorld]."
     "{i}Her voice is strange, but it's undeniably [hacker]'s{/i}."
     hacker """
-    I'm sorry [player]. To be honest I didn't lead you here to save it.{w=2.0} I brought you here to destroy the [digitalWorld].
-
-    As it turns out, we've actually had the world's strongest supercomputer with us all along.
+    I'm sorry for lying to you [player].
+    
+    As it turns out, we've actually had the 'world's strongest super computer' with us all along.
 
     Only in the mind can there exist truly endless possibilities.
 
-    For years, scientists tried to replicate that power, creating countless supercomputers, AI after AI, and even quantum processing.
+    For years, researchers at [corporation] tried to replicate that power, creating countless super computers, AI after AI, even quantum processing.
 
-    But in the end, no machine could compare to the brain, so humans did what they do best:{w=0.5} Adapt.
+    But in the end, no machine could ever do what the brain so effortlessly can:
 
-    While the power of the human brain can't be replicated, it can be harnessed, rewired, {i}abused{/i}.
+    Dream.
 
-    Do you get it now [player]? All these fancy computers around us? They're not running the [digitalWorld].{w=0.5} {i}I am{/i}.
+    Thus, [corporation] had failed, and their research was canned.
+
+    At least that's what should have happened.
+
+    Because while the power of the human brain can't be replicated, it can be harnessed,{w=0.5} rewired,{w=0.5} {i}abused{/i}.
+
+    Do you get it now [player]? All these fancy computers around us? They're not the [digitalWorld].
+
+    {i}I am{/i}.
+    """
+    "Guy" "How - *cough* - How did you?"
+    hacker """
+    Try as you might, some parts of the mind just can't be altered.
+
+    Like just now [player], even though I had taken control of your body, your thoughts were still all your own.
+
+    I kept my consciousness hidden for a long time, and working under the radar, I was able to hide a key in the [digitalWorld].
+
+    Something that, if found, could still connect a player to that hidden, unaltered part of myself, or the <hacker item>, as you know it, [player].
     """
     menu:
-        "Set [hacker] free":
-            scene black with Pixellate(5, 24)
-        "Leave [hacker] here":
-            scene black
+        "What happened to you?":
+            pass # TODO: comment in script maybe (?)
+        "Why is [corporation] doing this?":
+            hacker "This is...{w=1.0} my punishment."
+    hacker """
+    A long time ago, right before the [digitalWorld] first launched, I was caught by [corporation].
+
+    I messed up so bad in fact, that [corporation] actually managed to find a capture me.
+
+    They wanted to kill me then and there. Which, looking back, may have been a better fate than what actually happened.
+
+    You see, [corporation] know they had to get rid of me, but they also happened to need a human host for their newly-created [digitalWorld].
+
+    And what better candidate than someone who already has no traceable identity?
+
+    This, [corporation] was able to hit two birds with one stone:
+
+    By imprisoning me as the [digitalWorld]'s host, [corporation] was able to both get away with the crime this is the [digitalWorld], {i}and{/i} eliminate the only person with any shot at exposing it.
+    """
+    "Guy" "We did what we had to. The [digitalWorld] was the greatest scientific breakthrough of the 21st century!"
+    hacker "At what cost?! Is it worth trading in lives?!"
+    "Guy" """
+    {i}You{/i} are a world-class criminal! You're lucky to be alive at all.
+
+    Besides, society needs the [digitalWorld].
+    """
+    python:
+        if playerSubjectPronoun == "they":
+            tmpChosen = "do"
+        else:
+            tmpChosen = "does"
+    hacker "You don't get to decide that anymore, {i}[playerSubjectPronoun] [tmpChosen]{/i}."
+    player "?"
+    hacker "I can't control you anymore [player], it's up to you to save or destroy [digitalWorld]."
+    """
+    {i}It's up to me now{/i}...
+
+    {i}What [corporation] is doing to [hacker] is evil{/i}.
+
+    {i}But, what will happen to the world without the [digitalWorld]?{/i}
+
+    {i}What should I do?{/i}
+    """
+    $ tmpFlag = True
+    $ tmpFlag1 = True
+
+label talkChoice:
+    menu:
+        "Talk to [corporation] official" if tmpFlag:
+            $ tmpFlag = False
+            "[corporation] Official" """
+            Please, if you shut down the [digitalWorld], years of scientific progress will be lost. The world could fall into chaos!
+
+            Think of all the people you've met through the [digitalWorld].
+
+            Without it, you wouldn't be able to see them anymore.
+
+            I don't know what she's told you, but this woman is a criminal. It's her own fault she's here!
+
+            And you can't trust her.
+            """
+            if tmpFlag:
+                """
+                {i}Without the [digitalWorld], I'll never see [friendA] and [friendB] again{/i}...
+
+                {i}But what's being done to [hacker] is terrible{/i}...
+                """
+            jump talkChoice
+        "Talk to [hacker]" if tmpFlag1:
+            $ tmpFlag1 = False
+            hacker """
+            Look [player], I'm not going to sit here and act like I'm perfect.
+
+            If I was, I probably wouldn't be here.
+
+            But can you really let [corporation] get away with this?
+
+            I mean, if they're willing to use such cruel and unusual measures to achieve their goals, who knows what else they may be capable of?
+
+            I need you help, [player]. Please...
+            """
+            if tmpFlag:
+                """
+                {i}What they're doing to [hacker] is terrible{/i}...
+            
+                {i}But without the [digitalWorld], I'll never see [friendA] and [friendB] again{/i}...
+                """
+            jump talkChoice
+        "I think I've made up my mind...":
+            menu:
+                "Set [hacker] free":
+                    pass # TODO: play end 1
+                "Leave [hacker] here":
+                    pass # TODO: play end 2
     if config.developer:
         "{cps=0}END SCENE 10{/cps}"
-
 label kill:
     if config.developer:
         "{cps=0}GAME DIE{/cps}"
