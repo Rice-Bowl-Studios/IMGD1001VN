@@ -262,7 +262,7 @@ label startBossFight:
                         jump kill
                     "Back":
                         jump startBossFight
-    # TODO: music 1.1.1 boss fight music
+    play music "audio/Music_1.1.1.mp3"
     scene Game World Arena 01
     show Boss01 neutral at right
     show Friend01 angry at left:
@@ -392,7 +392,7 @@ label startBossAttackChoice3:
     hide Boss01 with zoomout
     hide redBar
     hide HP with easeouttop
-    # TODO: music 1.1.2 post boss fight music
+    play music "audio/Music_1.1.2.mp3"
     show Friend01 happy
     friendA "That was awesome!"
     menu:
@@ -426,7 +426,7 @@ label startBossAttackChoice3:
     hide crash with zoomout
 
 label startRealWorld:
-    # TODO: music 1.1.3 hanging out in room
+    play music "audio/Music_1.1.3.mp3"
     scene Bedroom with fade
     """
     {i}[gameWorld] seems to have crashed.{/i}
@@ -670,7 +670,7 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label scene3Start:
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3"
     scene Forest
     show Friend01 neutral at right
     show Friend02 angry at left
@@ -725,7 +725,7 @@ label scene3Start:
     hide hacker item with zoomout
     friendA "I didn't mean it that way. I just figured... well you know, if there really is some crazy quest that involves whatever the heck just happened to [playerCharacter], you would have heard about it."
     friendB "Yeah, I'm pretty shocked myself."
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3"
     friendA "Well, I say we go see what this mystery quest is all about! I bet we'll find some rare loot along the way too. {size=-5}maybe even some stuff [friendB] doesn't have{/size}"
     friendB "Are you serious? You can't just charge headfirst into a quest you know nothing about. You're not even level 50 yet."
     friendA "You're right..."
@@ -1252,7 +1252,7 @@ label scene5Start:
         size (0, 90)
         linear 1.0 size (1280, 90)
     "{i}Not good!{/i}"
-    # TODO: music 1.1.1
+    play music "audio/Music_1.1.1.mp3"
     menu:
         "Fight":
             pass
@@ -1305,7 +1305,7 @@ label scene5Start:
         "END SCENE 5"
 
 label scene5HalfStart:
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3"
     scene Forest
     show Friend01 neutral at right
     show Friend02 angry at left
