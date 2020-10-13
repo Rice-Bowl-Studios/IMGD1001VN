@@ -1099,7 +1099,7 @@ label scene5Start:
     # I hate myself for doing this, but it's kind of funny
     iceBoss "rawr uwu" # TODO: replace with roar SFX
     friendB "New plan. Everybody run!"
-    scene Forest Snow with fade
+    scene Forest Snow
     show snowTree1:
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
@@ -1532,15 +1532,15 @@ label scene7Purple:
     $ treePos = generateTreePos()
     scene Forest Snow with fade
     show snowTree1:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     $ treePos = generateTreePos(4)
@@ -1556,7 +1556,7 @@ label scene7Purple:
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     $ treePos = generateTreePos(5)
@@ -1575,7 +1575,7 @@ label scene7Purple:
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     show snowTree5:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
     $ treePos = generateTreePos(6)
@@ -1598,7 +1598,7 @@ label scene7Purple:
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
     show snowTree6:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[5][0]
         pos (treePos[5][1][0], treePos[5][1][1])
     hide hacker item
@@ -1607,27 +1607,27 @@ label scene7Purple:
     image snowTree6 = "bg_GW_snowtree3.png"
     "{i}I guess I should follow it{/i}."
     show snowTree1:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     show snowTree5:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
     show snowTree6:
-        anchor (0.5, 1.0)
+        #anchor (0.5, 1.0)
         zoom treePos[5][0]
         pos (treePos[5][1][0], treePos[5][1][1])
     """
