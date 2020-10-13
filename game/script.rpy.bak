@@ -1907,7 +1907,7 @@ label scene10Start:
     "Unknown Male Voice" "Hey! Stop right there!"
     stop music
     # TODO: gunshot sfx
-    # TODO: hide hacker filter if I add one
+    # TDDO: hide hacker filter if I add one
     if noFlashing:
         "The man shoots you"
     show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
@@ -2243,7 +2243,7 @@ label kill:
         "{cps=0}GAME DIE{/cps}"
     stop music fadeout 1.0
     # TODO: music 3.12.1. peaceful ambient ending music
-    call credits from _call_credits
+    call credits
     scene whitedrop with fade
     show Rice Bowl:
         xalign 0.5

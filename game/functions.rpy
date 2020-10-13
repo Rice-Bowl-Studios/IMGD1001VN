@@ -3,7 +3,7 @@ init python:
 
     def generateTreePos(nTree=3, minScale=0.5, maxScale=0.7):
         out = []
-        partChoices = range(3)
+        partChoices = range(nTree)
         random.shuffle(partChoices)
         for x in range(nTree):
             # TODO: maybe make scale dependent on y if I have time
@@ -137,5 +137,5 @@ label credits:
     $ credits_speed = 30
     scene black with dissolve
     show credit at Move((0.5, 7.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
-    with Pause(credits_speed + 2)
+    with Pause(credits_speed + 2, hard=True)
     return
