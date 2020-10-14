@@ -128,14 +128,53 @@ init python:
     creditText += "\n{size=48}Engine\n{size=64}" + renpy.version()
 
 screen tear(number=10, offtimeMult=1, ontimeMult=1, offsetMin=0, offsetMax=50, srf=None):
-    zorder 150
-    add Tear(number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf) size (1280,720)
-    on "show" action Function(hide_windows_enabled, enabled=False)
-    on "hide" action Function(hide_windows_enabled, enabled=True)
+    if not noFlashing:
+        zorder 150
+        add Tear(number, offtimeMult, ontimeMult, offsetMin, offsetMax, srf) size (1280,720)
+        on "show" action Function(hide_windows_enabled, enabled=False)
+        on "hide" action Function(hide_windows_enabled, enabled=True)
 
 label credits:
     $ credits_speed = 30
     scene black with dissolve
     show credit at Move((0.5, 7.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
     with Pause(credits_speed + 2, hard=True)
+    return
+
+label jumper:
+    menu:
+        "Where to jump to?"
+        "Scene 1":
+            pass
+        "Scene 2":
+            jump startHackerSpace
+        "Scene 3":
+            jump scene3Start
+        "Scene 4":
+            jump scene4Start
+        "Scene 5":
+            jump scene5Start
+        "Scene 6":
+            jump scene6Start
+        "Scene 7 Orange":
+            jump scene7Orange
+        "More":
+            menu:
+                "Where to jump to?"
+                "Scene 7 Purple":
+                    jump scene7Purple
+                "Scene 8":
+                    jump scene8Start
+                "Scene 9":
+                    jump scene9Start
+                "Scene 10":
+                    jump scene10Start
+                "End 1":
+                    jump end1
+                "End 2":
+                    jump end2
+                "Kill":
+                    jump kill
+                "Back":
+                    jump startBossFight
     return
