@@ -227,7 +227,7 @@ label start:
 
 label startBossFight:
     if config.developer:
-        call jumper
+        call jumper from _call_jumper
     play music "audio/Music_1.1.1.mp3" fadein 1.5
     scene Game World Arena 01
     show Boss01 neutral at right
@@ -1985,7 +1985,7 @@ label scene10Start:
         easein 1.0 xpos 0.85
     "Unknown Male Voice" "Hey! Stop right there!"
     stop music fadeout 1.0
-    # TODO: gunshot sfx
+    play sound "audio/9_mm_gunshot.wav"
     # TODO: hide hacker filter if I add one
     if noFlashing:
         "The man shoots you"

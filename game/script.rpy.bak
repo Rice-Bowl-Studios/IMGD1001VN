@@ -227,42 +227,8 @@ label start:
 
 label startBossFight:
     if config.developer:
-        menu:
-            "Where to jump to?"
-            "Scene 1":
-                pass
-            "Scene 2":
-                jump startHackerSpace
-            "Scene 3":
-                jump scene3Start
-            "Scene 4":
-                jump scene4Start
-            "Scene 5":
-                jump scene5Start
-            "Scene 6":
-                jump scene6Start
-            "Scene 7 Orange":
-                jump scene7Orange
-            "More":
-                menu:
-                    "Where to jump to?"
-                    "Scene 7 Purple":
-                        jump scene7Purple
-                    "Scene 8":
-                        jump scene8Start
-                    "Scene 9":
-                        jump scene9Start
-                    "Scene 10":
-                        jump scene10Start
-                    "End 1":
-                        jump end1
-                    "End 2":
-                        jump end2
-                    "Kill":
-                        jump kill
-                    "Back":
-                        jump startBossFight
-    # TODO: music 1.1.1 boss fight music
+        call jumper
+    play music "audio/Music_1.1.1.mp3" fadein 1.5
     scene Game World Arena 01
     show Boss01 neutral at right
     show Friend01 angry at left:
@@ -374,7 +340,20 @@ label startBossAttackChoice3:
         "Attack":
             play sound "audio/swordMetal6.ogg"
             show Boss01 angry:
-                ease 0.1 zoom 0.9 xoffset 100
+                parallel:
+                    ease 0.1 zoom 0.9 xoffset 100
+                parallel:
+                    parallel:
+                        linear 0.1 xoffset -13
+                        linear 0.1 xoffset 24
+                        linear 0.1 xoffset -24
+                        linear 0.1 xoffset 13
+                    parallel:
+                        linear 0.1 yoffset -6
+                        linear 0.1 yoffset 10
+                        linear 0.1 yoffset -10
+                        linear 0.1 yoffset 6
+                    repeat
             $ renpy.pause (0.1)
             show redBar:
                 linear 0.25 size (0, 90)
@@ -392,7 +371,7 @@ label startBossAttackChoice3:
     hide Boss01 with zoomout
     hide redBar
     hide HP with easeouttop
-    # TODO: music 1.1.2 post boss fight music
+    play music "audio/Music_1.1.2.mp3" fadeout 1.0 fadein 1.0
     show Friend01 happy
     friendA "That was awesome!"
     menu:
@@ -426,7 +405,7 @@ label startBossAttackChoice3:
     hide crash with zoomout
 
 label startRealWorld:
-    # TODO: music 1.1.3 hanging out in room
+    play music "audio/Music_1.1.3.mp3" fadeout 1.0 fadein 1.0
     scene Bedroom with fade
     """
     {i}[gameWorld] seems to have crashed.{/i}
@@ -440,6 +419,7 @@ label startRealWorld:
     $ renpy.music.set_pause(True)
     play sound "<to 2.5>audio/phone_ringing.wav"
     $ renpy.pause(2)
+    stop sound fadeout 0.5
     $ renpy.music.set_pause(False)
     player "It's [friendB]."
     friendB "Hey [player] where are you two? I thought you and [friendA] were gonna come over after you took down [startBoss]."
@@ -452,7 +432,7 @@ label startRealWorld:
     player "I'd better try logging back in."
     "You put your headset back on."
     stop music fadeout 1.0
-    scene logInScreen
+    scene logInScreen with pixellate
     image passwordHintText = ParameterizedText(xalign=0.5, yalign=0.5)
     image passwordText = ParameterizedText()
     image playerIdText = ParameterizedText(xalign=1.0)
@@ -488,7 +468,7 @@ label startRealWorld:
     $ renpy.pause(0.5)
     scene black with fade
     "..."
-    # TODO: music 1.1.4 trying to log back on
+    play music "audio/Music_1.1.4.mp3" fadeout 1.0 fadein 1.0
     """
     {i}???{/i}
     
@@ -511,7 +491,7 @@ label startRealWorld:
     stop music fadeout 1.0
 
 label startHackerSpace:
-    # TODO: music 1.2.1 hacker space
+    play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     scene Hacker Space with fade
     "Where am I?"
     show GWHacker at center with easeinbottom
@@ -545,6 +525,9 @@ label startHackerSpace:
             pass
         "How did you know that?" if tmpChosen != 2:
             pass
+    show screen tear
+    $ renpy.pause(0.25)
+    hide screen tear
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Okay, I think that's enough questioning for today.{/font}"
     "You try to speak, but nothing comes out. It feels as though you are underwater."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
@@ -624,7 +607,7 @@ label afterHackerSpaceNameChoice:
     
     {font=Kenney Rocket.ttf}?{/font}
     
-    {font=Kenney Rocket.ttf}Nothing?{w=1.0} Seriously? {size=-5}Wow, have I really fallen off that hard?{/size}{/font}
+    {font=Kenney Rocket.ttf}Nothing?{w=0.25} Seriously?{w=0.5} {size=-5}Wow, have I really fallen off that hard?{/size}{/font}
     """
     $ hackerName = "Medusa"
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
@@ -632,7 +615,7 @@ label afterHackerSpaceNameChoice:
     
     {font=Kenney Rocket.ttf}So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game.{/font}
     
-    {font=Kenney Rocket.ttf}What was it called again?{w=2.0} You know, the one you've been playing {i}literally{/i} non-stop. {size=-5}Like seriously don't you have a job or something?{/size}{/font}
+    {font=Kenney Rocket.ttf}What was it called again?{w=1.0} You know, the one you've been playing {i}literally{/i} non-stop.{w=0.5} {size=-5}Like seriously don't you have a job or something?{/size}{/font}
     
     {font=Kenney Rocket.ttf}Anyways, I've got a game of my own going on{w=0.5} -so to speak-, and it's {i}really{/i} important{/font}
     
@@ -650,6 +633,9 @@ label afterHackerSpaceNameChoice:
         "ok...?":
             $ tmpFlag = False
         "Hell no!":
+            show screen tear
+            $ renpy.pause(0.25)
+            hide screen tear
             $ tmpFlag = True
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?{/font}"
     if tmpFlag:
@@ -670,7 +656,7 @@ label afterHackerSpaceNameChoice:
     "{i}What was that?{/i}"
 
 label scene3Start:
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3" fadeout 1.0 fadein 1.0
     scene Forest
     show Friend01 neutral at right
     show Friend02 angry at left
@@ -698,7 +684,7 @@ label scene3Start:
     show Friend02 angry at left with fade
     friendA "..."
     friendB "..."
-    # TODO: music 1.3.1
+    play music "audio/Music_1.3.1.mp3" fadeout 1.0 fadein 1.0
     show Friend01 neutral
     show Friend02 neutral
     friendA "{i}Seriously?{/i}"
@@ -716,25 +702,25 @@ label scene3Start:
             pass
         "The person put this thing on my wrist":
             pass
-    friendA "Oh yeah, I forgot about that; after [playerCharacter] killed [startBoss], [playerCharacterSubjectPronoun] picked up that weird item. [friendB], have you ever seen anything like it?"
     show hacker item at truecenter with zoomin
-    friendB "No. It looks just like any normal accessory, but it has no name and {w=0.5} wait, that's strange."
+    friendA "Oh yeah, I forgot about that. After [playerCharacter] killed [startBoss], [playerCharacterSubjectPronoun] picked up that weird item. [friendB], have you ever seen anything like it?"
+    friendB "No. It looks just like any normal accessory, but it has no name and...{w=0.25} Wait. That's strange."
     friendB "It's identified as a quest item?"
     friendA "If it's a quest item, then it must be important! You really haven't seen it before [friendB]? I thought you knew everything there is to know about [gameWorld]."
     friendB "Well... not everything. I do have a life you know."
     hide hacker item with zoomout
     friendA "I didn't mean it that way. I just figured... well you know, if there really is some crazy quest that involves whatever the heck just happened to [playerCharacter], you would have heard about it."
     friendB "Yeah, I'm pretty shocked myself."
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3" fadeout 1.0 fadein 1.0
     friendA "Well, I say we go see what this mystery quest is all about! I bet we'll find some rare loot along the way too. {size=-5}maybe even some stuff [friendB] doesn't have{/size}"
-    friendB "Are you serious? You can't just charge headfirst into a quest you know nothing about. You're not even level 50 yet."
+    friendB "Are you serious? You can't just charge head first into a quest you know nothing about. You're not even level 50 yet."
     friendA "You're right..."
     friendA "That's why you're coming with me!"
     friendB "I would be lying if I said I wasn't a little interested. But just so we're clear, I am {i}not{/i} here to babysit you two."
     friendA "Yes!"
     friendA "How about you [playerCharacter]?"
     playerCharacter "..."
-    $ renpy.music.set_pause(True)
+    stop music fadeout 1.0
     $ tmpGlitchText = glitchText(16)
     """
     You feel the [tmpGlitchText] pulling at your arm.
@@ -743,8 +729,7 @@ label scene3Start:
     
     Your hand raises into a thumbs-up position.
     """
-    $ renpy.music.set_pause(False)
-    play music "audio/Mission Plausible.ogg" # TODO: remove
+    play music "audio/Music_1.1.2.mp3" fadein 1.0
     $ playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.lower()
     friendA "Great! It's the perfect team: Me as our fearless leader, [friendB] as our game expert/bodyguard, and [playerCharacter] and [playerCharacterDepPossesivePronoun] weird bracelet thing as our guide through the unknown."
     friendA "Together, we'll be unstoppable!"
@@ -774,22 +759,22 @@ label scene3Start:
     $ renpy.pause(2.0)
 
 label scene4Start:
-    # TODO: music 1.2.1
+    play music "audio/Music_1.2.1.mp3" fadein 1.0
     scene Hacker Space with fade
     "Am I... dreaming?"
     show GWHacker at right with easeinright
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Sort of. Depends on where you draw the line between dream and reality.{/font}"
     "What are you talking about?"
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Do you want the short answer?{w=0.5} Or the long technical one?{w=0.5} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all{/size}{/font}
+    {font=Kenney Rocket.ttf}Do you want the short answer?{w=0.5} Or the long technical one?{w=0.5} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all.{/size}{/font}
 
     {font=Kenney Rocket.ttf}[preferredName], I don't know what they taught you in school about [digitalWorld],{/font}
     
-    {font=Kenney Rocket.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful super computer\"{/font}
+    {font=Kenney Rocket.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful super computer\",{/font}
     
-    {font=Kenney Rocket.ttf}\"A new era of digital communication\", generously brought to you by [corporation]{/font}
+    {font=Kenney Rocket.ttf}\"A new era of digital communication\", generously brought to you by [corporation].{/font}
 
-    {font=Kenney Rocket.ttf}Which honestly isn't far off in some aspects{/font}
+    {font=Kenney Rocket.ttf}Which honestly isn't far off in some aspects.{/font}
 
     {font=Kenney Rocket.ttf}{i}But my god, there is so much more to it than that.{/i}{/font}
 
@@ -945,6 +930,8 @@ label scene4Start:
         zoom 0.5
         anchor (0.5, 1.0)
         pos (0.35, 0.99)
+        alpha 0.0
+        linear 0.25 alpha 1.0
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Look familiar?{/font}"
     "[preferredName]" "It looks like the city I live in. Although I don't think I've been to this particular area."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
@@ -969,7 +956,9 @@ label scene4Start:
             
             {font=Kenney Rocket.ttf}But to answer your question, I'm here to keep an eye on our sophisticated friend here.{/font}
 
-            {font=Kenney Rocket.ttf}From what I've gathered, this particular individual is without a doubt part of [corporation]. And from the looks of his fancy getup, I'd say he's a pretty important one at that.{/font}
+            {font=Kenney Rocket.ttf}From what I've gathered, this particular individual is without a doubt part of [corporation].{/font}
+            
+            {font=Kenney Rocket.ttf}And from the looks of his fancy getup, I'd say he's a pretty important one at that.{/font}
             """
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}But that alone doesn't explain the data coming from his headset. There's something seriously off about it.{/font}
@@ -1009,7 +998,7 @@ label scene4Start:
     """
 
 label scene5Start:
-    # TODO:  music 2.5.1
+    play music "audio/Music_2.5.1.mp3" fadein 2.0
     scene Forest Snow with fade
     show Friend01 happy at right
     show Friend02 happy at left
@@ -1110,67 +1099,97 @@ label scene5Start:
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     $ treePos = generateTreePos()
-    show black:
-        alpha 0.0
-        easein 0.25 alpha 1.0
-        easeout 0.25 alpha 0.0
-    $ renpy.pause(0.5)
-    hide black
     """
     {i}I think I'm safe here, but now I'm totally lost.{/i}
 
     {i}I need to find [friendA] and [friendB]{/i}
     """
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     """
     {i}...{/i}
     
     {i}Am I going the right way?{/i}
     """
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     "{i}This forest feels endless{/i}."
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     "{i}Have I been this way before?{/i}"
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     "{i}I think I'm going in circles{/i}."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I think I'm going in circles.{/font}"
-    # TODO: music 1.2.1
+    play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     show Hallway:
         alpha 0.0
         zoom 0.5
@@ -1179,38 +1198,57 @@ label scene5Start:
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}You know, when I imagined finding this place in my head, it was a lot cooler.{/font}
 
-    {font=Kenney Rocket.ttf}I mean, who would hae thought I'd be infiltrating the world;s most top secret facility using a sanitation bot?{/font}
+    {font=Kenney Rocket.ttf}I mean, who would hae thought I'd be infiltrating the world's most top secret facility using a sanitation bot?{/font}
 
     {font=Kenney Rocket.ttf}Whatever. Desperate times call for desperate measures, I guess...{/font}
     """
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     "{i}Where am I?{/i}"
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Come on...{w=0.5} Where is it?{/font}"
     show Hallway:
-        linear 10 alpha 0.6
+        linear 8 alpha 0.6
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 0.75
+        easeout 0.3 alpha 0.0
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos()
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I've got to hurry before somebody sees me.{/font}"
     "[preferredName]" "I'm so freaking lost."
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I'm so freaking lost.{/font}"
     show Hallway:
+        alpha 0.6
         linear 2.5 alpha 1.0
     "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}How big can this place be? I must be close. I have to be.{/font}"
     show Hallway:
@@ -1225,12 +1263,12 @@ label scene5Start:
     
     {font=Kenney Rocket.ttf}Not good.{/font}
     """
-    stop music
-    hide Hallway
+    stop music fadeout 1.0
     hide Boss02
     hide snowTree1
     hide snowTree2
     hide snowTree3
+    hide Hallway with fade
     scene Forest Snow
     show snowTree1:
         zoom treePos[0][0]
@@ -1252,7 +1290,7 @@ label scene5Start:
         size (0, 90)
         linear 1.0 size (1280, 90)
     "{i}Not good!{/i}"
-    # TODO: music 1.1.1
+    play music "audio/Music_1.1.1.mp3" fadeout 1.0 fadein 1.0
     menu:
         "Fight":
             pass
@@ -1279,7 +1317,7 @@ label scene5Start:
 
     {i}I guess this is it{/i}...
     """
-    show hacker item:
+    show hacker item with zoomin:
         anchor (0.5, 0.5)
         pos (0.2, 0.6)
         block:
@@ -1305,14 +1343,11 @@ label scene5Start:
         "END SCENE 5"
 
 label scene5HalfStart:
-    # TODO: music 1.1.2
+    play music "audio/Music_1.1.2.mp3" fadeout 1.0 fadein 1.0
     scene Forest
     show Friend01 neutral at right
     show Friend02 angry at left
-    show campfire:
-        alpha 0.0
     show darkOverlay:
-        alpha 0.0
     friendA "[playerCharacter]! You made it!"
     friendB "We got split up after the [iceBoss] found us. You didn't find anything, did you?"
     playerCharacter "No."
@@ -1323,12 +1358,14 @@ label scene5HalfStart:
 
     Whatever, I guess we'd better set up camp for now. We can look some more later.
     """
-    show darkOverlay with fade:
-        alpha 1.0
+    show darkOverlay:
+        linear 0.25 alpha 0.0
     show campfire:
         align (0.52, 0.95)
         alpha 0.0
-        linear 0.1 alpha 1.0
+        linear 0.25 alpha 1.0
+    $ renpy.pause(0.25)
+    hide darkOverlay
     friendB "Um, I don't know about you, but I am {i}not{/i} going back in there with that [iceBoss] prowling around. Especially not after what you just pulled."
     friendA "Look, I said I was sorry alright?  How was I supposed to know all that  ice was there?"
     friendB """
@@ -1349,7 +1386,7 @@ label scene5HalfStart:
     hide screen tear
 
 label scene6Start:
-    # TODO: music 1.2.1
+    play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     scene Hacker Space with pixellate
     show GWHacker at center:
         alpha 0.0
@@ -1468,7 +1505,7 @@ label scene6Start:
             menu:
                 "OK, what do I have to do?":
                     jump scene6PurpleCont
-                "No. Tell me what's going on {i}{b}now{/b}{/i}":
+                "No. Tell me what's going on {b}now{/b}":
                     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
                     {font=Kenney Rocket.ttf}I-{w=0.5} I...{w=0.5} Listen, I don't have time for this!{/font}
                     
@@ -1504,7 +1541,7 @@ label scene6PurpleCont:
 
 label scene7Purple:
     $ colorPath = False
-    scene Forest
+    scene Forest with fade
     show Friend01 neutral at right
     show Friend02 angry at left
     show campfire:
@@ -1532,104 +1569,143 @@ label scene7Purple:
     $ treePos = generateTreePos()
     scene Forest Snow with fade
     show snowTree1:
-        anchor (0.5, 1.0)
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
-        anchor (0.5, 1.0)
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
-        anchor (0.5, 1.0)
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     $ treePos = generateTreePos(4)
     image snowTree4 = "bg_GW_snowtree1.png"
     "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside [forestName].{/font}"
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
-        anchor (0.5, 1.0)
+        alpha 0.0
+        time 0.3
+        alpha 1.0
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos(5)
     image snowTree5 = "bg_GW_snowtree2.png"
     "{i}This place makes no sense{/i}."
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
+        time 0.3
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     show snowTree5:
-        anchor (0.5, 1.0)
+        alpha 0.0
+        time 0.3
+        alpha 1.0
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos(6)
     "{i}What am I even looking for?{/i}"
     show hacker item at truecenter with zoomin
     "{i}The [hackerItemNickname] is pulling at my arm...{/i}"
     show snowTree1:
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
+        time 0.3
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     show snowTree5:
+        time 0.3
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
     show snowTree6:
-        anchor (0.5, 1.0)
+        alpha 0.0
+        time 0.3
+        alpha 1.0
         zoom treePos[5][0]
         pos (treePos[5][1][0], treePos[5][1][1])
     hide hacker item
     show hacker item at truecenter
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
+    $ renpy.pause(0.6)
+    hide black
     $ treePos = generateTreePos(6)
     image snowTree6 = "bg_GW_snowtree3.png"
     "{i}I guess I should follow it{/i}."
     show snowTree1:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[0][0]
         pos (treePos[0][1][0], treePos[0][1][1])
     show snowTree2:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[1][0]
         pos (treePos[1][1][0], treePos[1][1][1])
     show snowTree3:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     show snowTree4:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[3][0]
         pos (treePos[3][1][0], treePos[3][1][1])
     show snowTree5:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[4][0]
         pos (treePos[4][1][0], treePos[4][1][1])
     show snowTree6:
-        anchor (0.5, 1.0)
+        time 0.3
         zoom treePos[5][0]
         pos (treePos[5][1][0], treePos[5][1][1])
+    show black:
+        alpha 0.0
+        easein 0.3 alpha 1.0
+        easeout 0.3 alpha 0.0
+    $ renpy.pause(0.6)
+    hide black
     """
     {i}I've been walking for a long time now{/i}.
     
@@ -1707,10 +1783,10 @@ label scene7Orange:
         "END SCENE 7"
 
 label scene8Start:
-    scene black with fade
+    scene black with pixellate
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
-    # TODO: music 1.2.1
+    play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     "{font=Kenney Rocket.ttf}[hacker]{/font}" """
     {font=Kenney Rocket.ttf}This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.{/font}
 
@@ -1761,6 +1837,10 @@ label scene8Start:
 
             {font=Kenney Rocket.ttf}{i}I have to do this{/i}.{/font}
             """
+    if noFlashing:
+        if config.developer:
+            "{cps=0}END SCENE 8{/cps}"
+        jump scene9Start
     show screen tear()
     $ renpy.pause(1.0)
     show screen tear(30)
@@ -1775,7 +1855,7 @@ label scene8Start:
         "{cps=0}END SCENE 8{/cps}"
 
 label scene9Start:
-    # TODO: music 1.3.1
+    play music "audio/Music_1.3.1.mp3" fadeout 1.0 fadein 1.0
     scene Bedroom with None
     $ tmpGlitchText = glitchText(16)
     """
@@ -1831,13 +1911,12 @@ label scene9Start:
 
     As you open the door, you feel a growing sense of excitement. You cannot tell if it's your own.
     """
-    stop music fadeout 1.0
     if config.developer:
         "{cps=0}END SCENE 9{/cps}"
 
 label scene10Start:
-    # TODO: music 3.11.1
-    scene Prison
+    play music "audio/Music_3.11.1.mp3" fadeout 1.0 fadein 1.0
+    scene Prison with fade
     """
     You appear to be in some kind of server room.
 
@@ -1905,9 +1984,9 @@ label scene10Start:
         pos (1.1, 0.52)
         easein 1.0 xpos 0.85
     "Unknown Male Voice" "Hey! Stop right there!"
-    stop music
+    stop music fadeout 1.0
     # TODO: gunshot sfx
-    # TDDO: hide hacker filter if I add one
+    # TODO: hide hacker filter if I add one
     if noFlashing:
         "The man shoots you"
     show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
@@ -1926,9 +2005,9 @@ label scene10Start:
     """
     "Man" "Your 'game' ends here."
     "Unknown Female Voice" "No!"
-    hide CorpGuy angry with easeoutright
+    show CorpGuy neutral with fade
     # TODO: explosion sfx
-    # TODO: music 1.2.1
+    play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     """
     Before the man is able to fire another shot, the console nearest him explodes, knocking him to the ground.
 
@@ -2100,11 +2179,11 @@ label talkChoice:
 
 label end1:
     scene whitedrop with fade
-    show text "{i}Once month later{/i}..." at truecenter:
+    show text "{color=#000}{i}Once month later{/i}...{/color}" at truecenter:
         alpha 0.0
-        ease 0.5 alpha 1.0
-    $ renpy.pause(0.5)
-    # TODO: music 3.12.1
+        easein 0.5 alpha 1.0
+    $ renpy.pause(1.0)
+    play music "audio/Music_3.12.1.mp3" fadeout 1.0 fadein 1.0
     scene City Hidden with fade
     """
     {i}The streets are even more crowded than usual today{/i}.
@@ -2242,8 +2321,8 @@ label kill:
     if config.developer:
         "{cps=0}GAME DIE{/cps}"
     stop music fadeout 1.0
-    # TODO: music 3.12.1. peaceful ambient ending music
-    call credits
+    play music "audio/Music_3.12.1.mp3" fadeout 1.0 fadein 1.0
+    call credits from _call_credits
     scene whitedrop with fade
     show Rice Bowl:
         xalign 0.5
