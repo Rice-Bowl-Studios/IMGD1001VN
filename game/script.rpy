@@ -81,6 +81,7 @@ image Boss01 neutral:
     repeat
 image Boss02 neutral = "ch_GW_Boss02_neutral.png"
 image Boss02 angry = "ch_GW_Boss02_angry.png"
+image Boss02 possessed = "ch_GW_Boss02_possessed.png"
 image Friend01 angry = im.Crop("ch_GW_Friend01_angry.png", (100, 0, 520, 720))
 image Friend01 happy = im.Crop("ch_GW_Friend01_happy.png", (100, 0, 520, 720))
 image Friend01 neutral = im.Crop("ch_GW_Friend01_neutral.png", (100, 0, 520, 720))
@@ -1333,6 +1334,8 @@ label scene5Start:
             ease 1.0 zoom 1.05
             ease 1.0 zoom 0.95
             repeat
+    $ renpy.pause(0.75)
+    show iceBoss possessed
     iceBoss "..."
     playerCharacter "?"
     "The [iceBoss] looks at you with a blank stare, and then wanders off into the forest." # ATL the boss out
@@ -2005,14 +2008,14 @@ label scene10Start:
     "Unknown Male Voice" "Hey! Stop right there!"
     stop music fadeout 1.0
     play sound "audio/9_mm_gunshot.wav"
-    show hackerFilter:
-        alpha 1.0
-        linear 1.0 alpha 0.0
-    $ renpy.pause(1.0)
-    hide hackFilter
     if noFlashing:
+        show hackerFilter onlayer screens:
+            linear 1.0 alpha 0.0
         "The man shoots you"
-    show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
+    else:
+        show hackerFilter onlayer screens:
+            alpha 0.0
+        show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
     """
     You wake up on the floor in front of the center console.
 
@@ -2309,6 +2312,11 @@ label end2:
         align (0.52, 0.95)
     show Friend01 neutral at right
     show Friend02 angry at left
+    friendB "Hey, it's [playerCharacter]."
+    friendA "Hey! We were just talking about what we should do today."
+    friendB "I don't much care what we do, personally."
+    friendA "Well, I don't know anout you, but I'm just dying for a new quest."
+    friendB "Hmm... hey what about that weird quest item [playerCharacter] had? Remember?"
     if colorPath: # Orange
         friendA "Oh yeah! we were doing that quest the day the [digitalWorld] crashed, weren't we?"
         friendB "Yeah, now {i}that{/i} was something I didn't see coming. Thank god they were able to get it back up and running so quickly."
