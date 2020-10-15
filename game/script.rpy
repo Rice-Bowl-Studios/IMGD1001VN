@@ -168,62 +168,62 @@ label start:
     if config.developer:
         "{cps=0}GAME START{/cps}"
     menu: 
-        "{cps=0}{font=Kenney Rocket.ttf}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/font}{/cps}"
-        "{font=Kenney Rocket.ttf}Yes{/font}":
+        "{cps=0}{font=ShareTechMono-Regular.ttf}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/font}{/cps}"
+        "{font=ShareTechMono-Regular.ttf}Yes{/font}":
             $ noFlashing = True
-        "{font=Kenney Rocket.ttf}No{/font}":
+        "{font=ShareTechMono-Regular.ttf}No{/font}":
             $ noFlashing = False
     python:
         while playerUsername == "":
-            playerUsername = renpy.input("{font=Kenney Rocket.ttf}Username:{/font}", length=36)
+            playerUsername = renpy.input("{font=ShareTechMono-Regular.ttf}Username:{/font}", length=36)
             playerUsername = playerUsername.strip()
         while playerPassword == "":
-            playerPassword = renpy.input("{font=Kenney Rocket.ttf}Password:{/font}", length=16)
+            playerPassword = renpy.input("{font=ShareTechMono-Regular.ttf}Password:{/font}", length=16)
             playerPassword = playerPassword.strip()
         playerID = "#" + generateHex(8)
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" """
-    {font=Kenney Rocket.ttf}Launching [gameWorld]{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Launching [gameWorld]{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
     
-    {font=Kenney Rocket.ttf}We did not find a character with that login info.{/font}
+    {font=ShareTechMono-Regular.ttf}We did not find a character with that login info.{/font}
     
-    {font=Kenney Rocket.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
+    {font=ShareTechMono-Regular.ttf}Launching character creation{w=0.5}.{w=0.5}.{w=0.5}.{w=0.5}{/font}{nw}
     """
     $ gameWorld = "HFO"
     menu:
-        "{cps=0}{font=Kenney Rocket.ttf}What are your character's pronouns?{/font}{/cps}"
-        "{font=Kenney Rocket.ttf}He/Him/His{/font}":
+        "{cps=0}{font=ShareTechMono-Regular.ttf}What are your character's pronouns?{/font}{/cps}"
+        "{font=ShareTechMono-Regular.ttf}He/Him/His{/font}":
             python:
                 playerCharacterSubjectPronoun = "he"
                 playerCharacterObjectPronoun = "him"
                 playerCharacterDepPossesivePronoun = "his"
-        "{font=Kenney Rocket.ttf}She/Her/Hers{/font}":
+        "{font=ShareTechMono-Regular.ttf}She/Her/Hers{/font}":
             python:
                 playerCharacterSubjectPronoun = "she"
                 playerCharacterObjectPronoun = "her"
                 playerCharacterDepPossesivePronoun = "her"
-        "{font=Kenney Rocket.ttf}They/Them/Their{/font}":
+        "{font=ShareTechMono-Regular.ttf}They/Them/Their{/font}":
             python:
                 playerCharacterSubjectPronoun = "they"
                 playerCharacterObjectPronoun = "them"
                 playerCharacterDepPossesivePronoun = "their"
-        "{font=Kenney Rocket.ttf}Other{/font}":
+        "{font=ShareTechMono-Regular.ttf}Other{/font}":
             python:
-                playerCharacterSubjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Subject Pronoun (ex. he, she, they):{/font}", length=24)
+                playerCharacterSubjectPronoun = renpy.input("{font=ShareTechMono-Regular.ttf}Subject Pronoun (ex. he, she, they):{/font}", length=24)
                 playerCharacterSubjectPronoun = playerCharacterSubjectPronoun.strip()
                 if not playerCharacterSubjectPronoun:
                     playerCharacterSubjectPronoun = "they"
-                playerCharacterObjectPronoun = renpy.input("{font=Kenney Rocket.ttf}Object Pronoun (ex. him, her, them):{/font}", length=24)
+                playerCharacterObjectPronoun = renpy.input("{font=ShareTechMono-Regular.ttf}Object Pronoun (ex. him, her, them):{/font}", length=24)
                 playerCharacterObjectPronoun = playerCharacterObjectPronoun.strip()
                 if not playerCharacterObjectPronoun:
                     playerCharacterObjectPronoun = "them"
-                playerCharacterDepPossesivePronoun = renpy.input("{font=Kenney Rocket.ttf}Dependent Possessive Pronoun (ex. his, her, their):{/font}", length=24)
+                playerCharacterDepPossesivePronoun = renpy.input("{font=ShareTechMono-Regular.ttf}Dependent Possessive Pronoun (ex. his, her, their):{/font}", length=24)
                 playerCharacterDepPossesivePronoun = playerCharacterDepPossesivePronoun.strip()
                 if not playerCharacterDepPossesivePronoun:
                     playerCharacterDepPossesivePronoun = "their"
     python:
         playerName = ""
         while playerName == "":
-            playerName = renpy.input("{font=Kenney Rocket.ttf}Real Name:{/font}", length=36)
+            playerName = renpy.input("{font=ShareTechMono-Regular.ttf}Real Name:{/font}", length=36)
             playerName = playerName.strip()
 
 label startBossFight:
@@ -249,7 +249,7 @@ label startBossFight:
     play sound "audio/mirror_shattering.wav"
     show Boss01 neutral with vpunch
     friendA "Damn, my weapon's almost broken! I can't stay here much longer."
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}[playerCharacter] has entered the area.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}[playerCharacter] has entered the area.{/font}"
     show Friend01 happy
     friendA "There you are! It's about time! Wasn't the plan to ambush this boss like 30 minutes ago?"
     menu:
@@ -303,7 +303,7 @@ label startBossAttackChoice:
                 linear 0.25 size (360 * 2 / 4, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
-            "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
+            "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}"
             friendA "Nice!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -325,7 +325,7 @@ label startBossAttackChoice2:
                 linear 0.25 size (360 / 4, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
-            "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
+            "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}"
             friendA "Wow!"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -358,7 +358,7 @@ label startBossAttackChoice3:
             $ renpy.pause (0.1)
             show redBar:
                 linear 0.25 size (0, 90)
-            "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Critical Hit!{/font}"
+            "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}"
             friendA "What the-"
         "Run Away" if not tmpFlag:
             $ tmpFlag = True
@@ -389,7 +389,7 @@ label startBossAttackChoice3:
     "Only one item appears on your screen."
     show hacker item at truecenter with zoomin
     $ tmpGlitchText = glitchText(16)
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}[tmpGlitchText] was added to your inventory{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}[tmpGlitchText] was added to your inventory{/font}"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No."
@@ -453,7 +453,7 @@ label startRealWorld:
         tmpPassword = tmpPassword.strip()
     while tmpPassword != playerPassword:
         play sound "audio/error2.ogg"
-        "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Incorrect Login.{/font}"
+        "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Incorrect Login.{/font}"
         python:
             tmpPassword = renpy.input("Password:")
             tmpPassword = tmpPassword.strip()
@@ -496,28 +496,28 @@ label startHackerSpace:
     scene Hacker Space with fade
     "Where am I?"
     show GWHacker at center with easeinbottom
-    $ hackerName = "{b}redacted{/b}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/font}"
+    $ hackerName = "{b}<redacted>{/b}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/font}"
     $ tmpChosen = -1
     menu:
         "Who are you?":
             $ tmpChosen = 0
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}That's kind of complicated. Could we start with the easy questions please?{/font}"
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}That's kind of complicated. Could we start with the easy questions please?{/font}"
         "Did you just read my mind?":
             $ tmpChosen = 1
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Oh, if only it were that simple! What do I look like? Some kind of fortune teller?{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Oh, if only it were that simple! What do I look like? Some kind of fortune teller?{/font}
             
-            {font=Kenney Rocket.ttf}Let's just say I made an extremely educated guess{/font}
+            {font=ShareTechMono-Regular.ttf}Let's just say I made an extremely educated guess{/font}
             """
         "How did you know that?":
             $ tmpChosen = 2
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Um... I'm actually a psychic.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Um... I'm actually a psychic.{/font}
             
-            {font=Kenney Rocket.ttf}No, a genie!{/font}
+            {font=ShareTechMono-Regular.ttf}No, a genie!{/font}
             
-            {font=Kenney Rocket.ttf}Or maybe I'm your conscience! Hehe, spooky, right?{/font}
+            {font=ShareTechMono-Regular.ttf}Or maybe I'm your conscience! Hehe, spooky, right?{/font}
             """
     menu:
         "Who are you?" if tmpChosen != 0:
@@ -529,24 +529,24 @@ label startHackerSpace:
     show screen tear
     $ renpy.pause(0.25)
     hide screen tear
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Okay, I think that's enough questioning for today.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Okay, I think that's enough questioning for today.{/font}"
     "You try to speak, but nothing comes out. It feels as though you are underwater."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Right, now where was I? Let's see, plant the thing, dramatic entrance, obligatory exposition...{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Right, now where was I? Let's see, plant the thing, dramatic entrance, obligatory exposition...{/font}
     
-    {font=Kenney Rocket.ttf}Ah of course{/font}
+    {font=ShareTechMono-Regular.ttf}Ah of course{/font}
     
-    {font=Kenney Rocket.ttf}{i}*ahem*{/i}{/font}
+    {font=ShareTechMono-Regular.ttf}{i}*ahem*{/i}{/font}
     """
     if playerName != playerUsername:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-        {font=Kenney Rocket.ttf}Welcome to my world, [playerCharacter]! Or should I say [player].{/font}
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+        {font=ShareTechMono-Regular.ttf}Welcome to my world, [playerCharacter]! Or should I say [player].{/font}
         
-        {font=Kenney Rocket.ttf}Which would you prefer?{/font}
+        {font=ShareTechMono-Regular.ttf}Which would you prefer?{/font}
         """
         $ tmpFlag = True
     else:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Welcome to my world, [player].{/font}"
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Welcome to my world, [player].{/font}"
         python:
             preferredName = playerName
             preferredSubjectPronoun = playerSubjectPronoun
@@ -574,15 +574,15 @@ label hackerSpaceNameChoice:
             play sound "audio/error2.ogg"
             $ renpy.pause(0.5)
             hide screen tear
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Hey, what did I say about asking questions?{/font}"
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Hey, what did I say about asking questions?{/font}"
             jump hackerSpaceNameChoice
     
 label afterHackerSpaceNameChoice:
     if playerName != playerUsername:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Ya know, I'm so glad you're here [preferredName]. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here [preferredName]. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
     else:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}But then, right when I was about to call it off, you came along and found my invitation!{/font}"
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}But then, right when I was about to call it off, you came along and found my invitation!{/font}"
     show hacker item at truecenter with zoomin
     $ tmpGlitchText = glitchText(16, False, True)
     """
@@ -591,44 +591,44 @@ label afterHackerSpaceNameChoice:
     {i}How did that get there?{/i}
     """
     hide hacker item with zoomout
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}And guess what. The best part is{w=3.0}: it's yours to keep! Consider it a party favor from your new best friend.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}And guess what. The best part is{w=3.0}: it's yours to keep! Consider it a party favor from your new best friend.{/font}
     
-    {font=Kenney Rocket.ttf}Oh, that reminds me,{w=1.0} I haven't introduced myself yet! {size=-5}Gosh, what kind of friend doesn't even know their friend's name?{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}Oh, that reminds me,{w=1.0} I haven't introduced myself yet! {size=-5}Gosh, what kind of friend doesn't even know their friend's name?{/size}{/font}
     
-    {font=Kenney Rocket.ttf}Sorry, it's been a while since I've actually talked to someone for real like this.{/font}
+    {font=ShareTechMono-Regular.ttf}Sorry, it's been a while since I've actually talked to someone for real like this.{/font}
     
-    {font=Kenney Rocket.ttf}Hmmm...{w=0.5} where do I begin?{w=1.0} I've gone by a LOT of names in the past, [hackerNames[0]]{w=0.5}, [hackerNames[1]]{w=0.5}, [hackerNames[2]]{w=1.0}, {size=-5}[hackerNames[3]]{w=0.5}... I don't know what I was thinking with that one{/size}...{/font}
+    {font=ShareTechMono-Regular.ttf}Hmmm...{w=0.5} where do I begin?{w=1.0} I've gone by a LOT of names in the past, [hackerNames[0]]{w=0.5}, [hackerNames[1]]{w=0.5}, [hackerNames[2]]{w=1.0}, {size=-5}[hackerNames[3]]{w=0.5}... I don't know what I was thinking with that one{/size}...{/font}
     
-    {font=Kenney Rocket.ttf}Anything ring a bell? You've probably heard of me before, right? I mean - I'm {i}kind of{/i} a big deal.{/font}
+    {font=ShareTechMono-Regular.ttf}Anything ring a bell? You've probably heard of me before, right? I mean - I'm {i}kind of{/i} a big deal.{/font}
     """
     "..."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}...{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}...{/font}
     
-    {font=Kenney Rocket.ttf}?{/font}
+    {font=ShareTechMono-Regular.ttf}?{/font}
     
-    {font=Kenney Rocket.ttf}Nothing?{w=0.25} Seriously?{w=0.5} {size=-5}Wow, have I really fallen off that hard?{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}Nothing?{w=0.25} Seriously?{w=0.5} {size=-5}Wow, have I really fallen off that hard?{/size}{/font}
     """
     $ hackerName = "Medusa"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Well, whatever, since we're friends you can call me [hacker]{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Well, whatever, since we're friends you can call me [hacker]{/font}
     
-    {font=Kenney Rocket.ttf}So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game.{/font}
+    {font=ShareTechMono-Regular.ttf}So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game.{/font}
     
-    {font=Kenney Rocket.ttf}What was it called again?{w=1.0} You know, the one you've been playing {i}literally{/i} non-stop.{w=0.5} {size=-5}Like seriously don't you have a job or something?{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}What was it called again?{w=1.0} You know, the one you've been playing {i}literally{/i} non-stop.{w=0.5} {size=-5}Like seriously don't you have a job or something?{/size}{/font}
     
-    {font=Kenney Rocket.ttf}Anyways, I've got a game of my own going on{w=0.5} -so to speak-, and it's {i}really{/i} important{/font}
+    {font=ShareTechMono-Regular.ttf}Anyways, I've got a game of my own going on{w=0.5} -so to speak-, and it's {i}really{/i} important{/font}
     
-    {font=Kenney Rocket.ttf}But you see, the thing is, I kind of need some help getting to the end of it.{/font}
+    {font=ShareTechMono-Regular.ttf}But you see, the thing is, I kind of need some help getting to the end of it.{/font}
     
-    {font=Kenney Rocket.ttf}And you know...{/font}
+    {font=ShareTechMono-Regular.ttf}And you know...{/font}
     
-    {font=Kenney Rocket.ttf}I just thought...{/font}
+    {font=ShareTechMono-Regular.ttf}I just thought...{/font}
     
-    {font=Kenney Rocket.ttf}{i}Since we are friends,{/i}{/font}
+    {font=ShareTechMono-Regular.ttf}{i}Since we are friends,{/i}{/font}
     
-    {font=Kenney Rocket.ttf}You could lend me a hand!{/font}
+    {font=ShareTechMono-Regular.ttf}You could lend me a hand!{/font}
     """
     menu:
         "ok...?":
@@ -638,19 +638,19 @@ label afterHackerSpaceNameChoice:
             $ renpy.pause(0.25)
             hide screen tear
             $ tmpFlag = True
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?{/font}"
     if tmpFlag:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}{size=-10}Totally doesn't bother me that you don't really want to help.{/size}{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}And don't worry! I promise that when we beat my little game, there's gonna be a special reward, just for you!{/font}
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}{size=-10}Totally doesn't bother me that you don't really want to help.{/size}{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}And don't worry! I promise that when we beat my little game, there's gonna be a special reward, just for you!{/font}
     
-    {font=Kenney Rocket.ttf}Alright, [preferredName], it's been a pleasure chatting with you tonight,{/font}
+    {font=ShareTechMono-Regular.ttf}Alright, [preferredName], it's been a pleasure chatting with you tonight,{/font}
     
-    {font=Kenney Rocket.ttf}However, I now have have some very important business to attend to.{w=1.0} I'll be contacting you with more info on our deal pretty soon, so be on the lookout!{/font}
+    {font=ShareTechMono-Regular.ttf}However, I now have have some very important business to attend to.{w=1.0} I'll be contacting you with more info on our deal pretty soon, so be on the lookout!{/font}
     
-    {font=Kenney Rocket.ttf}Alright, now back to your regularly scheduled programming.{/font}
+    {font=ShareTechMono-Regular.ttf}Alright, now back to your regularly scheduled programming.{/font}
 
-    {font=Kenney Rocket.ttf}Anyways, [hacker] out!{/font}
+    {font=ShareTechMono-Regular.ttf}Anyways, [hacker] out!{/font}
     """
     stop music fadeout 1.0
     scene black with pixellate
@@ -764,167 +764,167 @@ label scene4Start:
     scene Hacker Space with fade
     "Am I... dreaming?"
     show GWHacker at right with easeinright
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Sort of. Depends on where you draw the line between dream and reality.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Sort of. Depends on where you draw the line between dream and reality.{/font}"
     "What are you talking about?"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Do you want the short answer?{w=0.5} Or the long technical one?{w=0.5} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all.{/size}{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Do you want the short answer?{w=0.5} Or the long technical one?{w=0.5} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all.{/size}{/font}
 
-    {font=Kenney Rocket.ttf}[preferredName], I don't know what they taught you in school about [digitalWorld],{/font}
+    {font=ShareTechMono-Regular.ttf}[preferredName], I don't know what they taught you in school about [digitalWorld],{/font}
     
-    {font=Kenney Rocket.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful super computer\",{/font}
+    {font=ShareTechMono-Regular.ttf}But I'm assuming it was some kind of pretentious spiel about \"the world's most powerful super computer\",{/font}
     
-    {font=Kenney Rocket.ttf}\"A new era of digital communication\", generously brought to you by [corporation].{/font}
+    {font=ShareTechMono-Regular.ttf}\"A new era of digital communication\", generously brought to you by [corporation].{/font}
 
-    {font=Kenney Rocket.ttf}Which honestly isn't far off in some aspects.{/font}
+    {font=ShareTechMono-Regular.ttf}Which honestly isn't far off in some aspects.{/font}
 
-    {font=Kenney Rocket.ttf}{i}But my god, there is so much more to it than that.{/i}{/font}
+    {font=ShareTechMono-Regular.ttf}{i}But my god, there is so much more to it than that.{/i}{/font}
 
-    {font=Kenney Rocket.ttf}Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret.{/font}
+    {font=ShareTechMono-Regular.ttf}Don't get me wrong. I love our education system just as much as the next person, but let me tell you a secret.{/font}
     
-    {font=Kenney Rocket.ttf}Your 8th grade history teacher has no idea what's actually going on under the hood of [corporation]'s little simulation.{/font}
+    {font=ShareTechMono-Regular.ttf}Your 8th grade history teacher has no idea what's actually going on under the hood of [corporation]'s little simulation.{/font}
     
-    {font=Kenney Rocket.ttf}In fact, {i}nobody does{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}In fact, {i}nobody does{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}{/font}
+    {font=ShareTechMono-Regular.ttf}Hold on, did I say \"nobody\"?{w=0.5} Ha!{w=0.25} {i}They wish.{/i}{/font}
 
-    {font=Kenney Rocket.ttf}You see, what [corporation] doesn't want you to know about their fancy \"super computer\" is that most of its design was actually {i}stolen{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}You see, what [corporation] doesn't want you to know about their fancy \"super computer\" is that most of its design was actually {i}stolen{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}Don't believe me? Look no further than the first thought you had when I brought you here today.{/font}
+    {font=ShareTechMono-Regular.ttf}Don't believe me? Look no further than the first thought you had when I brought you here today.{/font}
     """
     "I thought I was in a dream..."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Exactly! Let me explain...{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Exactly! Let me explain...{/font}
 
-    {font=Kenney Rocket.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever.{/font}
+    {font=ShareTechMono-Regular.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever.{/font}
     
-    {font=Kenney Rocket.ttf}You see, their so-called \"super computer\" isn't much of a computer at all.{/font}
+    {font=ShareTechMono-Regular.ttf}You see, their so-called \"super computer\" isn't much of a computer at all.{/font}
     
-    {font=Kenney Rocket.ttf}It's actually emulating something much more akin to what goes on in your brain when we fall asleep.{/font}
+    {font=ShareTechMono-Regular.ttf}It's actually emulating something much more akin to what goes on in your brain when we fall asleep.{/font}
     
-    {font=Kenney Rocket.ttf}A dream, essentially.{/font}
+    {font=ShareTechMono-Regular.ttf}A dream, essentially.{/font}
     """
     menu:
         "Are we dreaming right now?":
             pass
         "Is everyone on [digitalWorld] dreaming?":
             pass
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Well, not exactly. It's more like one person {size=-5}the computer{/size} is having some kind of comatose fever-dream, and everyone else,{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Well, not exactly. It's more like one person {size=-5}the computer{/size} is having some kind of comatose fever-dream, and everyone else,{/font}
     
-    {font=Kenney Rocket.ttf}{size=-5}including you and your weird friends,{/size} gets to show up and whisper in the dreamer's ear.{/font}
+    {font=ShareTechMono-Regular.ttf}{size=-5}including you and your weird friends,{/size} gets to show up and whisper in the dreamer's ear.{/font}
 
-    {font=Kenney Rocket.ttf}With enough whispering, you can make an imprint on their subconscious, and then the dream can be whatever you want.{/font}
+    {font=ShareTechMono-Regular.ttf}With enough whispering, you can make an imprint on their subconscious, and then the dream can be whatever you want.{/font}
 
-    {font=Kenney Rocket.ttf}In short, they made a super advanced dream machine. Super cool!{/font}
+    {font=ShareTechMono-Regular.ttf}In short, they made a super advanced dream machine. Super cool!{/font}
 
-    {font=Kenney Rocket.ttf}And super {i}creepy{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}And super {i}creepy{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from your brain to the [digitalWorld] all the time?{/font}
+    {font=ShareTechMono-Regular.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from your brain to the [digitalWorld] all the time?{/font}
     """
     "[preferredName]" "..."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
     menu:
         "Why are you telling me all of this":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}You know if you'd just hold on a minute, I was getting there.{/font}"
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}You know if you'd just hold on a minute, I was getting there.{/font}"
         "How do you know all of this?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Oh [preferredName], I'm so glad you asked!{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}In case you haven't noticed, I'm kind of a genius when it comes to the [digitalWorld], {size=-5}and everything else for that matter{/size}.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Oh [preferredName], I'm so glad you asked!{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}In case you haven't noticed, I'm kind of a genius when it comes to the [digitalWorld], {size=-5}and everything else for that matter{/size}.{/font}
     
-    {font=Kenney Rocket.ttf}And believe it or not, me and [corporation] actually go way back.{/font}
+    {font=ShareTechMono-Regular.ttf}And believe it or not, me and [corporation] actually go way back.{/font}
 
-    {font=Kenney Rocket.ttf}My relationship with them is...{w=0.5} complicated, to say the least. I hack them...{w=0.5} they catch me...{/font}
+    {font=ShareTechMono-Regular.ttf}My relationship with them is...{w=0.5} complicated, to say the least. I hack them...{w=0.5} they catch me...{/font}
     
-    {font=Kenney Rocket.ttf}I disappear for a while...{w=0.5} and then I come back and do it again!{/font}
+    {font=ShareTechMono-Regular.ttf}I disappear for a while...{w=0.5} and then I come back and do it again!{/font}
 
-    {font=Kenney Rocket.ttf}And so on.{/font}
+    {font=ShareTechMono-Regular.ttf}And so on.{/font}
 
-    {font=Kenney Rocket.ttf}But things changed when [corporation] launched the [digitalWorld].{/font}
+    {font=ShareTechMono-Regular.ttf}But things changed when [corporation] launched the [digitalWorld].{/font}
     
-    {font=Kenney Rocket.ttf}{i}The New Digital Frontier{/i}, as they like to call it, was supposed to be totally secure. Unhackable! Foolproof!{/font}
+    {font=ShareTechMono-Regular.ttf}{i}The New Digital Frontier{/i}, as they like to call it, was supposed to be totally secure. Unhackable! Foolproof!{/font}
 
-    {font=Kenney Rocket.ttf}Can you believe that? {size=-5}So arrogant, even by my standards{/size}.{/font}
+    {font=ShareTechMono-Regular.ttf}Can you believe that? {size=-5}So arrogant, even by my standards{/size}.{/font}
 
-    {font=Kenney Rocket.ttf}They're not wrong though. There's no other system like [supercomputerName],{/font}
+    {font=ShareTechMono-Regular.ttf}They're not wrong though. There's no other system like [supercomputerName],{/font}
     
-    {font=Kenney Rocket.ttf}so even if you were somehow able to intercept its data, the actual hardware you'd need to read it doesn't exist.{/font}
+    {font=ShareTechMono-Regular.ttf}so even if you were somehow able to intercept its data, the actual hardware you'd need to read it doesn't exist.{/font}
 
-    {font=Kenney Rocket.ttf}I'm an exception of course. When it comes to the [digitalWorld], I can see {i}everything{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}I'm an exception of course. When it comes to the [digitalWorld], I can see {i}everything{/i}.{/font}
     
-    {font=Kenney Rocket.ttf}From the contents of your inventory, to the actual thought data flowing through your headset.{/font}
+    {font=ShareTechMono-Regular.ttf}From the contents of your inventory, to the actual thought data flowing through your headset.{/font}
     """
     menu:
         "How are you able to do that?":
             pass
         "What makes you so special?":
             pass
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at [corporation] are a pretty clever bunch.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at [corporation] are a pretty clever bunch.{/font}
 
-    {font=Kenney Rocket.ttf}So clever in fact, that when they launched the [digitalWorld], they actually created a whole new security system just for me! {size=-5}Flattering, I know.{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}So clever in fact, that when they launched the [digitalWorld], they actually created a whole new security system just for me! {size=-5}Flattering, I know.{/size}{/font}
 
-    {font=Kenney Rocket.ttf}For certain {i}personal reasons{/i}, I won't be going into detail on how exactly [corporation] decided to deal with me. {size=-5}Sorry, we are not that close yet{/size}.{/font}
+    {font=ShareTechMono-Regular.ttf}For certain {i}personal reasons{/i}, I won't be going into detail on how exactly [corporation] decided to deal with me. {size=-5}Sorry, we are not that close yet{/size}.{/font}
 
-    {font=Kenney Rocket.ttf}But what's more important is that their plan backfired{w=0.5} - Well, not entirely. It's more like a double edged sword.{/font}
+    {font=ShareTechMono-Regular.ttf}But what's more important is that their plan backfired{w=0.5} - Well, not entirely. It's more like a double edged sword.{/font}
 
-    {font=Kenney Rocket.ttf}{i}And my side is sharper{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}{i}And my side is sharper{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}You see, what [corporation] hasn't realized yet about their \"expert security plan\" is that,{/font}
+    {font=ShareTechMono-Regular.ttf}You see, what [corporation] hasn't realized yet about their \"expert security plan\" is that,{/font}
     
-    {font=Kenney Rocket.ttf}it just so happens to double as an all-exclusive backdoor to the entire [digitalWorld].{/font}
+    {font=ShareTechMono-Regular.ttf}it just so happens to double as an all-exclusive backdoor to the entire [digitalWorld].{/font}
 
-    {font=Kenney Rocket.ttf}And that's what allows me to do all the cool stuff I do!{/font}
+    {font=ShareTechMono-Regular.ttf}And that's what allows me to do all the cool stuff I do!{/font}
 
-    {font=Kenney Rocket.ttf}{i}And{/i} how I'll get my revenge{/font}
+    {font=ShareTechMono-Regular.ttf}{i}And{/i} how I'll get my revenge{/font}
     """
     menu:
         "Revenge?":
             pass
         "What exactly are you planning?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Hehe, piqued your interest have I? Sorry but you'll just have to wait and see.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Hehe, piqued your interest have I? Sorry but you'll just have to wait and see.{/font}
             
-            {font=Kenney Rocket.ttf}Wouldn't want to ruin the surprise after all.{/font}
+            {font=ShareTechMono-Regular.ttf}Wouldn't want to ruin the surprise after all.{/font}
         """
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Let's just say, [corporation] is hiding something about the [digitalWorld].{w=1.0} {i}Something big{/i}.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Let's just say, [corporation] is hiding something about the [digitalWorld].{w=1.0} {i}Something big{/i}.{/font}
 
-    {font=Kenney Rocket.ttf}And I'm gonna be the one to expose it!{/font}
+    {font=ShareTechMono-Regular.ttf}And I'm gonna be the one to expose it!{/font}
 
-    {font=Kenney Rocket.ttf}But...{w=0.5} I need some help. {size=-5}Lame, I know.{/size} That's where you come in [preferredName]{/font}
+    {font=ShareTechMono-Regular.ttf}But...{w=0.5} I need some help. {size=-5}Lame, I know.{/size} That's where you come in [preferredName]{/font}
     """
     menu:
         "What do you need me for?":
             pass
         "Is this going to be illegal?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Pfft... no! No... haha... why would you thing that?{w=0.25} I mean, I don't know...{w=0.25} maybe...{w=0.25} {size=-5}it could be.{w=0.25} Do you want it to be?{/size}{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}You see [preferredName], before I can make my next big move, I need you to hurry up and finish your quest.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Pfft... no! No... haha... why would you thing that?{w=0.25} I mean, I don't know...{w=0.25} maybe...{w=0.25} {size=-5}it could be.{w=0.25} Do you want it to be?{/size}{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}You see [preferredName], before I can make my next big move, I need you to hurry up and finish your quest.{/font}
 
-    {font=Kenney Rocket.ttf}Sorry. I don't mean to sound ungrateful or anything, but there's something really important hiding at the end of that quest I gave you, and I need it ASAP.{/font}
+    {font=ShareTechMono-Regular.ttf}Sorry. I don't mean to sound ungrateful or anything, but there's something really important hiding at the end of that quest I gave you, and I need it ASAP.{/font}
     """
     menu:
         "Why don't you just get it yourself?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Um, in case you haven't noticed, I can't actually enter the [digitalWorld] myself.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Um, in case you haven't noticed, I can't actually enter the [digitalWorld] myself.{/font}
 
-            {font=Kenney Rocket.ttf}If I were to be detected by [corporation], everything I've done up until now would be pointless.{/font}
+            {font=ShareTechMono-Regular.ttf}If I were to be detected by [corporation], everything I've done up until now would be pointless.{/font}
 
-            {font=Kenney Rocket.ttf}Also, I'm kind of busy with my own adventure right now.{/font}
+            {font=ShareTechMono-Regular.ttf}Also, I'm kind of busy with my own adventure right now.{/font}
 
-            {font=Kenney Rocket.ttf}Here, take a look.{/font}
+            {font=ShareTechMono-Regular.ttf}Here, take a look.{/font}
             """
         "What is it?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}{size=-5}Hmmm...{w=0.25} how should I explain this{/size}?{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}{size=-5}Hmmm...{w=0.25} how should I explain this{/size}?{/font}
 
-            {font=Kenney Rocket.ttf}It's a key (sort of?) to the heart of the [digitalWorld].{/font}
+            {font=ShareTechMono-Regular.ttf}It's a key (sort of?) to the heart of the [digitalWorld].{/font}
 
-            {font=Kenney Rocket.ttf}Once I have it, I'll finally be able to expose [corporation]'s secret, and take back what they stole from me.{/font}
+            {font=ShareTechMono-Regular.ttf}Once I have it, I'll finally be able to expose [corporation]'s secret, and take back what they stole from me.{/font}
 
-            {font=Kenney Rocket.ttf}Exciting stuff, right? Anyways, I didn't just bring you here today just to monologue about me master plan.{/font}
+            {font=ShareTechMono-Regular.ttf}Exciting stuff, right? Anyways, I didn't just bring you here today just to monologue about me master plan.{/font}
 
-            {font=Kenney Rocket.ttf}I actually wanted to take you on a little field trip...{/font}
+            {font=ShareTechMono-Regular.ttf}I actually wanted to take you on a little field trip...{/font}
             """
     scene City with pixellate
     show CorpGuy neutral:
@@ -933,44 +933,44 @@ label scene4Start:
         pos (0.35, 0.99)
         alpha 0.0
         linear 0.25 alpha 1.0
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Look familiar?{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Look familiar?{/font}"
     "[preferredName]" "It looks like the city I live in. Although I don't think I've been to this particular area."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}This is the energy district. Unless you're into nuclear physics or radiation poisoning, you've probably never been here.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}This is the energy district. Unless you're into nuclear physics or radiation poisoning, you've probably never been here.{/font}
 
-    {font=Kenney Rocket.ttf}And this guy definitely doesn't fall into either of those categories.{/font}
+    {font=ShareTechMono-Regular.ttf}And this guy definitely doesn't fall into either of those categories.{/font}
     """
     menu:
         "Who is he?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}I'm wondering the same thing.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}I'm wondering the same thing.{/font}
 
-            {font=Kenney Rocket.ttf}From what I've gathered, he's definitely connected to [corporation].{/font}
+            {font=ShareTechMono-Regular.ttf}From what I've gathered, he's definitely connected to [corporation].{/font}
 
-            {font=Kenney Rocket.ttf}But that alone doesn't explain the data coming from his headset.{/font}
+            {font=ShareTechMono-Regular.ttf}But that alone doesn't explain the data coming from his headset.{/font}
 
-            {font=Kenney Rocket.ttf}There's something off about it. It's unlike any I've seen before.{/font}
+            {font=ShareTechMono-Regular.ttf}There's something off about it. It's unlike any I've seen before.{/font}
             """
         "Why are you here?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Oh, I'm not actually {i}here{/i} [preferredName]. I'm just borrowing the local cameras.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Oh, I'm not actually {i}here{/i} [preferredName]. I'm just borrowing the local cameras.{/font}
             
-            {font=Kenney Rocket.ttf}But to answer your question, I'm here to keep an eye on our sophisticated friend here.{/font}
+            {font=ShareTechMono-Regular.ttf}But to answer your question, I'm here to keep an eye on our sophisticated friend here.{/font}
 
-            {font=Kenney Rocket.ttf}From what I've gathered, this particular individual is without a doubt part of [corporation].{/font}
+            {font=ShareTechMono-Regular.ttf}From what I've gathered, this particular individual is without a doubt part of [corporation].{/font}
             
-            {font=Kenney Rocket.ttf}And from the looks of his fancy getup, I'd say he's a pretty important one at that.{/font}
+            {font=ShareTechMono-Regular.ttf}And from the looks of his fancy getup, I'd say he's a pretty important one at that.{/font}
             """
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}But that alone doesn't explain the data coming from his headset. There's something seriously off about it.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}But that alone doesn't explain the data coming from his headset. There's something seriously off about it.{/font}
 
-    {font=Kenney Rocket.ttf}You see, I've been tracking him for a couple days now, but whenever I try and see what's going on inside his head, I get all this weird junk data.{/font}
+    {font=ShareTechMono-Regular.ttf}You see, I've been tracking him for a couple days now, but whenever I try and see what's going on inside his head, I get all this weird junk data.{/font}
 
-    {font=Kenney Rocket.ttf}It's like there's some kind of noise machine in his headset, drowning out all the real stuff with a bunch of nonsense.{/font}
+    {font=ShareTechMono-Regular.ttf}It's like there's some kind of noise machine in his headset, drowning out all the real stuff with a bunch of nonsense.{/font}
 
-    {font=Kenney Rocket.ttf}I can't get any kind of read on what he's thinking, or doing in the [digitalWorld]. It's unlike anything I've ever seen before, and honestly, it kind of freaks me out.{/font}
+    {font=ShareTechMono-Regular.ttf}I can't get any kind of read on what he's thinking, or doing in the [digitalWorld]. It's unlike anything I've ever seen before, and honestly, it kind of freaks me out.{/font}
 
-    {font=Kenney Rocket.ttf}Anyways, I've got a sneaking suspicion this guy may know something about what I'm looking for, so I'm gonna follow him until I find it.{/font}
+    {font=ShareTechMono-Regular.ttf}Anyways, I've got a sneaking suspicion this guy may know something about what I'm looking for, so I'm gonna follow him until I find it.{/font}
     """
     window hide
     show CorpGuy neutral:
@@ -979,16 +979,16 @@ label scene4Start:
     $ renpy.pause(4.0)
     hide CorpGuy
     "The man heads inside a large office building."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}!{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}!{/font}
 
-    {font=Kenney Rocket.ttf}Did you see that [preferredName]? The building he just went in must be one of [corporation]'s secret labs! Oh my god, this could be it!{/font}
+    {font=ShareTechMono-Regular.ttf}Did you see that [preferredName]? The building he just went in must be one of [corporation]'s secret labs! Oh my god, this could be it!{/font}
 
-    {font=Kenney Rocket.ttf}Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so that's a no-go.{/font}
+    {font=ShareTechMono-Regular.ttf}Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so that's a no-go.{/font}
 
-    {font=Kenney Rocket.ttf}Shoot! If I don't figure out something soon, I'm gonna miss my chance! Sorry [preferredName], but I've gotta run. This is just too important to miss.{/font}
+    {font=ShareTechMono-Regular.ttf}Shoot! If I don't figure out something soon, I'm gonna miss my chance! Sorry [preferredName], but I've gotta run. This is just too important to miss.{/font}
 
-    {font=Kenney Rocket.ttf}[hacker] out!{/font}
+    {font=ShareTechMono-Regular.ttf}[hacker] out!{/font}
     """
     stop music fadeout 1.0
     scene Bedroom with pixellate
@@ -1013,7 +1013,7 @@ label scene5Start:
             friendB "I don't really blame you. I mean, what {i}are{/i} we doing anyways?"
     show hacker item at top with easeintop
     "{i}The [hackerItemNickname] is pointing toward an area called The [forestName]{/i}."
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside [forestName].{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Current Objective: Inside [forestName].{/font}"
     hide hacker item with easeouttop
     show Friend01 neutral
     $ treePos = generateTreePos()
@@ -1041,7 +1041,7 @@ label scene5Start:
         zoom 0.75
     $ treePos = generateTreePos()
     friendA "Alright. We're in the forest. Now what?"
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside [forestName].{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Current Objective: Inside [forestName].{/font}"
     friendA "Ok... let's just start looking around I guess."
     friendB "Wait, hold on. Do you see that?"
     friendA """
@@ -1189,19 +1189,19 @@ label scene5Start:
     hide black
     $ treePos = generateTreePos()
     "{i}I think I'm going in circles{/i}."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I think I'm going in circles.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I think I'm going in circles.{/font}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     show Hallway:
         alpha 0.0
         zoom 0.5
         linear 15.0 alpha 0.1
     "{i}?{/i}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}You know, when I imagined finding this place in my head, it was a lot cooler.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}You know, when I imagined finding this place in my head, it was a lot cooler.{/font}
 
-    {font=Kenney Rocket.ttf}I mean, who would hae thought I'd be infiltrating the world's most top secret facility using a sanitation bot?{/font}
+    {font=ShareTechMono-Regular.ttf}I mean, who would hae thought I'd be infiltrating the world's most top secret facility using a sanitation bot?{/font}
 
-    {font=Kenney Rocket.ttf}Whatever. Desperate times call for desperate measures, I guess...{/font}
+    {font=ShareTechMono-Regular.ttf}Whatever. Desperate times call for desperate measures, I guess...{/font}
     """
     show black:
         alpha 0.0
@@ -1223,7 +1223,7 @@ label scene5Start:
     hide black
     $ treePos = generateTreePos()
     "{i}Where am I?{/i}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Come on...{w=0.5} Where is it?{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Come on...{w=0.5} Where is it?{/font}"
     show Hallway:
         linear 8 alpha 0.6
     show black:
@@ -1245,24 +1245,24 @@ label scene5Start:
     $ renpy.pause(0.6)
     hide black
     $ treePos = generateTreePos()
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I've got to hurry before somebody sees me.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I've got to hurry before somebody sees me.{/font}"
     "[preferredName]" "I'm so freaking lost."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I'm so freaking lost.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I'm so freaking lost.{/font}"
     show Hallway:
         alpha 0.6
         linear 2.5 alpha 1.0
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}How big can this place be? I must be close. I have to be.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}How big can this place be? I must be close. I have to be.{/font}"
     show Hallway:
         alpha 1.0
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 2.5
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}This... This is it! After so many years. Finally...{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}This... This is it! After so many years. Finally...{/font}"
     "Before [hacker] reaches the door, it begins to open from the other side."
     # TODO: maybe play the solid snake alert sound?
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}{b}!{/b}{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}{b}!{/b}{/font}
     
-    {font=Kenney Rocket.ttf}Not good.{/font}
+    {font=ShareTechMono-Regular.ttf}Not good.{/font}
     """
     stop music fadeout 1.0
     hide Boss02
@@ -1392,75 +1392,75 @@ label scene6Start:
     show GWHacker at center:
         alpha 0.0
         linear 0.5 alpha 1.0
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Now {i}that{/i} was a close call.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Now {i}that{/i} was a close call.{/font}
     
-    {font=Kenney Rocket.ttf}You're welcome by the way.{/font}
+    {font=ShareTechMono-Regular.ttf}You're welcome by the way.{/font}
     """
     menu:
         "For what?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}For saving you just new, duh. {size=-5}You should probably be used to it by now, if we're being honest.{/size}{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}For saving you just new, duh. {size=-5}You should probably be used to it by now, if we're being honest.{/size}{/font}
 
-            {font=Kenney Rocket.ttf}Whatever. You can thank me later. Right now, I have a question.{/font}
+            {font=ShareTechMono-Regular.ttf}Whatever. You can thank me later. Right now, I have a question.{/font}
             """
         "What was that door?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Door? You{w=0.5} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Door? You{w=0.5} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}{/font}
 
-            {font=Kenney Rocket.ttf}That was part of [corporation]'s lab.{/font}
+            {font=ShareTechMono-Regular.ttf}That was part of [corporation]'s lab.{/font}
 
-            {font=Kenney Rocket.ttf}You know, the one I showed you earlier.{/font}
+            {font=ShareTechMono-Regular.ttf}You know, the one I showed you earlier.{/font}
 
-            {font=Kenney Rocket.ttf}Sorry for leaving you on a cliffhanger there. I just got a little overexcited.{/font}
+            {font=ShareTechMono-Regular.ttf}Sorry for leaving you on a cliffhanger there. I just got a little overexcited.{/font}
 
-            {font=Kenney Rocket.ttf}For good reason, though!{/font}
+            {font=ShareTechMono-Regular.ttf}For good reason, though!{/font}
 
-            {font=Kenney Rocket.ttf}I found something, but before I tell you, I have a question.{/font}
+            {font=ShareTechMono-Regular.ttf}I found something, but before I tell you, I have a question.{/font}
             """
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}[preferredName], be honest{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}[preferredName], be honest{/font}
     
-    {font=Kenney Rocket.ttf}What do {i}you{/i} think about hte whole [digitalWorld]?{/font}
+    {font=ShareTechMono-Regular.ttf}What do {i}you{/i} think about hte whole [digitalWorld]?{/font}
     """
     $ tmpFlag = False
     menu:
         "I like it.":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}You know, if I wasn't in my current position, I think I might really love this place.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}You know, if I wasn't in my current position, I think I might really love this place.{/font}
 
-            {font=Kenney Rocket.ttf}I mean, a whole world where you can see your friends all the time, and have the same freedom as a dream?{/font}
+            {font=ShareTechMono-Regular.ttf}I mean, a whole world where you can see your friends all the time, and have the same freedom as a dream?{/font}
 
-            {font=Kenney Rocket.ttf}Sounds pretty nice to me.{/font}
+            {font=ShareTechMono-Regular.ttf}Sounds pretty nice to me.{/font}
             """
         "I hate it.":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}I get that, there's so much about the [digitalWorld] that even I don't know.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}I get that, there's so much about the [digitalWorld] that even I don't know.{/font}
 
-            {font=Kenney Rocket.ttf}I mean, imagine if somebody else could do what I can. They'd be able to get away with whatever they want.{/font}
+            {font=ShareTechMono-Regular.ttf}I mean, imagine if somebody else could do what I can. They'd be able to get away with whatever they want.{/font}
             """
         "Why do you ask?":
             $ tmpFlag = True
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Just curious.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Just curious.{/font}
 
-            {font=Kenney Rocket.ttf}I don't really get out of the house much, so I wonder how normal people like you must feel about it.{/font}
+            {font=ShareTechMono-Regular.ttf}I don't really get out of the house much, so I wonder how normal people like you must feel about it.{/font}
 
-            {font=Kenney Rocket.ttf}You know, if I wasn't in my current position, I think I'd really love this place.{/font}
+            {font=ShareTechMono-Regular.ttf}You know, if I wasn't in my current position, I think I'd really love this place.{/font}
 
-            {font=Kenney Rocket.ttf}A whole world where you can see your friends all the time, adn have the same amount of freedom as a dream?{/font}
+            {font=ShareTechMono-Regular.ttf}A whole world where you can see your friends all the time, adn have the same amount of freedom as a dream?{/font}
 
-            {font=Kenney Rocket.ttf}Doesn't sound so bad to me.{/font}
+            {font=ShareTechMono-Regular.ttf}Doesn't sound so bad to me.{/font}
 
-            {font=Kenney Rocket.ttf}But at the same time, it's kind of scary, isn't it?{/font}
+            {font=ShareTechMono-Regular.ttf}But at the same time, it's kind of scary, isn't it?{/font}
 
-            {font=Kenney Rocket.ttf}I mean, there's so much about the [digitalWorld] that even I still don't know.{/font}
+            {font=ShareTechMono-Regular.ttf}I mean, there's so much about the [digitalWorld] that even I still don't know.{/font}
 
-            {font=Kenney Rocket.ttf}Imagine if somebody else was able to do what I can.{/font}
+            {font=ShareTechMono-Regular.ttf}Imagine if somebody else was able to do what I can.{/font}
 
-            {font=Kenney Rocket.ttf}They could get away with whatever they want.{/font}
+            {font=ShareTechMono-Regular.ttf}They could get away with whatever they want.{/font}
 
-            {font=Kenney Rocket.ttf}Sorry [preferredName], you don't have to answer the question if you don't want to.{/font}
+            {font=ShareTechMono-Regular.ttf}Sorry [preferredName], you don't have to answer the question if you don't want to.{/font}
             """
     if tmpFlag:
         menu:
@@ -1470,56 +1470,56 @@ label scene6Start:
                 pass
             "I'd prefer not to say.":
                 pass
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I can understand that. One way or another, I hope we find some answers at the end of this.{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Anyways [preferredName], I've {i}finally{/i} found what I'm looking for. Which means we're almost at the end of our little quest.{/font}
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I can understand that. One way or another, I hope we find some answers at the end of this.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Anyways [preferredName], I've {i}finally{/i} found what I'm looking for. Which means we're almost at the end of our little quest.{/font}
 
-    {font=Kenney Rocket.ttf}I have to warn you, from here on out, what we're doing is {i}not{/i} a game.{/font}
+    {font=ShareTechMono-Regular.ttf}I have to warn you, from here on out, what we're doing is {i}not{/i} a game.{/font}
     """
     "[preferredName]" "..."
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}I'm serious, what [corporation]'s been doing in that lab is...{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}I'm serious, what [corporation]'s been doing in that lab is...{/font}
 
-    {font=Kenney Rocket.ttf}It's just really not cool! Alright?{/font}
+    {font=ShareTechMono-Regular.ttf}It's just really not cool! Alright?{/font}
 
-    {font=Kenney Rocket.ttf}Look, all I need now is for you to finish your quest in [gameWorld]. OK?{/font}
+    {font=ShareTechMono-Regular.ttf}Look, all I need now is for you to finish your quest in [gameWorld]. OK?{/font}
 
-    {font=Kenney Rocket.ttf}{size=-5}Then maybe, just maybe, I'll be able to fix this.{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}{size=-5}Then maybe, just maybe, I'll be able to fix this.{/size}{/font}
     """
     menu:
         "What is [corporation] doing exactly?":
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}I-{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}I-{/font}
 
-            {font=Kenney Rocket.ttf}They-{/font}
+            {font=ShareTechMono-Regular.ttf}They-{/font}
 
-            {font=Kenney Rocket.ttf}...{/font}
+            {font=ShareTechMono-Regular.ttf}...{/font}
 
-            {font=Kenney Rocket.ttf}*Sigh*{/font}
+            {font=ShareTechMono-Regular.ttf}*Sigh*{/font}
 
-            {font=Kenney Rocket.ttf}Listen [preferredName]. I know I have some explaining to do. I just...{/font}
+            {font=ShareTechMono-Regular.ttf}Listen [preferredName]. I know I have some explaining to do. I just...{/font}
 
-            {font=Kenney Rocket.ttf}I need you to trust me right now, OK?{/font}
+            {font=ShareTechMono-Regular.ttf}I need you to trust me right now, OK?{/font}
 
-            {font=Kenney Rocket.ttf}It'll all make sense once you finish the quest. I promise.{/font}
+            {font=ShareTechMono-Regular.ttf}It'll all make sense once you finish the quest. I promise.{/font}
             """
             menu:
                 "OK, what do I have to do?":
                     jump scene6PurpleCont
                 "No. Tell me what's going on {b}now{/b}":
-                    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-                    {font=Kenney Rocket.ttf}I-{w=0.5} I...{w=0.5} Listen, I don't have time for this!{/font}
+                    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+                    {font=ShareTechMono-Regular.ttf}I-{w=0.5} I...{w=0.5} Listen, I don't have time for this!{/font}
                     
-                    {font=Kenney Rocket.ttf}Are you gonna help me or not?{/font}
+                    {font=ShareTechMono-Regular.ttf}Are you gonna help me or not?{/font}
                     """
             menu:
                 "I guess.":
                     jump scene6PurpleCont
                 "No way!":
-                    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-                    {font=Kenney Rocket.ttf}Ugh, {i}fine{/i}. Sorry [preferredName], I tried playing nice, but this might be my only change.{/font}
+                    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+                    {font=ShareTechMono-Regular.ttf}Ugh, {i}fine{/i}. Sorry [preferredName], I tried playing nice, but this might be my only change.{/font}
 
-                    {font=Kenney Rocket.ttf}And I am {i}not{/i} going to miss it!{/font}
+                    {font=ShareTechMono-Regular.ttf}And I am {i}not{/i} going to miss it!{/font}
                     """
                     if config.developer:
                         "END SCENE 6"
@@ -1528,14 +1528,14 @@ label scene6Start:
             jump scene6PurpleCont
 
 label scene6PurpleCont:
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Great! All you have to do is go back into the forest, and you should find what you're looking for pretty fast.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Great! All you have to do is go back into the forest, and you should find what you're looking for pretty fast.{/font}
     
-    {font=Kenney Rocket.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-5}Sorry, but this last part is single-player only.{/size}{/font}
+    {font=ShareTechMono-Regular.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-5}Sorry, but this last part is single-player only.{/size}{/font}
 
-    {font=Kenney Rocket.ttf}Alright? You'd better hurry. Good luck [preferredName]!{/font}
+    {font=ShareTechMono-Regular.ttf}Alright? You'd better hurry. Good luck [preferredName]!{/font}
 
-    {font=Kenney Rocket.ttf}I'll be waiting for you on the other side.{/font}
+    {font=ShareTechMono-Regular.ttf}I'll be waiting for you on the other side.{/font}
     """
     if config.developer:
         "END SCENE 6"
@@ -1562,7 +1562,7 @@ label scene7Purple:
     
     All we found in that dumb forest was a freaking [iceBoss].
     """
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside [forestName].{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Current Objective: Inside [forestName].{/font}"
     "{i}Right. I've got to go back{/i}."
     playerCharacter "I'm gonna go get some more firewood."
     friendA "OK."
@@ -1580,7 +1580,7 @@ label scene7Purple:
         pos (treePos[2][1][0], treePos[2][1][1])
     $ treePos = generateTreePos(4)
     image snowTree4 = "bg_GW_snowtree1.png"
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective: Inside [forestName].{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Current Objective: Inside [forestName].{/font}"
     show snowTree1:
         time 0.3
         zoom treePos[0][0]
@@ -1728,7 +1728,7 @@ label scene7Purple:
     # TODO: show the SOMETHING
     "{i}Is that...?{/i}"
     $ tmpGlitchText = glitchText(128)
-    "{font=Kenney Rocket.ttf}[gameLog]{/font}" "{font=Kenney Rocket.ttf}Current Objective:{w=1.0} [tmpGlitchText]{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}Current Objective:{w=1.0} [tmpGlitchText]{/font}"
     $ tmpFlag = False
     if config.developer:
         "END SCENE 7"
@@ -1795,17 +1795,17 @@ label scene8Start:
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.{/font}
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.{/font}
 
-    {font=Kenney Rocket.ttf}You may already know by now, but the truth is, the [forestName] was never supposed to be part of the game.{/font}
+    {font=ShareTechMono-Regular.ttf}You may already know by now, but the truth is, the [forestName] was never supposed to be part of the game.{/font}
     
-    {font=Kenney Rocket.ttf}In fact, it’s barely part of the [digitalWorld] at all.{/font}
+    {font=ShareTechMono-Regular.ttf}In fact, it’s barely part of the [digitalWorld] at all.{/font}
 
-    {font=Kenney Rocket.ttf}It's part of {i}me{/i}.{/font}
+    {font=ShareTechMono-Regular.ttf}It's part of {i}me{/i}.{/font}
     """
     playerCharacter "?"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}And now that you've found it, I fear we're both in terrible danger.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}And now that you've found it, I fear we're both in terrible danger.{/font}"
     playerCharacter "???"
     $ tmpChosen = "Look"
     menu:
@@ -1814,36 +1814,36 @@ label scene8Start:
         "What do you mean the [forestName] is {i}part of you?{/i}":
             pass
         "What happened to the [digitalWorld]? To my friends?" if tmpFlag:
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Sorry, when you refused to finish the quest, I got desperate.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Sorry, when you refused to finish the quest, I got desperate.{/font}
 
-            {font=Kenney Rocket.ttf}But don't worry! Your friends will be fine.{w=1.0} {size=-5}Probably.{/size}{/font}
+            {font=ShareTechMono-Regular.ttf}But don't worry! Your friends will be fine.{w=1.0} {size=-5}Probably.{/size}{/font}
             """
             $ tmpChosen = "Anyways"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}[tmpChosen], I don't have much time, but I promise everything will make sense soon.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}[tmpChosen], I don't have much time, but I promise everything will make sense soon.{/font}"
     if colorPath:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}I’m finally able to complete our connection now.{/font}"
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I’m finally able to complete our connection now.{/font}"
     else:
-        "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Thanks to you finishing my quest, I’m finally able to complete our connection.{/font}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-    {font=Kenney Rocket.ttf}Which means right now, I {i}need{/i} your help. [preferredName], I have to know...{/font}
+        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Thanks to you finishing my quest, I’m finally able to complete our connection.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    {font=ShareTechMono-Regular.ttf}Which means right now, I {i}need{/i} your help. [preferredName], I have to know...{/font}
 
-    {font=Kenney Rocket.ttf}{i}Do you trust me?{/i}{/font}
+    {font=ShareTechMono-Regular.ttf}{i}Do you trust me?{/i}{/font}
     """
     menu:
         "Yes":
             "[hacker] lets out a sigh of relief."
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}Alright. This next part is gonna feel weird.{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}Alright. This next part is gonna feel weird.{/font}
 
-            {font=Kenney Rocket.ttf}Just promise to stay calm, alright?{/font}
+            {font=ShareTechMono-Regular.ttf}Just promise to stay calm, alright?{/font}
             """
         "No":
             "[hacker] lets out a disappointed sigh."
-            "{font=Kenney Rocket.ttf}[hacker]{/font}" """
-            {font=Kenney Rocket.ttf}I'm sorry [preferredName], but there's no other way...{/font}
+            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            {font=ShareTechMono-Regular.ttf}I'm sorry [preferredName], but there's no other way...{/font}
 
-            {font=Kenney Rocket.ttf}{i}I have to do this{/i}.{/font}
+            {font=ShareTechMono-Regular.ttf}{i}I have to do this{/i}.{/font}
             """
     if noFlashing:
         if config.developer:
@@ -1874,7 +1874,7 @@ label scene9Start:
 
     {i}Something's not right{/i}.
 
-    {i}{font=Kenney Rocket.ttf}I have to go now.{/font}{/i}
+    {i}{font=ShareTechMono-Regular.ttf}I have to go now.{/font}{/i}
 
     {i}But why?{/i}
 
@@ -1892,32 +1892,32 @@ label scene9Start:
 
     {i}I've never been this way before, but it feels oddly familiar{/i}.
 
-    {i}{font=Kenney Rocket.ttf}It must be this way.{/font}{/i}
+    {i}{font=ShareTechMono-Regular.ttf}It must be this way.{/font}{/i}
 
     {i}What is?{/i}
 
     You move as if you've walked this route a thousand times.
 
-    {i}{font=Kenney Rocket.ttf}I have to hurry.{/font}{/i}
+    {i}{font=ShareTechMono-Regular.ttf}I have to hurry.{/font}{/i}
     """
     "{i}Here?{/i}"
     show Hallway with fade:
         align (0.525, 0.51)
         zoom 0.5
     "{i}Won't somebody see me?{/i}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}They only see what I want them to see.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}They only see what I want them to see.{/font}"
     show Hallway:
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 1.5
     "{i}Are you{w=0.5}... in my head?{/i}"
-    "{font=Kenney Rocket.ttf}[hacker]{/font}" "{font=Kenney Rocket.ttf}Always have been.{/font}"
+    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Always have been.{/font}"
     show Hallway:
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 2.5
     """
-    {i}{font=Kenney Rocket.ttf}Almost there...{/font}{/i}
+    {i}{font=ShareTechMono-Regular.ttf}Almost there...{/font}{/i}
 
-    {i}{font=Kenney Rocket.ttf}I can't believe it. This actually might work!{/font}{/i}
+    {i}{font=ShareTechMono-Regular.ttf}I can't believe it. This actually might work!{/font}{/i}
 
     As you open the door, you feel a growing sense of excitement. You cannot tell if it's your own.
     """
