@@ -6,7 +6,6 @@ init python:
         partChoices = range(nTree)
         random.shuffle(partChoices)
         for x in range(nTree):
-            # TODO: maybe make scale dependent on y if I have time
             scale = random.random() * (maxScale - minScale) + minScale
             partChoice = partChoices.pop()
             x = min(880.0/1280.0, random.random() * (1.0 / nTree - 0.2) + (float(partChoice) / nTree))
@@ -29,6 +28,14 @@ init python:
         kanji = "死火亡煩"
         out = ""
         for x in range(length):
+            close = -1
+            close = random.randint(0, 3)
+            if close == 0:
+                tmp = random.randint(24, 32)
+                flip = 1
+                if random.randint(0,1):
+                    flip = -1
+                out += "{size=%s}" % (tmp * flip)
             if japanese:
                 tmp = random.randint(0, 4)
                 if tmp == 0:
@@ -47,6 +54,8 @@ init python:
                     out += random.choice(nonunicode_full)
                 else:
                     out += random.choice(nonunicode_part)
+            if close == 0:
+                out += "{/size}"
         return out
 
     def pulse(pulses, color, t0, xt, dt, in_t, out_t, pause_t=0.0):
@@ -119,7 +128,7 @@ init python:
             renpy.redraw(self, 0)
             return render
         
-    credits = ("Writing", "Samuel France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
+    credits = ("Writing", "Sam France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
     creditText = "{size=76}Credits\n"
     for c in credits:
         if c != "":
