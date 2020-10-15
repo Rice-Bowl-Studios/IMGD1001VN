@@ -2015,7 +2015,7 @@ label scene10Start:
     else:
         show hackerFilter onlayer screens:
             alpha 0.0
-        show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
+        show black with pulse(1, "#fff", 1.5, 1.0, 0.0, 0.1, 1.0, 2.0)
     """
     You wake up on the floor in front of the center console.
 
@@ -2031,13 +2031,14 @@ label scene10Start:
     """
     "Man" "Your 'game' ends here."
     "Unknown Female Voice" "No!"
-    show CorpGuy neutral with fade
+    show CorpGuy neutral
+    show black with pulse(1, "#ffa500", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
     # TODO: explosion sfx
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     """
     Before the man is able to fire another shot, the console nearest him explodes, knocking him to the ground.
 
-    His gun skitters out of reach into the daarkness.
+    His gun skitters out of reach into the darkness.
 
     {i}That voice{/i}...
     """
