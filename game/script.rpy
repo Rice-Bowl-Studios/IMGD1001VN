@@ -134,6 +134,7 @@ define forestName = "White Woods"
 define hackerItemNickname = "<hacker item nickname>"
 define supercomputerName = "<super computer>"
 define hackerNames = ["<name1>", "<name2>", "<name3>", "<embarrassing nickname>"]
+define tmpFlag = False
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
@@ -1793,12 +1794,6 @@ label scene7Orange:
 
 label scene8Start:
     scene black with pixellate
-    if not colorPath:
-        show hackerFilter onlayer screens:
-            alpha 0.0
-            linear 5.0 alpha 1.0
-    else:
-        show hackerFilter onlayer screens
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
@@ -1840,18 +1835,19 @@ label scene8Start:
     menu:
         "Yes":
             "[hacker] lets out a sigh of relief."
-            hacker """
-            {font=ShareTechMono-Regular.ttf}Alright. This next part is gonna feel weird.{/font}
-
-            {font=ShareTechMono-Regular.ttf}Just promise to stay calm, alright?{/font}
-            """
+            hacker "{font=ShareTechMono-Regular.ttf}Alright. This next part is gonna feel weird.{/font}"
+            $ tmpFlag = True
         "No":
             "[hacker] lets out a disappointed sigh."
-            hacker """
-            {font=ShareTechMono-Regular.ttf}I'm sorry [preferredName], but there's no other way...{/font}
-
-            {font=ShareTechMono-Regular.ttf}{i}I have to do this{/i}.{/font}
-            """
+            hacker "{font=ShareTechMono-Regular.ttf}I'm sorry [preferredName], but there's no other way...{/font}"
+            $ tmpFlag = False
+    show hackerFilter onlayer screens:
+        alpha 0.0
+        linear 0.5 alpha 1.0
+    if tmpFlag:
+        hacker "{font=ShareTechMono-Regular.ttf}Just promise to stay calm, alright?{/font}"
+    else:
+        hacker "{font=ShareTechMono-Regular.ttf}{i}I have to do this{/i}.{/font}"
     if noFlashing:
         if config.developer:
             "{cps=0}END SCENE 8{/cps}"
@@ -1864,14 +1860,19 @@ label scene8Start:
     $ renpy.pause(2.0)
     show screen tear(50, 0.25)
     $ renpy.pause(0.5)
-    scene black with pulse(12, "#777", 0.5, 1, 0.1, 0.1, 0.25, 1.0)
     hide screen tear
+    scene whitedrop:
+        alpha 0.0
+        alpha 1.0 alpha 1.0
+    $ renpy.pause(1.0)
     if config.developer:
         "{cps=0}END SCENE 8{/cps}"
 
 label scene9Start:
     play music "audio/Music_1.3.1.mp3" fadeout 1.0 fadein 1.0
-    scene Bedroom with None
+    scene Bedroom:
+        alpha 0.0
+        linear 0.5 alpha 1.0
     show hackerFilter onlayer screens
     $ tmpGlitchText = glitchText(16)
     """
