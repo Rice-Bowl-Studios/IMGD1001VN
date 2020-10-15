@@ -23,7 +23,7 @@ init python:
 
     def glitchText(length, japanese=False, full=False):
         nonunicode_full = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"
-        nonunicode_kenney_rocket = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
+        nonunicode_part = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿıŁłŒœŠšŸŽž"
         hiragana = "あいうおえかきくけこなにぬねのはひふへほまみむめもたちつてとさしすせそがぎぐげごばびぶべぼぱぴぷぺぽだぢづでどざじずぜぞわをん"
         katakana = "アイウエオカキクケコナニヌネノハヒフヘホマミムメモタチツテトサシスセソガギグゲゴバビブベボパピプペポダヂヅデドザジズゼゾワヲン"
         kanji = "死火亡煩"
@@ -41,12 +41,12 @@ init python:
                     if full:
                         out += random.choice(nonunicode_full)
                     else:
-                        out += random.choice(nonunicode_kenney_rocket)
+                        out += random.choice(nonunicode_part)
             else:
                 if full:
                     out += random.choice(nonunicode_full)
                 else:
-                    out += random.choice(nonunicode_kenney_rocket)
+                    out += random.choice(nonunicode_part)
         return out
 
     def pulse(pulses, color, t0, xt, dt, in_t, out_t, pause_t=0.0):

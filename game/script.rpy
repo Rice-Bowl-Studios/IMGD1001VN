@@ -80,7 +80,7 @@ image Boss01 neutral:
     0.33
     repeat
 image Boss02 neutral = "ch_GW_Boss02_neutral.png"
-image Boss02 possessed = "ch_GW_Boss02_POSSESSED.png"
+image Boss02 angry = "ch_GW_Boss02_angry.png"
 image Friend01 angry = im.Crop("ch_GW_Friend01_angry.png", (100, 0, 520, 720))
 image Friend01 happy = im.Crop("ch_GW_Friend01_happy.png", (100, 0, 520, 720))
 image Friend01 neutral = im.Crop("ch_GW_Friend01_neutral.png", (100, 0, 520, 720))
@@ -389,7 +389,7 @@ label startBossAttackChoice3:
     "Only one item appears on your screen."
     show hacker item at truecenter with zoomin
     $ tmpGlitchText = glitchText(16)
-    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}[tmpGlitchText] was added to your inventory{/font}"
+    "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{font=ShareTechMono-Regular.ttf}{color=#0F0}[tmpGlitchText]{/color} was added to your inventory{/font}"
     friendA "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     friendA "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
     playerCharacter "No."
@@ -496,29 +496,31 @@ label startHackerSpace:
     scene Hacker Space with fade
     "Where am I?"
     show GWHacker at center with easeinbottom
-    $ hackerName = "{b}<redacted>{/b}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/font}"
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/font}"
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     $ tmpChosen = -1
     menu:
         "Who are you?":
             $ tmpChosen = 0
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}That's kind of complicated. Could we start with the easy questions please?{/font}"
+            hacker "{font=ShareTechMono-Regular.ttf}That's kind of complicated. Could we start with the easy questions please?{/font}"
         "Did you just read my mind?":
             $ tmpChosen = 1
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Oh, if only it were that simple! What do I look like? Some kind of fortune teller?{/font}
             
             {font=ShareTechMono-Regular.ttf}Let's just say I made an extremely educated guess{/font}
             """
         "How did you know that?":
             $ tmpChosen = 2
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Um... I'm actually a psychic.{/font}
             
             {font=ShareTechMono-Regular.ttf}No, a genie!{/font}
             
             {font=ShareTechMono-Regular.ttf}Or maybe I'm your conscience! Hehe, spooky, right?{/font}
             """
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     menu:
         "Who are you?" if tmpChosen != 0:
             pass
@@ -529,24 +531,26 @@ label startHackerSpace:
     show screen tear
     $ renpy.pause(0.25)
     hide screen tear
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Okay, I think that's enough questioning for today.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Okay, I think that's enough questioning for today.{/font}"
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     "You try to speak, but nothing comes out. It feels as though you are underwater."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Right, now where was I? Let's see, plant the thing, dramatic entrance, obligatory exposition...{/font}
     
     {font=ShareTechMono-Regular.ttf}Ah of course{/font}
     
     {font=ShareTechMono-Regular.ttf}{i}*ahem*{/i}{/font}
     """
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     if playerName != playerUsername:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+        hacker """
         {font=ShareTechMono-Regular.ttf}Welcome to my world, [playerCharacter]! Or should I say [player].{/font}
         
         {font=ShareTechMono-Regular.ttf}Which would you prefer?{/font}
         """
         $ tmpFlag = True
     else:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Welcome to my world, [player].{/font}"
+        hacker "{font=ShareTechMono-Regular.ttf}Welcome to my world, [player].{/font}"
         python:
             preferredName = playerName
             preferredSubjectPronoun = playerSubjectPronoun
@@ -574,24 +578,26 @@ label hackerSpaceNameChoice:
             play sound "audio/error2.ogg"
             $ renpy.pause(0.5)
             hide screen tear
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Hey, what did I say about asking questions?{/font}"
+            hacker "{font=ShareTechMono-Regular.ttf}Hey, what did I say about asking questions?{/font}"
             jump hackerSpaceNameChoice
     
 label afterHackerSpaceNameChoice:
     if playerName != playerUsername:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here [preferredName]. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
+        hacker "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here [preferredName]. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
     else:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}But then, right when I was about to call it off, you came along and found my invitation!{/font}"
+        hacker "{font=ShareTechMono-Regular.ttf}Ya know, I'm so glad you're here. I was really starting to think {i}nobody{/i} would show up to my little party.{/font}"
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}But then, right when I was about to call it off, you came along and found my invitation!{/font}"
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     show hacker item at truecenter with zoomin
     $ tmpGlitchText = glitchText(16, False, True)
     """
-    The mysterious figure gestures toward the [tmpGlitchText], which is now fastened to your wrist
+    The mysterious figure gestures toward the {font=ShareTechMono-Regular.ttf}{color=#0F0}[tmpGlitchText]{/color}{/font}, which is now fastened to your wrist
     
     {i}How did that get there?{/i}
     """
     hide hacker item with zoomout
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}And guess what. The best part is{w=3.0}: it's yours to keep! Consider it a party favor from your new best friend.{/font}
     
     {font=ShareTechMono-Regular.ttf}Oh, that reminds me,{w=1.0} I haven't introduced myself yet! {size=-5}Gosh, what kind of friend doesn't even know their friend's name?{/size}{/font}
@@ -602,16 +608,17 @@ label afterHackerSpaceNameChoice:
     
     {font=ShareTechMono-Regular.ttf}Anything ring a bell? You've probably heard of me before, right? I mean - I'm {i}kind of{/i} a big deal.{/font}
     """
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}" + glitchText(8) + "{/font}"
     "..."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}...{/font}
     
     {font=ShareTechMono-Regular.ttf}?{/font}
     
     {font=ShareTechMono-Regular.ttf}Nothing?{w=0.25} Seriously?{w=0.5} {size=-5}Wow, have I really fallen off that hard?{/size}{/font}
     """
-    $ hackerName = "Medusa"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    $ hackerName = "{font=ShareTechMono-Regular.ttf}Medusa{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}Well, whatever, since we're friends you can call me [hacker]{/font}
     
     {font=ShareTechMono-Regular.ttf}So.. I'm sure you're probably wondering why I invited you here today. Well you see, I actually noticed you and your friends are pretty into that game.{/font}
@@ -638,10 +645,10 @@ label afterHackerSpaceNameChoice:
             $ renpy.pause(0.25)
             hide screen tear
             $ tmpFlag = True
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Awesome! I knew I could count on you [preferredName]!{w=1.0} I mean, what are friends for, right?{/font}"
     if tmpFlag:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}{size=-10}Totally doesn't bother me that you don't really want to help.{/size}{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+        hacker "{font=ShareTechMono-Regular.ttf}{size=-10}Totally doesn't bother me that you don't really want to help.{/size}{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}And don't worry! I promise that when we beat my little game, there's gonna be a special reward, just for you!{/font}
     
     {font=ShareTechMono-Regular.ttf}Alright, [preferredName], it's been a pleasure chatting with you tonight,{/font}
@@ -724,7 +731,7 @@ label scene3Start:
     stop music fadeout 1.0
     $ tmpGlitchText = glitchText(16)
     """
-    You feel the [tmpGlitchText] pulling at your arm.
+    You feel the {font=ShareTechMono-Regular.ttf}{color=#0F0}[tmpGlitchText]{/color}{/font} pulling at your arm.
     
     You try to speak, but nothing comes out.
     
@@ -763,10 +770,10 @@ label scene4Start:
     play music "audio/Music_1.2.1.mp3" fadein 1.0
     scene Hacker Space with fade
     "Am I... dreaming?"
-    show GWHacker at right with easeinright
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Sort of. Depends on where you draw the line between dream and reality.{/font}"
+    show GWHacker with easeintop
+    hacker "{font=ShareTechMono-Regular.ttf}Sort of. Depends on where you draw the line between dream and reality.{/font}"
     "What are you talking about?"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Do you want the short answer?{w=0.5} Or the long technical one?{w=0.5} Ah, screw it, I'll give you both. {size=-5}I do love hearing the sound of my own voice after all.{/size}{/font}
 
     {font=ShareTechMono-Regular.ttf}[preferredName], I don't know what they taught you in school about [digitalWorld],{/font}
@@ -792,7 +799,7 @@ label scene4Start:
     {font=ShareTechMono-Regular.ttf}Don't believe me? Look no further than the first thought you had when I brought you here today.{/font}
     """
     "I thought I was in a dream..."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Exactly! Let me explain...{/font}
 
     {font=ShareTechMono-Regular.ttf}Believe it or not, the suits and ties at [corporation] are pretty clever.{/font}
@@ -808,7 +815,7 @@ label scene4Start:
             pass
         "Is everyone on [digitalWorld] dreaming?":
             pass
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Well, not exactly. It's more like one person {size=-5}the computer{/size} is having some kind of comatose fever-dream, and everyone else,{/font}
     
     {font=ShareTechMono-Regular.ttf}{size=-5}including you and your weird friends,{/size} gets to show up and whisper in the dreamer's ear.{/font}
@@ -822,13 +829,13 @@ label scene4Start:
     {font=ShareTechMono-Regular.ttf}I mean, do you have any idea how much raw data is constantly flowing straight from your brain to the [digitalWorld] all the time?{/font}
     """
     "[preferredName]" "..."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Neither do I! Nobody does! But I have a theory that it's a lot.{/font}"
     menu:
         "Why are you telling me all of this":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}You know if you'd just hold on a minute, I was getting there.{/font}"
+            hacker "{font=ShareTechMono-Regular.ttf}You know if you'd just hold on a minute, I was getting there.{/font}"
         "How do you know all of this?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Oh [preferredName], I'm so glad you asked!{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker "{font=ShareTechMono-Regular.ttf}Oh [preferredName], I'm so glad you asked!{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}In case you haven't noticed, I'm kind of a genius when it comes to the [digitalWorld], {size=-5}and everything else for that matter{/size}.{/font}
     
     {font=ShareTechMono-Regular.ttf}And believe it or not, me and [corporation] actually go way back.{/font}
@@ -858,7 +865,7 @@ label scene4Start:
             pass
         "What makes you so special?":
             pass
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}To be honest, I got {i}really{/i} lucky.{w=0.5} Like I said before, the folks at [corporation] are a pretty clever bunch.{/font}
 
     {font=ShareTechMono-Regular.ttf}So clever in fact, that when they launched the [digitalWorld], they actually created a whole new security system just for me! {size=-5}Flattering, I know.{/size}{/font}
@@ -881,12 +888,12 @@ label scene4Start:
         "Revenge?":
             pass
         "What exactly are you planning?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Hehe, piqued your interest have I? Sorry but you'll just have to wait and see.{/font}
             
             {font=ShareTechMono-Regular.ttf}Wouldn't want to ruin the surprise after all.{/font}
         """
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Let's just say, [corporation] is hiding something about the [digitalWorld].{w=1.0} {i}Something big{/i}.{/font}
 
     {font=ShareTechMono-Regular.ttf}And I'm gonna be the one to expose it!{/font}
@@ -897,15 +904,15 @@ label scene4Start:
         "What do you need me for?":
             pass
         "Is this going to be illegal?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Pfft... no! No... haha... why would you thing that?{w=0.25} I mean, I don't know...{w=0.25} maybe...{w=0.25} {size=-5}it could be.{w=0.25} Do you want it to be?{/size}{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker "{font=ShareTechMono-Regular.ttf}Pfft... no! No... haha... why would you thing that?{w=0.25} I mean, I don't know...{w=0.25} maybe...{w=0.25} {size=-5}it could be.{w=0.25} Do you want it to be?{/size}{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}You see [preferredName], before I can make my next big move, I need you to hurry up and finish your quest.{/font}
 
     {font=ShareTechMono-Regular.ttf}Sorry. I don't mean to sound ungrateful or anything, but there's something really important hiding at the end of that quest I gave you, and I need it ASAP.{/font}
     """
     menu:
         "Why don't you just get it yourself?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Um, in case you haven't noticed, I can't actually enter the [digitalWorld] myself.{/font}
 
             {font=ShareTechMono-Regular.ttf}If I were to be detected by [corporation], everything I've done up until now would be pointless.{/font}
@@ -915,7 +922,7 @@ label scene4Start:
             {font=ShareTechMono-Regular.ttf}Here, take a look.{/font}
             """
         "What is it?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}{size=-5}Hmmm...{w=0.25} how should I explain this{/size}?{/font}
 
             {font=ShareTechMono-Regular.ttf}It's a key (sort of?) to the heart of the [digitalWorld].{/font}
@@ -933,16 +940,16 @@ label scene4Start:
         pos (0.35, 0.99)
         alpha 0.0
         linear 0.25 alpha 1.0
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Look familiar?{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Look familiar?{/font}"
     "[preferredName]" "It looks like the city I live in. Although I don't think I've been to this particular area."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}This is the energy district. Unless you're into nuclear physics or radiation poisoning, you've probably never been here.{/font}
 
     {font=ShareTechMono-Regular.ttf}And this guy definitely doesn't fall into either of those categories.{/font}
     """
     menu:
         "Who is he?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}I'm wondering the same thing.{/font}
 
             {font=ShareTechMono-Regular.ttf}From what I've gathered, he's definitely connected to [corporation].{/font}
@@ -952,7 +959,7 @@ label scene4Start:
             {font=ShareTechMono-Regular.ttf}There's something off about it. It's unlike any I've seen before.{/font}
             """
         "Why are you here?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Oh, I'm not actually {i}here{/i} [preferredName]. I'm just borrowing the local cameras.{/font}
             
             {font=ShareTechMono-Regular.ttf}But to answer your question, I'm here to keep an eye on our sophisticated friend here.{/font}
@@ -961,7 +968,7 @@ label scene4Start:
             
             {font=ShareTechMono-Regular.ttf}And from the looks of his fancy getup, I'd say he's a pretty important one at that.{/font}
             """
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}But that alone doesn't explain the data coming from his headset. There's something seriously off about it.{/font}
 
     {font=ShareTechMono-Regular.ttf}You see, I've been tracking him for a couple days now, but whenever I try and see what's going on inside his head, I get all this weird junk data.{/font}
@@ -979,7 +986,7 @@ label scene4Start:
     $ renpy.pause(4.0)
     hide CorpGuy
     "The man heads inside a large office building."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}!{/font}
 
     {font=ShareTechMono-Regular.ttf}Did you see that [preferredName]? The building he just went in must be one of [corporation]'s secret labs! Oh my god, this could be it!{/font}
@@ -1075,12 +1082,12 @@ label scene5Start:
     friendA "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2}woah{/size} {size=2}-Ahh!{/size}"
     # TODO: twig snap SFX
     "[friendA] slips and falls."
-    show Boss02 possessed
+    show Boss02 angry
     iceBoss "?"
     stop music fadeout 0.5
     friendB "{size=-5}You've got to be kidding me.{/size}"
     hide Boss02
-    show Boss02 possessed:
+    show Boss02 angry:
         zoom 0.7
         align (0.5, 0.5)
         ypos 0.25
@@ -1189,14 +1196,14 @@ label scene5Start:
     hide black
     $ treePos = generateTreePos()
     "{i}I think I'm going in circles{/i}."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I think I'm going in circles.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}I think I'm going in circles.{/font}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     show Hallway:
         alpha 0.0
         zoom 0.5
         linear 15.0 alpha 0.1
     "{i}?{/i}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}You know, when I imagined finding this place in my head, it was a lot cooler.{/font}
 
     {font=ShareTechMono-Regular.ttf}I mean, who would hae thought I'd be infiltrating the world's most top secret facility using a sanitation bot?{/font}
@@ -1223,7 +1230,7 @@ label scene5Start:
     hide black
     $ treePos = generateTreePos()
     "{i}Where am I?{/i}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Come on...{w=0.5} Where is it?{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Come on...{w=0.5} Where is it?{/font}"
     show Hallway:
         linear 8 alpha 0.6
     show black:
@@ -1245,21 +1252,21 @@ label scene5Start:
     $ renpy.pause(0.6)
     hide black
     $ treePos = generateTreePos()
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I've got to hurry before somebody sees me.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}I've got to hurry before somebody sees me.{/font}"
     "[preferredName]" "I'm so freaking lost."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I'm so freaking lost.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}I'm so freaking lost.{/font}"
     show Hallway:
         alpha 0.6
         linear 2.5 alpha 1.0
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}How big can this place be? I must be close. I have to be.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}How big can this place be? I must be close. I have to be.{/font}"
     show Hallway:
         alpha 1.0
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 2.5
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}This... This is it! After so many years. Finally...{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}This... This is it! After so many years. Finally...{/font}"
     "Before [hacker] reaches the door, it begins to open from the other side."
     # TODO: maybe play the solid snake alert sound?
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}{b}!{/b}{/font}
     
     {font=ShareTechMono-Regular.ttf}Not good.{/font}
@@ -1281,7 +1288,7 @@ label scene5Start:
         zoom treePos[2][0]
         pos (treePos[2][1][0], treePos[2][1][1])
     $ del(treePos)
-    show Boss02 possessed
+    show Boss02 angry
     "{i}!{/i}"
     iceBoss "rawr xD" # TODO: replace with roar SFX
     # pause for roar
@@ -1392,20 +1399,20 @@ label scene6Start:
     show GWHacker at center:
         alpha 0.0
         linear 0.5 alpha 1.0
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Now {i}that{/i} was a close call.{/font}
     
     {font=ShareTechMono-Regular.ttf}You're welcome by the way.{/font}
     """
     menu:
         "For what?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}For saving you just new, duh. {size=-5}You should probably be used to it by now, if we're being honest.{/size}{/font}
 
             {font=ShareTechMono-Regular.ttf}Whatever. You can thank me later. Right now, I have a question.{/font}
             """
         "What was that door?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Door? You{w=0.5} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}{/font}
 
             {font=ShareTechMono-Regular.ttf}That was part of [corporation]'s lab.{/font}
@@ -1418,7 +1425,7 @@ label scene6Start:
 
             {font=ShareTechMono-Regular.ttf}I found something, but before I tell you, I have a question.{/font}
             """
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}[preferredName], be honest{/font}
     
     {font=ShareTechMono-Regular.ttf}What do {i}you{/i} think about hte whole [digitalWorld]?{/font}
@@ -1426,7 +1433,7 @@ label scene6Start:
     $ tmpFlag = False
     menu:
         "I like it.":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}You know, if I wasn't in my current position, I think I might really love this place.{/font}
 
             {font=ShareTechMono-Regular.ttf}I mean, a whole world where you can see your friends all the time, and have the same freedom as a dream?{/font}
@@ -1434,14 +1441,14 @@ label scene6Start:
             {font=ShareTechMono-Regular.ttf}Sounds pretty nice to me.{/font}
             """
         "I hate it.":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}I get that, there's so much about the [digitalWorld] that even I don't know.{/font}
 
             {font=ShareTechMono-Regular.ttf}I mean, imagine if somebody else could do what I can. They'd be able to get away with whatever they want.{/font}
             """
         "Why do you ask?":
             $ tmpFlag = True
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Just curious.{/font}
 
             {font=ShareTechMono-Regular.ttf}I don't really get out of the house much, so I wonder how normal people like you must feel about it.{/font}
@@ -1470,14 +1477,14 @@ label scene6Start:
                 pass
             "I'd prefer not to say.":
                 pass
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I can understand that. One way or another, I hope we find some answers at the end of this.{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+        hacker "{font=ShareTechMono-Regular.ttf}I can understand that. One way or another, I hope we find some answers at the end of this.{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}Anyways [preferredName], I've {i}finally{/i} found what I'm looking for. Which means we're almost at the end of our little quest.{/font}
 
     {font=ShareTechMono-Regular.ttf}I have to warn you, from here on out, what we're doing is {i}not{/i} a game.{/font}
     """
     "[preferredName]" "..."
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}I'm serious, what [corporation]'s been doing in that lab is...{/font}
 
     {font=ShareTechMono-Regular.ttf}It's just really not cool! Alright?{/font}
@@ -1488,7 +1495,7 @@ label scene6Start:
     """
     menu:
         "What is [corporation] doing exactly?":
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}I-{/font}
 
             {font=ShareTechMono-Regular.ttf}They-{/font}
@@ -1507,7 +1514,7 @@ label scene6Start:
                 "OK, what do I have to do?":
                     jump scene6PurpleCont
                 "No. Tell me what's going on {b}now{/b}":
-                    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+                    hacker """
                     {font=ShareTechMono-Regular.ttf}I-{w=0.5} I...{w=0.5} Listen, I don't have time for this!{/font}
                     
                     {font=ShareTechMono-Regular.ttf}Are you gonna help me or not?{/font}
@@ -1516,7 +1523,7 @@ label scene6Start:
                 "I guess.":
                     jump scene6PurpleCont
                 "No way!":
-                    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+                    hacker """
                     {font=ShareTechMono-Regular.ttf}Ugh, {i}fine{/i}. Sorry [preferredName], I tried playing nice, but this might be my only change.{/font}
 
                     {font=ShareTechMono-Regular.ttf}And I am {i}not{/i} going to miss it!{/font}
@@ -1528,7 +1535,7 @@ label scene6Start:
             jump scene6PurpleCont
 
 label scene6PurpleCont:
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}Great! All you have to do is go back into the forest, and you should find what you're looking for pretty fast.{/font}
     
     {font=ShareTechMono-Regular.ttf}Oh, and this time, don't bring any of your pesky friends with you! {size=-5}Sorry, but this last part is single-player only.{/size}{/font}
@@ -1795,7 +1802,7 @@ label scene8Start:
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+    hacker """
     {font=ShareTechMono-Regular.ttf}This is it [player]. Before we continue{w=1.0}, I have to apologize. I haven't been 100 percent honest with you.{/font}
 
     {font=ShareTechMono-Regular.ttf}You may already know by now, but the truth is, the [forestName] was never supposed to be part of the game.{/font}
@@ -1805,7 +1812,7 @@ label scene8Start:
     {font=ShareTechMono-Regular.ttf}It's part of {i}me{/i}.{/font}
     """
     playerCharacter "?"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}And now that you've found it, I fear we're both in terrible danger.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}And now that you've found it, I fear we're both in terrible danger.{/font}"
     playerCharacter "???"
     $ tmpChosen = "Look"
     menu:
@@ -1814,18 +1821,18 @@ label scene8Start:
         "What do you mean the [forestName] is {i}part of you?{/i}":
             pass
         "What happened to the [digitalWorld]? To my friends?" if tmpFlag:
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Sorry, when you refused to finish the quest, I got desperate.{/font}
 
             {font=ShareTechMono-Regular.ttf}But don't worry! Your friends will be fine.{w=1.0} {size=-5}Probably.{/size}{/font}
             """
             $ tmpChosen = "Anyways"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}[tmpChosen], I don't have much time, but I promise everything will make sense soon.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}[tmpChosen], I don't have much time, but I promise everything will make sense soon.{/font}"
     if colorPath:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}I’m finally able to complete our connection now.{/font}"
+        hacker "{font=ShareTechMono-Regular.ttf}I’m finally able to complete our connection now.{/font}"
     else:
-        "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Thanks to you finishing my quest, I’m finally able to complete our connection.{/font}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+        hacker "{font=ShareTechMono-Regular.ttf}Thanks to you finishing my quest, I’m finally able to complete our connection.{/font}"
+    hacker """
     {font=ShareTechMono-Regular.ttf}Which means right now, I {i}need{/i} your help. [preferredName], I have to know...{/font}
 
     {font=ShareTechMono-Regular.ttf}{i}Do you trust me?{/i}{/font}
@@ -1833,14 +1840,14 @@ label scene8Start:
     menu:
         "Yes":
             "[hacker] lets out a sigh of relief."
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}Alright. This next part is gonna feel weird.{/font}
 
             {font=ShareTechMono-Regular.ttf}Just promise to stay calm, alright?{/font}
             """
         "No":
             "[hacker] lets out a disappointed sigh."
-            "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" """
+            hacker """
             {font=ShareTechMono-Regular.ttf}I'm sorry [preferredName], but there's no other way...{/font}
 
             {font=ShareTechMono-Regular.ttf}{i}I have to do this{/i}.{/font}
@@ -1880,7 +1887,7 @@ label scene9Start:
 
     You walk toward the door.
 
-    As you reach for the handle, you notice the [tmpGlitchText] on your wrist.
+    As you reach for the handle, you notice the {font=ShareTechMono-Regular.ttf}{color=#0F0}[tmpGlitchText]{/color}{/font} on your wrist.
 
     {i}Is this real?{/i}
     """
@@ -1905,12 +1912,12 @@ label scene9Start:
         align (0.525, 0.51)
         zoom 0.5
     "{i}Won't somebody see me?{/i}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}They only see what I want them to see.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}They only see what I want them to see.{/font}"
     show Hallway:
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 1.5
     "{i}Are you{w=0.5}... in my head?{/i}"
-    "{font=ShareTechMono-Regular.ttf}[hacker]{/font}" "{font=ShareTechMono-Regular.ttf}Always have been.{/font}"
+    hacker "{font=ShareTechMono-Regular.ttf}Always have been.{/font}"
     show Hallway:
         align (0.525, 0.51)
         easeout_quad 10.0 zoom 2.5
