@@ -124,6 +124,7 @@ image darkOverlay = "bg_forest_darkoverlay.png"
 image snowTree1 = "bg_GW_snowtree1.png"
 image snowTree2 = "bg_GW_snowtree2.png"
 image snowTree3 = "bg_GW_snowtree3.png"
+image hackerFilter = "hacker_filter.png"
 
 # Other game vars
 define digitalWorld = "NeuralScape"
@@ -1748,12 +1749,13 @@ label scene7Orange:
         align (0.52, 0.95)
         alpha 0.0
         linear 0.1 alpha 1.0
+    friendA "So what should we do now?"
+    show hackerFilter:
+        alpha 0.0
+        linear 5.0 alpha 1.0
     friendA """
-    So what should we do now?
-
     All we found in the forest was a freaking [iceBoss]
-    """
-    friendA """
+    
     ?
 
     What the...
@@ -1784,6 +1786,12 @@ label scene7Orange:
 
 label scene8Start:
     scene black with pixellate
+    if not colorPath:
+        show hackerFilter onlayer screens:
+            alpha 0.0
+            linear 5.0 alpha 1.0
+    else:
+        show hackerFilter onlayer screens
     "{i}Where am I?{/i}"
     "{i}I can't feel my body{/i}"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
@@ -1857,6 +1865,7 @@ label scene8Start:
 label scene9Start:
     play music "audio/Music_1.3.1.mp3" fadeout 1.0 fadein 1.0
     scene Bedroom with None
+    show hackerFilter onlayer screens
     $ tmpGlitchText = glitchText(16)
     """
     {i}I'm...{w=0.5} home?{/i}
@@ -1877,6 +1886,7 @@ label scene9Start:
     """
     "You leave your room and step outside"
     scene City with fade
+    show hackerFilter onlayer screens
     """
     You begin walking down the street.
 
@@ -1917,6 +1927,7 @@ label scene9Start:
 label scene10Start:
     play music "audio/Music_3.11.1.mp3" fadeout 1.0 fadein 1.0
     scene Prison with fade
+    show hackerFilter onlayer screens
     """
     You appear to be in some kind of server room.
 
@@ -1986,7 +1997,11 @@ label scene10Start:
     "Unknown Male Voice" "Hey! Stop right there!"
     stop music fadeout 1.0
     play sound "audio/9_mm_gunshot.wav"
-    # TODO: hide hacker filter if I add one
+    show hackerFilter:
+        alpha 1.0
+        linear 1.0 alpha 0.0
+    $ renpy.pause(1.0)
+    hide hackFilter
     if noFlashing:
         "The man shoots you"
     show black with pulse(1, "#fff", 0.0, 1.0, 0.0, 0.1, 0.5, 2.0)
