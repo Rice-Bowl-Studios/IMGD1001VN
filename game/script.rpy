@@ -22,15 +22,13 @@ define gameLog = Character("{font=ShareTechMono-Regular.ttf}{color=#BEFF52}GameL
 define hacker = Character("[hackerName]")
 
 # BG IMG
-image Game Tavern = "bg_GW_GameTavern.png"
 image Game World Arena 01 = "bg_GW_GameWorldArena01.png"
-image Game World Arena 02 = "bg_GW_GameWorldArena02.png"
-image Generic Game Env = "bg_GW_GenericGameEnvironment.png"
 image Forest = "bg_GW_forest.png"
 image Hacker Space = "bg_GW_HackerSpace.png"
 image Bedroom = "bg_RW_Bedroom.png"
 image City = "bg_RW_City.png"
 image City Hidden = "bg_RW_City_hidden.png"
+image City Future = "bg_RW_City_future.png"
 image Prison = "bg_RW_Prison.png"
 image Hallway = "bg_RW_Hallway.png"
 image crash = "bg_GW_crash.png"
@@ -90,7 +88,7 @@ image Friend02 angry = im.Crop("ch_GW_Friend02_angry.png", (100, 0, 520, 720))
 image Friend02 happy = im.Crop("ch_GW_Friend02_happy.png", (100, 0, 520, 720))
 image Friend02 neutral = im.Crop("ch_GW_Friend02_neutral.png", (100, 0, 520, 720))
 image Friend02 sad = im.Crop("ch_GW_Friend02_sad.png", (100, 0, 520, 720))
-image GWHacker:
+image Hacker game:
     "ch_GW_Medusa1.png"
     0.15
     "ch_GW_Medusa2.png"
@@ -100,7 +98,8 @@ image GWHacker:
     "ch_GW_Medusa4.png"
     0.15
     repeat
-image RWHacker = "ch_RW_Hacker.png"
+image Hacker future = "ch_RW_Hacker_future.png"
+image Hacker real = "ch_RW_Hacker.png"
 image CorpGuy neutral = im.Crop("ch_RW_CorpGuy_neutral.png", (200, 0, 420, 720))
 image CorpGuy angry = im.Crop("ch_RW_CorpGuy_angry.png", (140, 0, 480, 720))
 
@@ -129,11 +128,12 @@ image hackerFilter = "hacker_filter.png"
 
 # Other game vars
 define fellAsleep = False
-define tmpFlag = False # Only need to hard define for jumper
+define tmpFlag = False
 
 # Non game vars
 image credit = Text(creditText, text_align=0.5)
 image Rice Bowl = Composite((525, 314), (121, 0), "rice_bowl_studios_PLACEHOLDER.png")
+image Brain Logo = Composite((1024, 275), (0, 0), "brain.png", (235, 60), Text("{size=164}{font=ShareTechMono-Regular.ttf}{color=#0F0}HARDWIRED{/color}{/font}{/size}"))
 
 # Other vars
 define noFlashing = True
@@ -153,7 +153,14 @@ label splashscreen:
             linear 3.0 rotate 480
     $ renpy.pause(4.0)
     scene black with fade
-    # TODO: game splash (minimal priority)
+    show Brain Logo:
+        align (0.5, 0.5)
+        alpha 0.0
+        easein 0.5 alpha 1.0
+        0.25
+        easeout 1.0 alpha 0.0
+    $ renpy.pause(2.0)
+    hide Brain Logo
     return
 
 label main_menu:
@@ -163,7 +170,6 @@ label start:
     $ suppress_overlay = False
     if config.developer:
         "{cps=0}GAME START{/cps}"
-    # TODO: character creation screen with login filling out as you enter (minimal priority)
     menu:
         "{cps=0}{font=ShareTechMono-Regular.ttf}This game has flashing and strobing, which can cause seizures. Would you like to disable them?{/font}{/cps}"
         "{font=ShareTechMono-Regular.ttf}Yes{/font}":
@@ -224,14 +230,14 @@ label start:
 
 label startBossFight:
     if config.developer:
-        call jumper from _call_jumper # Scene jumper
+        call jumper from _call_jumper
     play music "audio/Music_1.1.1.mp3" fadein 1.5
     scene Game World Arena 01
-    show Boss01 neutral: # Move Boss to the right position and anchor at center for zoomout transition
+    show Boss01 neutral:
         anchor (0.5, 0.5)
         pos (0.719, 0.5)
     show Friend01 angry at left:
-        xzoom -1.0 # Flip image
+        xzoom -1.0
     show black:
         0.1
         linear 0.25 alpha 0.0
@@ -248,8 +254,8 @@ label startBossFight:
     "{color=#F94239}[friendA]{/color}" "Ugh! Why's this taking so long? Where the heck [tmpChosen] [playerCharacterSubjectPronoun]?"
     startBoss "HAHAHAHA THERE IS NO HOPE FOR YOU PUNY MORTAL!"
     hide black
-    play sound "audio/mirror_shattering.wav"
-    show Friend01 neutral with vpunch # Call vpunch without changing images to shake the screen
+    play sound "audio/SFX_01.wav"
+    show Friend01 neutral with vpunch
     "{color=#F94239}[friendA]{/color}" "Damn, my weapon's almost broken! I can't stay here much longer."
     "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=ShareTechMono-Regular.ttf}[playerCharacter] has entered the area.{/font}{/color}"
     show Friend01 happy
@@ -278,14 +284,13 @@ label startBossFight:
         ease 0.05 zoom 0.9 xoffset 100
         ease 0.1 zoom 1.0 xoffset 0
     $ renpy.pause(0.15)
-    play sound "audio/swordMetal6.ogg"
+    play sound "audio/SFX_02.wav"
     show redBar:
-        linear 0.25 size (360 * 3 / 4, 90) # Scale down hp bar to show 75% left
+        linear 0.25 size (360 * 3 / 4, 90)
     show Friend01 angry:
         ease 0.35 xalign 0.0
         ease 0.25 zoom 1.0
     "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=ShareTechMono-Regular.ttf}[friendA]'s Legendary Mace has shattered into a million pieces.{/font}{/color}"
-    # TODO: weapon break sfx
     "{color=#F94239}[friendA]{/color}" "Shit!"
     "{color=#F94239}[friendA]{/color}" "I don't get it. Our level is way higher than his. Shouldn't this fight be easy?"
     menu:
@@ -304,7 +309,7 @@ label startBossAttackChoice:
                 ease 0.1 zoom 0.9 xoffset 100
             $ renpy.pause(0.1)
             show redBar:
-                linear 0.25 size (360 * 1 / 2, 90) # bring hp bar to 50%
+                linear 0.25 size (360 * 1 / 2, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
             "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}{/color}"
@@ -326,7 +331,7 @@ label startBossAttackChoice2:
                 ease 0.1 zoom 0.9 xoffset 100
             $ renpy.pause(0.1)
             show redBar:
-                linear 0.25 size (360 / 4, 90) # bring hp bar to 25%
+                linear 0.25 size (360 / 4, 90)
             show Boss01 neutral:
                 ease 0.1 zoom 1.0 xoffset 0
             "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}{/color}"
@@ -352,8 +357,7 @@ label startBossAttackChoice3:
             show Boss01 neutral:
                 ease 0.25 zoom 1.0
             jump startBossAttackChoice3
-    play sound "audio/swordMetal6.ogg"
-    show Boss01 angry: # Shake Boss01 up and down at odd intervals to give the idea of randomness
+    show Boss01 angry:
         parallel:
             ease 0.1 zoom 0.9 xoffset 100
         parallel:
@@ -370,9 +374,10 @@ label startBossAttackChoice3:
             repeat
     $ renpy.pause (0.1)
     show redBar:
-        linear 0.25 size (0, 90) # bring hp bar to 0%
+        linear 0.25 size (0, 90)
     "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=ShareTechMono-Regular.ttf}Critical Hit!{/font}{/color}"
     "{color=#F94239}[friendA]{/color}" "What the-"
+    play sound "audio/SFX_03.wav"
     startBoss "AAAARRRGGGGHHHHH I WILL SEE YOU IN THE ETERNAL FLAMES!!!"
     hide redBar
     hide Boss01 with zoomout
@@ -392,10 +397,10 @@ label startBossAttackChoice3:
     "{color=#F94239}[friendA]{/color}" "Ooo maybe this is-"
     "{color=#F94239}[friendA]{/color}" "Nah, I got nothing. How about you? Anything good?"
     "Only one item appears on your screen."
-    show hacker item with zoomin: # Show hacker item at right position with anchor in center
+    show hacker item with zoomin:
         anchor (0.5, 0.5)
         pos (0.719, 0.5)
-    $ tmpGlitchText = glitchText(16, False, False) # Generate glitched looking text
+    $ tmpGlitchText = glitchText(16, False, False)
     "{font=ShareTechMono-Regular.ttf}[gameLog]{/font}" "{color=#E9FEC7}{font=VT323-Regular.ttf}{size=28}{color=#0F0}[tmpGlitchText]{/color}{/size}{/font} {font=ShareTechMono-Regular.ttf}was added to your inventory{/font}{/color}"
     "{color=#F94239}[friendA]{/color}" "That's all you got? God, [friendB]'s gonna get a kick outta this one."
     "{color=#F94239}[friendA]{/color}" "Hey wait. What's up with it's name? I can't read it on my screen. Can you?"
@@ -403,10 +408,10 @@ label startBossAttackChoice3:
     "{color=#F94239}[friendA]{/color}" "Huh, weird. Well, maybe [friendB] knows something about it-{w=0.4}{nw}"
     stop music fadeout 0.5
     show screen tear
-    # TODO: play sfx 01 glitching
+    play sound "audio/SFX_04.mp3"
     $ renpy.pause(1.0)
     hide screen tear
-    play sound "audio/computer_error_alert.wav"
+    play sound "audio/SFX_05.wav"
     scene black
     show crash at truecenter with vpunch
     $ renpy.pause(1.5)
@@ -427,7 +432,7 @@ label startRealWorld:
     {i}What {i}was{/i} that weird bracelet item?{/i}
     """
     $ renpy.music.set_pause(True)
-    play sound "<to 2.5>audio/phone_ringing.wav"
+    play sound "<to 2.5>audio/SFX_06.wav"
     $ renpy.pause(2)
     stop sound fadeout 0.5
     $ renpy.music.set_pause(False)
@@ -518,7 +523,7 @@ label startHackerSpace:
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     scene Hacker Space with fade
     "Where am I?"
-    show GWHacker at center with easeinbottom
+    show Hacker game at center with easeinbottom
     $ hackerName = "{font=VT323-Regular.ttf}{size=28}" + glitchText(8) + "{/size}{/font}"
     "{color=#0F0}[hacker]{/color}" "{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/size}{/font}{/color}"
     $ hackerName = "{font=VT323-Regular.ttf}{size=28}" + glitchText(8) + "{/size}{/font}"
@@ -821,7 +826,7 @@ label scene4Start:
     play music "audio/Music_1.2.1.mp3" fadein 1.0
     scene Hacker Space with fade
     "Am I... dreaming?"
-    show GWHacker with easeintop
+    show Hacker game with easeintop
     "{i}!{/i}"
     "{color=#0F0}[hacker]{/color}" "{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Sort of. Depends on where you draw the line between dream and reality.{/size}{/font}{/color}"
     "{color=#88F9F4}[player]{/color}" "What are you talking about?"
@@ -1148,7 +1153,7 @@ label scene5Start:
     "{color=#F94239}[friendA]{/color}" "{size=-5}Hey, [friendB].{/size}"
     "{color=#2B95F8}[friendB]{/color}" "{size=-5}Shhh.{/size}"
     "{color=#F94239}[friendA]{/color}" "{size=-5}I just wanted to ask you-{/size}{size=-1}Wa-{/size} {size=-2}woah{/size} {size=2}-Ahh!{/size}"
-    # TODO: twig snap SFX
+    play sound  "audio/SFX_07.wav"
     "[friendA] slips and falls on the ice."
     show Boss02 angry
     iceBoss "?"
@@ -1161,8 +1166,7 @@ label scene5Start:
         ypos 0.25
         linear 0.5 zoom 1 ypos 0.5
     "{i}The [iceBoss] is heading straight at us. This is not good.{/i}"
-    # I hate myself for doing this, but it's kind of funny
-    iceBoss "rawr uwu" # TODO: replace with roar SFX
+    play sound "audio/SFX_08.wav"
     "{color=#2B95F8}[friendB]{/color}" "New plan. Everybody run!"
     scene Forest Snow
     show black onlayer overlay:
@@ -1332,8 +1336,8 @@ label scene5Start:
     show Boss02 angry:
         align (0.5, 0.5)
     "{i}!{/i}"
-    iceBoss "rawr xD" # TODO: replace with roar SFX
-    # pause for roar
+    play sound "audio/SFX_08.wav"
+    $ renpy.pause(2.0)
     hide black
     show HP at top with easeintop:
         size (1280, 90)
@@ -1363,12 +1367,14 @@ label scene5Start:
             pass
     show redBar:
         linear 0.25 size (1280 * 90 / 100, 90)
-    "[iceBoss] attacks."
     """
+    [iceBoss] attacks.
+    
     {i}This is really bad. I won't survive another attack like that{/i}.
-
-    {i}I guess this is it{/i}...
     """
+    play sound "audio/SFX_08.wav"
+    $ renpy.pause(0.5)
+    "{i}I guess this is it{/i}..."
     window hide
     show hacker item with zoomin:
         anchor (0.5, 0.5)
@@ -1451,7 +1457,7 @@ label scene5HalfStart:
 label scene6Start:
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     scene Hacker Space with pixellate
-    show GWHacker at center:
+    show Hacker game at center:
         alpha 0.0
         linear 0.5 alpha 1.0
     "{color=#0F0}[hacker]{/color}" """
@@ -1466,9 +1472,9 @@ label scene6Start:
 
             {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Whatever. You can thank me later. Right now, I have a question.{/size}{/font}{/color}
             """
-        "What was that door?":
+        "What was that hallway?":
             "{color=#0F0}[hacker]{/color}" """
-            {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Door? Y-you{w=0.25} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}{/size}{/font}{/color}
+            {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Hallway? Y-you{w=0.25} saw that?{w=0.5}{size=-5}Weird. I guess things are working out quicker than I thought.{/size}{/size}{/font}{/color}
 
             {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}That was part of NB-Co's lab.{/size}{/font}{/color}
 
@@ -1902,7 +1908,7 @@ label scene8Start:
         "{cps=0}END SCENE 8{/cps}"
 
 label scene9Start:
-    play music "audio/Music_1.3.1.mp3" fadeout 1.0 fadein 1.0
+    play music "audio/Music_3.9.1.mp3" fadeout 1.0 fadein 1.0
     scene Bedroom:
         alpha 0.0
         linear 0.5 alpha 1.0
@@ -1946,7 +1952,6 @@ label scene9Start:
     {i}{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}I have to hurry.{/size}{/font}{/color}{/i}
     """
     scene City
-    #show hackerFilter onlayer screens
     hide black
     "{i}Here?{/i}"
     show Hallway with fade:
@@ -2012,7 +2017,7 @@ label scene10Start:
     scene Prison Alert
     $ renpy.pause(5.0)
     scene black
-    show RWHacker:
+    show Hacker real:
         zoom 0.5
         anchor (0.5, 0.5)
         pos (0.475, 0.4)
@@ -2052,7 +2057,7 @@ label scene10Start:
         easein 1.0 xpos 0.85
     "Unknown Man" "Hey! Stop right there!"
     stop music fadeout 1.0
-    play sound "audio/9_mm_gunshot.wav"
+    play sound "audio/SFX_09.wav"
     if noFlashing:
         show hackerFilter onlayer screens:
             linear 1.0 alpha 0.0
@@ -2078,7 +2083,7 @@ label scene10Start:
     "Unknown Female Voice" "No!"
     show CorpGuy neutral
     show black with pulse(1, "#ffa500", 0.0, 1.0, 0.0, 0.1, 0.5, 0.0)
-    # TODO: explosion sfx
+    play sound "<0.3 to>audio/SFX_10.wav"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     """
     Before the man is able to fire another shot, the console nearest him explodes, knocking him to the ground.
@@ -2257,7 +2262,8 @@ label end1:
         easein 0.5 alpha 1.0
     $ renpy.pause(1.0)
     play music "audio/Music_3.12.1.mp3" fadeout 1.0 fadein 1.0
-    scene City Hidden with fade
+    play sound "audio/SFX_11.wav"
+    scene City Future with fade
     """
     {i}The streets are even more crowded than usual today{/i}.
 
@@ -2265,7 +2271,7 @@ label end1:
 
     {i}A lot has changed since that day{/i}...
     """
-    # TODO: show hacker
+    show Hacker future at right
     "{color=#0F0}[hacker]{/color}" """
     Hey [player], thanks for meeting me here.
 

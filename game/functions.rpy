@@ -72,8 +72,8 @@ init python:
         if pause_t > 0:
             out += [Pause(pause_t), False]
         return MultipleTransition(out)
-    
-    # Lines 41-94 and 104-108 are taken and modified from a decompiled version of Doki Doki Literature Club
+
+    # Lines 76-129 and 139-144 are taken and modified from a decompiled version of Doki Doki Literature Club
     def screenshot_srf():
         srf = renpy.display.draw.screenshot(None, False)
         return srf
@@ -91,7 +91,7 @@ init python:
             self.offset = 0
             self.offsetMin = offsetMin
             self.offsetMax = offsetMax
-        
+
         def update(self, st):
             st = st % (self.offTime + self.onTime)
             if st > self.offTime and self.offset == 0:
@@ -117,7 +117,7 @@ init python:
             tearpoints.sort()
             for i in range(number+1):
                 self.pieces.append(TearPiece(tearpoints[i], tearpoints[i+1], offtimeMult, ontimeMult, offsetMin, offsetMax))
-        
+
         def render(self, width, height, st, at):
             render = renpy.Render(self.width, self.height)
             render.blit(self.srf, (0,0))
@@ -127,7 +127,7 @@ init python:
                 render.blit(subsrf, (piece.offset, piece.startY))
             renpy.redraw(self, 0)
             return render
-        
+
     credits = ("Writing", "Sam France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
     creditText = "{size=76}Credits\n"
     for c in credits:
@@ -185,5 +185,5 @@ label jumper:
                 "Kill":
                     jump kill
                 "Back":
-                    jump startBossFight
+                    jump jumper
     return
