@@ -128,7 +128,7 @@ init python:
             renpy.redraw(self, 0)
             return render
 
-    credits = ("Writing", "Sam France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("metalPot3.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Space Cadet.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Mission Plausible.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("phone_ringing.wav, http://soundbible.com/1518-Phone-Ringing.html", ""), ("9_mm_gunshot.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("mirror_shattering.wav, http://soundbible.com/994-Mirror-Shattering.html", ""), ("computer_error_alert.wav, http://soundbible.com/1540-Computer-Error-Alert.html", "")
+    credits = ("Writing", "Sam France"), ("Art", "Conor Dolan"), ("Audio", "Ryan Darcey"), ("Programming", "Dennis James Stelmach"), ("External Assets", ""), ("click1.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("swordMetal6.ogg, Kenney Game Assets, Kenney, https://kenney.itch.io/kenney-game-assets-1", ""), ("Music by Eric Matyas", "www.soundimage.org"), ("Crusaders Approaching", "https://soundimage.org/epic-battle/"), ("Corporate Ladder", "https://soundimage.org/dance-techno/"), ("Game Menu", "https://soundimage.org/looping-music/"), ("More Freaky Things This Way Come", "https://soundimage.org/dark-ominous/"), ("The Rise of the Mech Beings", "https://soundimage.org/dark-ominous/"), ("Midnight Mist", "https://soundimage.org/dark-ominous-2/"), ("The Key to the Kingdom", "https://soundimage.org/fantasy-10/"), ("The Island of Dr. Sinister", "https://soundimage.org/dark-ominous/"), ("More Sewer Creepers", "https://soundimage.org/dark-ominous-2/"), ("Epilogue", "https://soundimage.org/drama/"), ("", "http://soundbible.com/1467-Grenade-Explosion.html"), ("", "http://soundbible.com/994-Mirror-Shattering.html"), ("", "http://soundbible.com/2127-Dragon-Fire-Breath-and-Roar.html"), ("", "https://www.freesoundslibrary.com/glitch-sounds/"), ("", "http://soundbible.com/1540-Computer-Error-Alert.html"), ("", "http://soundbible.com/1518-Phone-Ringing.html"), ("", "http://soundbible.com/48-Branch-Break.html"), ("", "http://soundbible.com/1282-Lion-Roar.html"), ("", "http://soundbible.com/2120-9mm-Gunshot.html"), ("", "http://soundbible.com/283-Molotov-Cocktail-Bomb.html"), ("", "http://soundbible.com/2175-Street.html")
     creditText = "{size=76}Credits\n"
     for c in credits:
         if c != "":
@@ -144,9 +144,9 @@ screen tear(number=10, offtimeMult=1, ontimeMult=1, offsetMin=0, offsetMax=50, s
         on "hide" action Function(hide_windows_enabled, enabled=True)
 
 label credits:
-    $ credits_speed = 30
+    $ credits_speed = 60
     scene black with dissolve
-    show credit at Move((0.5, 7.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
+    show credit at Move((0.5, 13.0), (0.5, 0.0), credits_speed, repeat=False, bounce=False, xanchor="center", yanchor="bottom")
     with Pause(credits_speed + 2, hard=True)
     return
 
