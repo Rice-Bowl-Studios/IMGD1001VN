@@ -157,9 +157,9 @@ label splashscreen:
         align (0.5, 0.5)
         alpha 0.0
         easein 0.5 alpha 1.0
-        0.25
+        1.0
         easeout 1.0 alpha 0.0
-    $ renpy.pause(2.0)
+    $ renpy.pause(3.0)
     hide Brain Logo
     return
 
