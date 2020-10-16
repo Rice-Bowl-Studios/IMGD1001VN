@@ -24,7 +24,7 @@ define hacker = Character("[hackerName]")
 # BG IMG
 image Game World Arena 01 = "bg_GW_GameWorldArena01.png"
 image Forest = "bg_GW_forest.png"
-image Hacker Space = "bg_GW_HackerSpace.png"
+image HackerSpace = "bg_GW_HackerSpace.png"
 image Bedroom = "bg_RW_Bedroom.png"
 image City = "bg_RW_City.png"
 image City Hidden = "bg_RW_City_hidden.png"
@@ -521,9 +521,9 @@ label startRealWorld:
 
 label startHackerSpace:
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
-    scene Hacker Space with fade
+    scene HackerSpace with fade
     "Where am I?"
-    show Hacker game at center with easeinbottom
+    show Hacker game at truecenter with easeinbottom
     $ hackerName = "{font=VT323-Regular.ttf}{size=28}" + glitchText(8) + "{/size}{/font}"
     "{color=#0F0}[hacker]{/color}" "{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Good question. From what I can see, I'm pretty sure you're in a bedroom.{/size}{/font}{/color}"
     $ hackerName = "{font=VT323-Regular.ttf}{size=28}" + glitchText(8) + "{/size}{/font}"
@@ -754,7 +754,11 @@ label scene3Start:
         "The person put this thing on my wrist.":
             pass
     show hacker item at truecenter with zoomin
-    "{color=#F94239}[friendA]{/color}" "Oh yeah, I forgot about that. After [playerCharacter] killed [startBoss],\n[playerCharacterSubjectPronoun] picked up that weird item. [friendB]. Have you ever seen anything like it, [friendB]?"
+    "{color=#F94239}[friendA]{/color}" """
+    Oh yeah, I forgot about that. After [playerCharacter] killed [startBoss], [playerCharacterSubjectPronoun] picked up that weird item. [friendB].
+    
+    Have you ever seen anything like it, [friendB]?
+    """
     "{color=#2B95F8}[friendB]{/color}" "No. It looks just like any normal accessory, but it has no name and{w=0.25} - Wait. That's strange..."
     "{color=#2B95F8}[friendB]{/color}" "It's identified as a quest item?"
     "{color=#F94239}[friendA]{/color}" "If it's a quest item, then it must be important! You really haven't seen it before [friendB]? I thought you knew everything there is to know about {color=#BEFF52}Hero's Fantasy Online{/color}."
@@ -824,7 +828,7 @@ label scene3Start:
 
 label scene4Start:
     play music "audio/Music_1.2.1.mp3" fadein 1.0
-    scene Hacker Space with fade
+    scene HackerSpace with fade
     "Am I... dreaming?"
     show Hacker game with easeintop
     "{i}!{/i}"
@@ -992,7 +996,7 @@ label scene4Start:
 
             {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}I actually wanted to take you on a little field trip...{/size}{/font}{/color}
             """
-    scene City with pixellate
+    scene City Hidden with pixellate
     "{color=#0F0}[hacker]{/color}" "{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Look familiar?{/size}{/font}{/color}"
     "{i}It looks like the city I live in. Although I don't think I've been to this particular area.{/i}"
     "{color=#0F0}[hacker]{/color}" """
@@ -1046,6 +1050,7 @@ label scene4Start:
         linear 0.5 alpha 0.0
     $ renpy.pause(4.0)
     hide CorpGuy
+    scene City
     "The man heads inside a large office building..."
     "{color=#0F0}[hacker]{/color}" """
     {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}!{/size}{/font}{/color}
@@ -1054,11 +1059,11 @@ label scene4Start:
 
     {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}{size=-5}Oh my god, this could be it!{/size}{/size}{/font}{/color}
 
-    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so that's a no-go...{/size}{/font}{/color}
+    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Hmm... I've gotta figure out how to get inside there, and fast. Their security cams are definitely well protected so\nthat's a no-go...{/size}{/font}{/color}
 
-    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Shoot! If I don't figure something out soon, I'm gonna miss my chance!{/size}{/font}{/color}
+    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Shoot! If I don't figure something out soon, I'm gonna\nmiss my chance!{/size}{/font}{/color}
 
-    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Sorry [preferredName], but I've gotta run. This is just too important to miss.{/size}{/font}{/color}
+    {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}Sorry [preferredName], but I've gotta run. This is just too\nimportant to miss.{/size}{/font}{/color}
 
     {color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}[hacker] out!{/size}{/font}{/color}
     """
@@ -1456,7 +1461,7 @@ label scene5HalfStart:
 
 label scene6Start:
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
-    scene Hacker Space with pixellate
+    scene HackerSpace with pixellate
     show Hacker game at center:
         alpha 0.0
         linear 0.5 alpha 1.0
@@ -1617,15 +1622,7 @@ label scene7Purple:
     show Friend01 neutral at right
     show Friend02 angry at left
     show campfire:
-        alpha 0.0
-    show darkOverlay:
-        alpha 0.0
-    show darkOverlay:
-        alpha 1.0
-    show campfire:
         align (0.52, 0.95)
-        alpha 0.0
-        linear 0.1 alpha 1.0
     "{color=#F94239}[friendA]{/color}" "Hey [playerCharacter], are you even listening?"
     "{color=#2B95F8}[friendB]{/color}" "Looks like [playerCharacterSubjectPronoun] zoned out pretty hard there."
     hide black
@@ -1760,7 +1757,7 @@ label scene7Purple:
             repeat
     "{i}Is this... supposed to be happening?{/i}"
     if not noFlashing:
-        show Hacker Space:
+        show HackerSpace:
             alpha 0.0
             block:
                 ease_elastic 1.0 alpha 0.4
@@ -1933,7 +1930,7 @@ label scene9Start:
     "{i}Is this... real?{/i}"
     scene black with fade
     "You leave your room and step outside."
-    scene City Hidden
+    scene City
     show black onlayer overlay:
         0.1
         linear 0.25 alpha 0.0
@@ -1951,7 +1948,6 @@ label scene9Start:
 
     {i}{color=#A4FAB1}{font=VT323-Regular.ttf}{size=28}I have to hurry.{/size}{/font}{/color}{/i}
     """
-    scene City
     hide black
     "{i}Here?{/i}"
     show Hallway with fade:
@@ -2082,8 +2078,8 @@ label scene10Start:
     "{color=#D6462F}NB Official{/color}" "Your 'game' ends here."
     "Unknown Female Voice" "No!"
     show CorpGuy neutral
+    play sound "<from 0.8>audio/SFX_10.wav"
     show black with pulse(1, "#ffa500", 0.0, 1.0, 0.0, 0.1, 0.5, 0.0)
-    play sound "<0.3 to>audio/SFX_10.wav"
     play music "audio/Music_1.2.1.mp3" fadeout 1.0 fadein 1.0
     """
     Before the man is able to fire another shot, the console nearest him explodes, knocking him to the ground.
